@@ -1,0 +1,90 @@
+{
+  "sources": {
+    "bongeats": { "name": "Bong Eats", "url": "https://www.bongeats.com/recipes" },
+    "sanjeevkapoor": { "name": "Sanjeev Kapoor", "url": "https://www.sanjeevkapoor.com/Recipe" },
+    "hebbarskitchen": { "name": "Hebbar's Kitchen", "url": "https://hebbarskitchen.com/" }
+  },
+  "_festivalNote": "Dates verified by web search for 2026 only (lunisolar festivals shift every year) — this table needs a fresh lookup each year. Gated by FESTIVAL_GATE_DAYS (100 days from launch) in generate_menu.py, so none of these 2026 dates will actually surface (Aug 18 2026 + 100 days = Nov 26 2026, after every festival listed here) — add 2027 dates before next use.",
+  "festivals": [
+    { "id": "saraswati_puja_2026", "name": "Saraswati Puja (Vasant Panchami)", "date": "2026-01-23", "specialId": "khichuri_bhog" },
+    { "id": "dol_jatra_2026", "name": "Dol Jatra / Holi", "date": "2026-03-03", "specialId": "malpoa_payesh" },
+    { "id": "poila_boishakh_2026", "name": "Poila Boishakh (Bengali New Year)", "date": "2026-04-15", "specialId": "luchi_alur_dom" },
+    { "id": "durga_puja_saptami_2026", "name": "Durga Puja — Saptami", "date": "2026-10-17", "specialId": "khichuri_bhog" },
+    { "id": "durga_puja_ashtami_2026", "name": "Durga Puja — Ashtami/Navami", "date": "2026-10-19", "specialId": "khichuri_bhog" },
+    { "id": "durga_puja_dashami_2026", "name": "Durga Puja — Vijaya Dashami", "date": "2026-10-20", "specialId": "kosha_mangsho_festive" },
+    { "id": "kali_puja_2026", "name": "Kali Puja / Diwali", "date": "2026-11-08", "specialId": "luchi_cholar_dal" }
+  ],
+  "festivalSpecials": {
+    "khichuri_bhog": { "name": "Bhog Khichuri, Labra & Beguni", "spiceLevel": "mild", "sourceSite": "bongeats", "rarity": "onceAYear", "ingredients": ["rice", "moong dal", "mixed vegetables", "eggplant fritters", "ghee", "panch phoron"] },
+    "malpoa_payesh": { "name": "Malpoa & Payesh", "spiceLevel": "mild", "sourceSite": "bongeats", "rarity": "onceAYear", "ingredients": ["milk", "rice", "jaggery/sugar", "flour", "fennel"] },
+    "luchi_alur_dom": { "name": "Luchi & Alur Dom", "spiceLevel": "mild", "sourceSite": "bongeats", "rarity": "onceAYear", "ingredients": ["flour", "baby potatoes", "yogurt", "ghee", "garam masala"] },
+    "kosha_mangsho_festive": { "name": "Kosha Mangsho & Luchi (festive portion)", "spiceLevel": "medium", "sourceSite": "bongeats", "rarity": "onceAYear", "ingredients": ["mutton", "flour", "onion", "yogurt", "whole spices"] },
+    "luchi_cholar_dal": { "name": "Luchi & Cholar Dal", "spiceLevel": "mild", "sourceSite": "bongeats", "rarity": "onceAYear", "ingredients": ["flour", "chana dal", "coconut", "ghee"] }
+  },
+  "bengali": {
+    "protein": [
+      { "id": "b_p_01", "name": "Machher Jhol (Fish Curry)", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "bongeats", "proteinFamily": "fish", "complexity": "simple", "ingredients": ["Rohu/Katla fish", "potato", "tomato", "mustard oil", "cumin-coriander powder", "green chili"] },
+      { "id": "b_p_03", "name": "Chingri Malai Curry (Prawn)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "proteinFamily": "fish", "complexity": "standard", "ingredients": ["prawns", "coconut milk", "onion paste", "ginger-garlic paste", "green chili", "garam masala"] },
+      { "id": "b_p_04", "name": "Kosha Mangsho (Mutton)", "advancePrep": true, "prepNote": "Tastes best marinated a few hours or overnight", "spiceLevel": "medium", "sourceSite": "bongeats", "proteinFamily": "mutton", "complexity": "standard", "ingredients": ["mutton", "onion", "yogurt", "ginger-garlic paste", "whole spices", "mustard oil"] },
+      { "id": "b_p_05", "name": "Chicken Rezala", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "proteinFamily": "chicken", "complexity": "simple", "ingredients": ["chicken", "yogurt", "cashew paste", "onion", "green chili", "ghee"] },
+      { "id": "b_p_06", "name": "Doi Maach (Fish in Yogurt)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "proteinFamily": "fish", "complexity": "simple", "ingredients": ["Rohu/Katla fish", "yogurt", "onion paste", "mustard oil", "turmeric"] },
+      { "id": "b_p_07", "name": "Dim Curry (Egg Curry)", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "bongeats", "proteinFamily": "egg", "complexity": "simple", "ingredients": ["eggs", "potato", "onion", "tomato", "cumin-coriander powder"] },
+      { "id": "b_p_08", "name": "Chicken Bhuna", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "bongeats", "proteinFamily": "chicken", "complexity": "simple", "ingredients": ["chicken", "onion", "tomato", "ginger-garlic paste", "garam masala"] },
+      { "id": "b_p_09", "name": "Katla Kalia", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "bongeats", "proteinFamily": "fish", "complexity": "simple", "ingredients": ["Katla fish", "onion paste", "ginger paste", "yogurt", "garam masala"] },
+      { "id": "b_p_11", "name": "Chingri Bhape (Steamed Prawn)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "proteinFamily": "fish", "complexity": "simple", "ingredients": ["prawns", "mustard paste", "coconut", "green chili", "mustard oil"] },
+      { "id": "b_p_12", "name": "Chicken Kosha", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "bongeats", "proteinFamily": "chicken", "complexity": "simple", "ingredients": ["chicken", "onion", "potato", "ginger-garlic paste", "garam masala"] },
+      { "id": "b_p_13", "name": "Dim Bhuji (Egg Bhuji)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "proteinFamily": "egg", "complexity": "simple", "ingredients": ["eggs", "onion", "green chili", "turmeric", "mustard oil"] },
+      { "id": "b_p_14", "name": "Chicken Jhol (Everyday Chicken Curry)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "proteinFamily": "chicken", "complexity": "simple", "ingredients": ["chicken", "potato", "onion", "turmeric", "cumin-coriander powder"] }
+    ],
+    "vegetable": [
+      { "id": "b_v_01", "name": "Alu Posto (Potato in Poppy Seed)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "complexity": "simple", "ingredients": ["potato", "poppy seed paste", "mustard oil", "green chili"] },
+      { "id": "b_v_02", "name": "Shukto", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "complexity": "standard", "ingredients": ["mixed vegetables", "bitter gourd", "milk", "ghee", "mustard paste"] },
+      { "id": "b_v_03", "name": "Cholar Dal", "advancePrep": true, "prepNote": "Chana dal soaks better with 3-4 hrs advance soak", "spiceLevel": "mild", "sourceSite": "bongeats", "complexity": "simple", "ingredients": ["chana dal", "coconut", "bay leaf", "ghee", "cumin"] },
+      { "id": "b_v_04", "name": "Dhokar Dalna", "advancePrep": true, "prepNote": "Lentil cakes need soaking + resting time", "spiceLevel": "medium", "sourceSite": "bongeats", "complexity": "complex", "ingredients": ["chana dal", "potato", "tomato", "garam masala", "ghee"] },
+      { "id": "b_v_05", "name": "Aloo Dum", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "bongeats", "complexity": "simple", "ingredients": ["baby potatoes", "yogurt", "onion", "garam masala"] },
+      { "id": "b_v_06", "name": "Labra (Mixed Veg)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "complexity": "simple", "ingredients": ["mixed seasonal vegetables", "panch phoron", "bay leaf"] },
+      { "id": "b_v_07", "name": "Begun Bhaja (Fried Eggplant)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "complexity": "simple", "ingredients": ["eggplant", "turmeric", "mustard oil"] },
+      { "id": "b_v_08", "name": "Mochar Ghonto (Banana Flower)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "complexity": "standard", "ingredients": ["banana flower", "coconut", "potato", "panch phoron"] },
+      { "id": "b_v_09", "name": "Bandhakopir Ghonto (Cabbage)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "complexity": "simple", "ingredients": ["cabbage", "potato", "peas", "cumin"] },
+      { "id": "b_v_10", "name": "Sheem er Torkari (Broad Beans)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "complexity": "simple", "ingredients": ["broad beans", "potato", "cumin", "mustard oil"] },
+      { "id": "b_v_11", "name": "Potol er Dolma (Stuffed Pointed Gourd)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "complexity": "standard", "ingredients": ["pointed gourd", "coconut", "poppy seed", "spices"] },
+      { "id": "b_v_12", "name": "Palong Shaak Bhaja (Spinach)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "complexity": "simple", "ingredients": ["spinach", "garlic", "green chili", "mustard oil"] },
+      { "id": "b_v_13", "name": "Aloo Bhaja (Fried Potato Sticks)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "complexity": "simple", "ingredients": ["potato", "turmeric", "mustard oil", "green chili"] },
+      { "id": "b_v_14", "name": "Korola Bhaja (Bitter Gourd Fry)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "complexity": "simple", "ingredients": ["bitter gourd", "turmeric", "mustard oil"] },
+      { "id": "b_v_15", "name": "Begun Bharta (Mashed Roasted Eggplant)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "complexity": "simple", "ingredients": ["eggplant", "onion", "mustard oil", "green chili"] },
+      { "id": "b_v_16", "name": "Aloo Bharta (Mashed Potato)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "complexity": "simple", "ingredients": ["potato", "onion", "mustard oil", "green chili"] }
+    ]
+  },
+  "chinese": {
+    "protein": [
+      { "id": "c_p_01", "name": "Chilli Chicken", "advancePrep": false, "spiceLevel": "spicy", "sourceSite": "sanjeevkapoor", "proteinFamily": "chicken", "complexity": "simple", "ingredients": ["chicken", "capsicum", "onion", "soy sauce", "chili sauce", "cornflour"] },
+      { "id": "c_p_02", "name": "Lemon Chicken", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "sanjeevkapoor", "proteinFamily": "chicken", "complexity": "simple", "ingredients": ["chicken", "lemon juice", "cornflour", "garlic", "soy sauce"] },
+      { "id": "c_p_03", "name": "Garlic Chicken", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "sanjeevkapoor", "proteinFamily": "chicken", "complexity": "simple", "ingredients": ["chicken", "garlic", "soy sauce", "capsicum", "cornflour"] },
+      { "id": "c_p_04", "name": "Chicken Manchurian", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "sanjeevkapoor", "proteinFamily": "chicken", "complexity": "simple", "ingredients": ["chicken", "cornflour", "soy sauce", "garlic", "spring onion"] },
+      { "id": "c_p_05", "name": "Honey Chilli Chicken", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "sanjeevkapoor", "proteinFamily": "chicken", "complexity": "simple", "ingredients": ["chicken", "honey", "chili sauce", "cornflour", "sesame seeds"] },
+      { "id": "c_p_06", "name": "Kung Pao Chicken", "advancePrep": false, "spiceLevel": "spicy", "sourceSite": "sanjeevkapoor", "proteinFamily": "chicken", "complexity": "simple", "ingredients": ["chicken", "peanuts", "dried red chili", "soy sauce", "spring onion"] }
+    ],
+    "vegetable": [
+      { "id": "c_v_01", "name": "Fried Rice", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["rice", "mixed vegetables", "spring onion", "soy sauce"] },
+      { "id": "c_v_02", "name": "Hakka Noodles", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["noodles", "mixed vegetables", "soy sauce", "vinegar"] },
+      { "id": "c_v_03", "name": "Veg Manchurian", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "hebbarskitchen", "complexity": "standard", "ingredients": ["cabbage", "carrot", "cornflour", "soy sauce", "garlic"] },
+      { "id": "c_v_04", "name": "Chilli Garlic Vegetables", "advancePrep": false, "spiceLevel": "spicy", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["mixed vegetables", "garlic", "dried red chili", "soy sauce"] },
+      { "id": "c_v_05", "name": "Schezwan Fried Rice", "advancePrep": false, "spiceLevel": "spicy", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["rice", "schezwan sauce", "mixed vegetables", "spring onion"] }
+    ]
+  },
+  "otherIndian": {
+    "protein": [
+      { "id": "o_p_01", "name": "Rajma (Kidney Beans)", "advancePrep": true, "prepNote": "Rajma needs an overnight soak before cooking", "spiceLevel": "mild", "sourceSite": "hebbarskitchen", "proteinFamily": "lentil", "complexity": "simple", "ingredients": ["kidney beans (rajma)", "onion", "tomato", "ginger-garlic paste", "garam masala"] },
+      { "id": "o_p_02", "name": "Chole (Chickpea Curry)", "advancePrep": true, "prepNote": "Chickpeas need an overnight soak before cooking", "spiceLevel": "medium", "sourceSite": "hebbarskitchen", "proteinFamily": "lentil", "complexity": "simple", "ingredients": ["chickpeas", "onion", "tomato", "chole masala"] },
+      { "id": "o_p_03", "name": "Dal Makhani", "advancePrep": true, "prepNote": "Whole black lentils soak better overnight", "spiceLevel": "mild", "sourceSite": "hebbarskitchen", "proteinFamily": "lentil", "complexity": "simple", "ingredients": ["whole black lentils (urad)", "butter", "cream", "tomato"] },
+      { "id": "o_p_04", "name": "Butter Chicken", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "sanjeevkapoor", "proteinFamily": "chicken", "complexity": "standard", "ingredients": ["chicken", "butter", "tomato puree", "cream", "kasuri methi"] },
+      { "id": "o_p_05", "name": "Paneer Butter Masala", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "hebbarskitchen", "proteinFamily": "paneer", "complexity": "simple", "ingredients": ["paneer", "butter", "tomato puree", "cream", "kasuri methi"] }
+    ],
+    "vegetable": [
+      { "id": "o_v_01", "name": "Palak Paneer", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["spinach", "paneer", "onion", "garlic", "cream"] },
+      { "id": "o_v_02", "name": "Aloo Gobi", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["potato", "cauliflower", "turmeric", "cumin"] },
+      { "id": "o_v_03", "name": "Bhindi Masala (Okra)", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["okra", "onion", "tomato", "cumin-coriander powder"] },
+      { "id": "o_v_04", "name": "Mixed Veg Curry", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["mixed vegetables", "onion", "tomato", "garam masala"] }
+    ]
+  }
+}

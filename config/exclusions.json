@@ -1,0 +1,5 @@
+{
+  "_comment": "Fill this in later. Add dish IDs (see data/dishes.json) or free-text names that your wife or kid don't like. The generator will skip any dish whose id or name (case-insensitive substring) matches an entry here.",
+  "disliked_by_wife": [],
+  "disliked_by_kid": []
+}

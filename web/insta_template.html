@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1080px; height: 1080px;
+    font-family: "Georgia", "Palatino Linotype", serif;
+    background: radial-gradient(circle at 20% 0%, #fdf6ea 0%, #fbf3e7 45%, #f3e3c8 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: #3a2e26;
+    position: relative;
+    overflow: hidden;
+  }
+  .doodle-top, .doodle-bottom {
+    position: absolute; left: 0; right: 0; height: 26px;
+    background: repeating-linear-gradient(90deg, #c1502e 0 28px, #e0a458 28px 56px);
+  }
+  .doodle-top { top: 0; }
+  .doodle-bottom { bottom: 0; }
+
+  .brand { font-size: 64px; font-weight: 700; color: #2f4636; letter-spacing: 2px; }
+  .brand .accent { color: #c1502e; }
+  .tagline { font-size: 26px; letter-spacing: 6px; text-transform: uppercase; color: #8a7357; margin-top: 10px; }
+
+  .date-pill {
+    margin-top: 34px;
+    background: #2f4636; color: #fbf3e7;
+    padding: 12px 34px; border-radius: 999px;
+    font-size: 28px; letter-spacing: 2px;
+  }
+
+  .category-badge {
+    margin-top: 30px;
+    background: #c1502e; color: white;
+    padding: 10px 28px; border-radius: 999px;
+    font-size: 26px; text-transform: uppercase; letter-spacing: 3px; font-weight: bold;
+  }
+
+  .card {
+    margin-top: 34px;
+    background: #fffdf9; border: 2px solid #ecdcc4;
+    border-radius: 34px; padding: 46px 60px;
+    width: 840px;
+    box-shadow: 0 30px 60px -20px rgba(58,46,38,0.25);
+  }
+  .row { display: flex; align-items: center; gap: 26px; padding: 20px 0; }
+  .row + .row { border-top: 2px dashed #e5d5ba; }
+  .icon { font-size: 58px; }
+  .label { font-size: 22px; text-transform: uppercase; letter-spacing: 3px; color: #9a8a76; }
+  .name { font-size: 42px; font-weight: 700; margin-top: 4px; }
+
+  .footer-note { margin-top: 40px; font-size: 22px; color: #b3a190; font-style: italic; text-align: center; width: 760px; }
+</style>
+</head>
+<body>
+  <div class="doodle-top"></div>
+  <div class="brand">What<span class="accent">sIn</span>Menu</div>
+  <div class="tagline">today's suggestion</div>
+  <div class="date-pill">{{DATE}}</div>
+  <div class="category-badge">{{CATEGORY}}</div>
+  <div class="card">
+    <div class="row">
+      <div class="icon">🍛</div>
+      <div>
+        <div class="label">Protein</div>
+        <div class="name">{{PROTEIN}}</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="icon">🥗</div>
+      <div>
+        <div class="label">Vegetable</div>
+        <div class="name">{{VEGETABLE}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-note">Recipe sourced from {{SOURCE}} — not written by AI. Two more options on the app.</div>
+  <div class="doodle-bottom"></div>
+</body>
+</html>

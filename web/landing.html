@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WhatsInMenu — what's for dinner, decided daily</title>
+<style>
+  :root {
+    --terracotta: #c1502e;
+    --mustard: #e0a458;
+    --deep-green: #2f4636;
+    --cream: #fbf3e7;
+    --butter: #f7e6a3;
+    --sage: #dfe6d5;
+    --ink: #2a211a;
+    --muted: #8a7357;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    color: var(--ink);
+    background: var(--cream);
+  }
+
+  .trust-banner {
+    background: var(--deep-green);
+    color: var(--cream);
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.6;
+  }
+  .trust-banner strong { color: var(--mustard); }
+
+  .wordmark {
+    font-size: clamp(3.5rem, 13vw, 10.5rem);
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 0.01em;
+    padding: 0.3em 0.1em 0.2em;
+    line-height: 0.95;
+    color: var(--ink);
+  }
+  .wordmark .accent { color: var(--terracotta); }
+
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 560px;
+  }
+  @media (max-width: 860px) {
+    .split { grid-template-columns: 1fr; }
+  }
+
+  .panel {
+    padding: 64px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .panel.pastel-butter { background: var(--butter); }
+  .panel.pastel-sage { background: var(--sage); }
+  .panel.pastel-terracotta { background: #f0c6a8; }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 34px;
+  }
+
+  .panel-copy {
+    font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+    line-height: 1.55;
+    text-align: center;
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+  .panel-copy .line { display: block; }
+
+  .location-tag {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .sticky-note {
+    position: absolute;
+    top: 46%;
+    left: 50%;
+    width: 150px;
+    height: 150px;
+    background: rgba(255,255,255,0.55);
+    transform: translate(-50%, -50%) rotate(-7deg);
+    clip-path: polygon(4% 8%, 22% 2%, 44% 6%, 68% 0%, 92% 6%, 100% 26%, 96% 48%, 100% 70%, 92% 94%, 70% 100%, 46% 96%, 24% 100%, 2% 92%, 6% 66%, 0% 42%, 6% 20%);
+    box-shadow: 0 18px 34px -12px rgba(42,33,26,0.35);
+    z-index: 1;
+    filter: blur(0.2px);
+  }
+
+  .photo-panel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cream);
+    text-align: center;
+    padding: 40px;
+  }
+  .photo-panel.gradient-a { background: radial-gradient(circle at 30% 20%, #a8532f 0%, #6e3220 55%, #3d1c14 100%); }
+  .photo-panel.gradient-b { background: radial-gradient(circle at 70% 30%, #3f5b45 0%, #223226 60%, #131c15 100%); }
+  .photo-panel .emoji-stack { font-size: 5.5rem; line-height: 1; filter: drop-shadow(0 10px 24px rgba(0,0,0,0.35)); }
+  .photo-caption {
+    margin-top: 18px;
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  .cta-section {
+    text-align: center;
+    padding: 90px 24px 100px;
+    background: var(--cream);
+  }
+  .cta-follow {
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .cta-follow a { color: var(--terracotta); text-decoration: none; font-weight: 700; }
+  .cta-title {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    margin: 18px 0 36px;
+    font-weight: 700;
+  }
+  .cta-button {
+    display: inline-block;
+    background: var(--terracotta);
+    color: var(--cream);
+    text-decoration: none;
+    padding: 20px 46px;
+    border-radius: 999px;
+    font-size: 1.05rem;
+    letter-spacing: 0.04em;
+    font-weight: 700;
+    box-shadow: 0 18px 34px -14px rgba(193,80,46,0.55);
+    transition: transform 0.15s ease;
+  }
+  .cta-button:hover { transform: translateY(-2px); }
+
+  footer {
+    text-align: center;
+    padding: 30px 16px 46px;
+    font-size: 0.74rem;
+    color: var(--muted);
+    background: var(--cream);
+  }
+</style>
+</head>
+<body>
+
+<div class="trust-banner">✦ Recipes are not written by AI — every dish links to a real recipe from <strong>great chefs &amp; home cooks</strong> ✦</div>
+
+<div class="wordmark">What<span class="accent">sIn</span>Menu</div>
+
+<div class="split">
+  <div class="panel pastel-butter">
+    <p class="eyebrow">What the app does</p>
+    <div class="sticky-note"></div>
+    <p class="panel-copy">
+      <span class="line">Check today's Instagram post.</span>
+      <span class="line">Get a WhatsApp notification.</span>
+      <span class="line">Get your shopping list.</span>
+      <span class="line">All picked to your taste and cuisine.</span>
+    </p>
+    <p class="location-tag">Bengali · Chinese · North Indian</p>
+  </div>
+  <div class="photo-panel gradient-a">
+    <div>
+      <div class="emoji-stack">🍛🥗</div>
+      <p class="photo-caption">home cooking, decided for you</p>
+    </div>
+  </div>
+</div>
+
+<div class="split">
+  <div class="photo-panel gradient-b" style="order:1;">
+    <div>
+      <div class="emoji-stack">🌶️🛒</div>
+      <p class="photo-caption">simple, not fussy</p>
+    </div>
+  </div>
+  <div class="panel pastel-sage" style="order:2;">
+    <p class="eyebrow">How it decides</p>
+    <div class="sticky-note" style="background: rgba(255,255,255,0.65);"></div>
+    <p class="panel-copy">
+      <span class="line">Mostly Bengali, sometimes Chinese</span>
+      <span class="line">or North Indian — never both mixed.</span>
+      <span class="line">A weekly budget keeps chicken, fish</span>
+      <span class="line">and mutton in sensible proportion.</span>
+    </p>
+    <p class="location-tag">Standard home cooking, nothing fussy</p>
+  </div>
+</div>
+
+<div class="split">
+  <div class="panel pastel-terracotta">
+    <p class="eyebrow">Every suggestion</p>
+    <div class="sticky-note" style="background: rgba(255,255,255,0.55); top: 44%;"></div>
+    <p class="panel-copy">
+      <span class="line">Three options, every single day.</span>
+      <span class="line">One protein, one vegetable, each one.</span>
+      <span class="line">Real recipes — Bong Eats, Sanjeev Kapoor,</span>
+      <span class="line">Hebbar's Kitchen — never invented.</span>
+    </p>
+    <p class="location-tag">Nothing AI-written, ever</p>
+  </div>
+  <div class="photo-panel gradient-a">
+    <div>
+      <div class="emoji-stack">📖🍚</div>
+      <p class="photo-caption">real recipes, real sources</p>
+    </div>
+  </div>
+</div>
+
+<div class="cta-section">
+  <p class="cta-follow">Follow <a href="https://whatsinmenu.com" target="_blank" rel="noopener">whatsinmenu.com</a></p>
+  <p class="cta-title">What's for dinner today?</p>
+  <a class="cta-button" href="today.html">Check Today's Menu →</a>
+</div>
+
+<footer>WhatsInMenu · made for home · not super complicated, on purpose 🍚</footer>
+
+</body>
+</html>
