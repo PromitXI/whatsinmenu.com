@@ -41,15 +41,15 @@
   .card {
     margin-top: 34px;
     background: #fffdf9; border: 2px solid #ecdcc4;
-    border-radius: 34px; padding: 46px 60px;
+    border-radius: 34px; padding: 32px 60px;
     width: 840px;
     box-shadow: 0 30px 60px -20px rgba(58,46,38,0.25);
   }
-  .row { display: flex; align-items: center; gap: 26px; padding: 20px 0; }
+  .row { display: flex; align-items: center; gap: 26px; padding: 14px 0; }
   .row + .row { border-top: 2px dashed #e5d5ba; }
   .icon { font-size: 58px; }
   .label { font-size: 22px; text-transform: uppercase; letter-spacing: 3px; color: #9a8a76; }
-  .name { font-size: 42px; font-weight: 700; margin-top: 4px; }
+  .name { font-size: 34px; font-weight: 700; margin-top: 4px; }
 
   .footer-note { margin-top: 40px; font-size: 22px; color: #b3a190; font-style: italic; text-align: center; width: 760px; }
 </style>
@@ -71,12 +71,19 @@
     <div class="row">
       <div class="icon">🥗</div>
       <div>
-        <div class="label">Vegetable</div>
-        <div class="name">{{VEGETABLE}}</div>
+        <div class="label">Side one</div>
+        <div class="name">{{SIDE_ONE}}</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="icon">🥗</div>
+      <div>
+        <div class="label">Side two</div>
+        <div class="name">{{SIDE_TWO}}</div>
       </div>
     </div>
   </div>
-  <div class="footer-note">Recipe sourced from {{SOURCE}} — not written by AI. Two more options on the app.</div>
+  <div class="footer-note">Recipes sourced from {{SOURCE}} and trusted publishers — never written by AI.</div>
   <div class="doodle-bottom"></div>
 </body>
 </html>

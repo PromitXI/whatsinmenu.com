@@ -3,3 +3,5 @@ __pycache__/
 .DS_Store
 _render_tmp.html
 *.png
+.env
+.env.local

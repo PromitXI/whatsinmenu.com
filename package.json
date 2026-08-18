@@ -1,0 +1,9 @@
+{
+  "name": "whatsinmenu",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node tests/menu-engine.test.mjs && python3 -m unittest discover -s tests -p 'test_*.py'",
+    "serve": "python3 -m http.server 8000"
+  }
+}

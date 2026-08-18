@@ -16,8 +16,8 @@ WhatsApp send, and Instagram post always agree on the same day's answer):
       multi-component assembly) — standard one-pan/one-pot home cooking only.
 
   COOK AGENT — from what the Mother agent allows, picks the actual dishes:
-    - Builds 3 distinct protein+vegetable combos for the day.
-    - Attaches a short shopping/ingredient list to each combo.
+    - Builds one complete dinner: one protein and two vegetable sides.
+    - Attaches a combined shopping/ingredient list to the meal.
     - Flags anything that needs advance prep (soak/marinate) a day ahead.
 
 Everything is deterministic per date (seeded hash of the date string) so the
@@ -46,7 +46,7 @@ IST = ZoneInfo("Asia/Kolkata")
 # 10-day "no Chinese yet" cold start AND the weekly protein-budget cycle.
 LAUNCH_DATE = date(2026, 8, 18)
 COLD_START_DAYS = 10
-OPTIONS_PER_DAY = 3
+SIDES_PER_MEAL = 2
 # "Once a year" dishes (festival specials, and later Promit's own list of
 # rare/expensive dishes) never show up before this many days from launch.
 FESTIVAL_GATE_DAYS = 100
@@ -60,6 +60,54 @@ CATEGORY_LABELS = {
 }
 SPICE_ICON = {"mild": "🌶️", "medium": "🌶️🌶️", "spicy": "🌶️🌶️🌶️"}
 SOURCES = DISHES.get("sources", {})
+RECIPE_URLS = {
+    "b_p_01": "https://www.bongeats.com/recipe/rui-macher-jhol",
+    "b_p_03": "https://www.bongeats.com/recipe/chingri-malaikari",
+    "b_p_04": "https://www.bongeats.com/recipe/mutton-kosha",
+    "b_p_05": "https://www.bongeats.com/recipe/chicken-rezala",
+    "b_p_06": "https://www.bongeats.com/recipe/bhetki-machher-jhol",
+    "b_p_07": "https://www.bongeats.com/recipe/dimer-dalna",
+    "b_p_08": "https://www.bongeats.com/recipe/murgir-lal-jhol",
+    "b_p_09": "https://www.bongeats.com/recipe/katla-kalia",
+    "b_p_11": "https://www.bongeats.com/recipe/chingri-bhaape",
+    "b_p_12": "https://www.bongeats.com/recipe/pressure-cooker-chicken",
+    "b_p_14": "https://www.bongeats.com/recipe/chicken-curry",
+    "b_v_01": "https://www.bongeats.com/recipe/alu-posto",
+    "b_v_02": "https://www.bongeats.com/recipe/shukto",
+    "b_v_03": "https://www.bongeats.com/recipe/cholar-dal",
+    "b_v_04": "https://www.bongeats.com/recipe/dhokar-dalna",
+    "b_v_05": "https://www.bongeats.com/recipe/niramish-aloo-dum",
+    "b_v_06": "https://www.bongeats.com/recipe/labra",
+    "b_v_07": "https://www.bongeats.com/recipe/begun-bhaja",
+    "b_v_08": "https://www.bongeats.com/recipe/mochar-ghonto",
+    "b_v_09": "https://www.bongeats.com/recipe/palong-shaaker-ghonto",
+    "b_v_10": "https://www.bongeats.com/recipe/sheemer-bhorta",
+    "b_v_11": "https://www.bongeats.com/recipe/potoler-dorma-with-dal-stuffing",
+    "b_v_12": "https://www.bongeats.com/recipe/palong-shaak-bhaja",
+    "b_v_13": "https://www.bongeats.com/recipe/jhuri-alu-bhaja",
+    "b_v_14": "https://www.bongeats.com/recipe/korola-bhaja",
+    "b_v_15": "https://www.bongeats.com/recipe/bota-soho-begun-bhaja",
+    "b_v_16": "https://www.bongeats.com/recipe/aloo-bhorta",
+    "c_p_01": "https://www.sanjeevkapoor.com/Recipe/Chinese-Chilli-Chicken-Sirf-30-minute-FoodFood.html",
+    "c_p_02": "https://www.sanjeevkapoor.com/Recipe/Lemon-Chicken.html",
+    "c_p_03": "https://www.sanjeevkapoor.com/Recipe/Garlic-Chicken-Sanjeev-Kapoor-Kitchen-FoodFood.html",
+    "c_p_04": "https://www.sanjeevkapoor.com/Recipe/Chicken-Manchurian.html",
+    "c_p_06": "https://www.sanjeevkapoor.com/Recipe/Kung-Pao-Chicken-SK-Khazana.html",
+    "c_v_01": "https://hebbarskitchen.com/veg-fried-rice-vegetable-fried-rice/",
+    "c_v_02": "https://hebbarskitchen.com/hakka-noodles-recipe-veg-hakka-noodles/",
+    "c_v_03": "https://hebbarskitchen.com/manchurian-gravy-recipe-veg-manchurian/",
+    "c_v_04": "https://hebbarskitchen.com/chilli-garlic-fried-rice-recipe/",
+    "c_v_05": "https://hebbarskitchen.com/schezwan-fried-rice-recipe-schezwan-rice/",
+    "o_p_01": "https://hebbarskitchen.com/rajma-recipe-punjabi-rajma-masala/",
+    "o_p_02": "https://hebbarskitchen.com/chana-masala-recipe-chickpea-masala/",
+    "o_p_03": "https://hebbarskitchen.com/punjabi-dal-makhani-recipe/",
+    "o_p_04": "https://www.sanjeevkapoor.com/Recipe/Butter-Chicken-Sanjeev-Kapoor-Kitchen-FoodFood.html",
+    "o_p_05": "https://hebbarskitchen.com/paneer-butter-masala-recipe/",
+    "o_v_01": "https://hebbarskitchen.com/palak-paneer-recipe-restaurant-style/",
+    "o_v_02": "https://hebbarskitchen.com/aloo-gobi-masala-recipe-aloo-gobi-curry/",
+    "o_v_03": "https://hebbarskitchen.com/bhindi-masala-recipe-bhindi-ki-gravy/",
+    "o_v_04": "https://hebbarskitchen.com/mix-veg-recipe-mixed-vegetable-curry/",
+}
 
 # Which category(ies) can supply each protein family.
 FAMILY_CATEGORIES = {
@@ -151,17 +199,15 @@ def _category_for_chicken(rng) -> str:
     return CHICKEN_CATEGORY_WEIGHTS[-1][0]
 
 
-def _combo(protein, vegetable):
-    needs_advance_prep = bool(protein.get("advancePrep") or vegetable.get("advancePrep"))
-    prep_notes = [d.get("prepNote") for d in (protein, vegetable) if d.get("advancePrep") and d.get("prepNote")]
-    ingredients = sorted(set((protein.get("ingredients") or []) + (vegetable.get("ingredients") or [])))
-    return {
-        "protein": protein,
-        "vegetable": vegetable,
-        "needsAdvancePrep": needs_advance_prep,
-        "prepNotes": prep_notes,
-        "ingredients": ingredients,
-    }
+def _dish_with_source(dish, role):
+    enriched = dict(dish)
+    source = SOURCES.get(dish.get("sourceSite"), {})
+    enriched.update({
+        "role": role,
+        "sourceName": source.get("name", "Trusted source"),
+        "recipeUrl": RECIPE_URLS.get(dish["id"], source.get("url", "")),
+    })
+    return enriched
 
 
 def generate_for_date(date_str: str) -> dict:
@@ -189,16 +235,12 @@ def generate_for_date(date_str: str) -> dict:
     family_pool = [d for d in protein_pool if d.get("proteinFamily") == family]
     lead_pool = family_pool or protein_pool  # fall back if the family has no dish in this category
 
-    proteins_shuffled = fisher_yates(rng, protein_pool)
-    # Make sure the family-matching dish leads the list (Option 1 honours the weekly budget).
-    lead = fisher_yates(rng, lead_pool)[0]
-    ordered_proteins = [lead] + [p for p in proteins_shuffled if p["id"] != lead["id"]]
-
-    n = min(OPTIONS_PER_DAY, len(ordered_proteins), len(veg_pool))
-    proteins = ordered_proteins[:n]
-    veggies = fisher_yates(rng, veg_pool)[:n]
-
-    options = [_combo(p, v) for p, v in zip(proteins, veggies)]
+    protein = fisher_yates(rng, lead_pool)[0]
+    veggies = fisher_yates(rng, veg_pool)[:SIDES_PER_MEAL]
+    dishes = [_dish_with_source(protein, "protein")]
+    dishes.extend(_dish_with_source(veg, "side") for veg in veggies)
+    ingredients = sorted(set(item for dish in dishes for item in dish.get("ingredients", [])))
+    prep_notes = [dish.get("prepNote") for dish in dishes if dish.get("advancePrep") and dish.get("prepNote")]
 
     return {
         "date": date_str,
@@ -206,15 +248,15 @@ def generate_for_date(date_str: str) -> dict:
         "categoryLabel": CATEGORY_LABELS[category],
         "coldStart": cold_start,
         "proteinFamily": family,
-        "options": options,
-        "anyNeedsAdvancePrep": any(o["needsAdvancePrep"] for o in options),
+        "dishes": dishes,
+        "ingredients": ingredients,
+        "prepNotes": prep_notes,
+        "anyNeedsAdvancePrep": any(dish.get("advancePrep") for dish in dishes),
     }
 
 
 def build_daily_payload(today_str: str) -> dict:
-    """What the scheduled task sends/shows: today's 3 options, plus a heads-up
-    if any of TOMORROW's options need advance prep (so soaking/marinating can
-    start tonight in case that's the one she picks)."""
+    """Build today's complete dinner and tomorrow's advance-prep notice."""
     today = generate_for_date(today_str)
     tomorrow_date = (datetime.strptime(today_str, "%Y-%m-%d") + timedelta(days=1)).strftime("%Y-%m-%d")
     tomorrow = generate_for_date(tomorrow_date)
@@ -229,14 +271,15 @@ def build_daily_payload(today_str: str) -> dict:
 def _source_line(dish: dict) -> str:
     src = SOURCES.get(dish.get("sourceSite", ""))
     spice = SPICE_ICON.get(dish.get("spiceLevel"), "")
-    src_txt = f" — recipe via {src['name']}: {src['url']}" if src else ""
+    recipe_url = RECIPE_URLS.get(dish.get("id"), src.get("url", "") if src else "")
+    src_txt = f" — recipe via {src['name']}: {recipe_url}" if src else ""
     return f"{spice}{src_txt}"
 
 
 def format_whatsapp_message(payload: dict, group_share: bool = True) -> str:
     t = payload["today"]
     lines = [
-        "🍽️ *WhatsInMenu — Today's Options*",
+        "🍽️ *WhatsInMenu — Tonight's Menu*",
         f"_{t['categoryLabel']} style_" + (" _(cold-start window: Bengali/North Indian only)_" if t["coldStart"] else ""),
         "",
     ]
@@ -248,24 +291,22 @@ def format_whatsapp_message(payload: dict, group_share: bool = True) -> str:
         lines.append("   🛒 " + ", ".join(fest["dish"]["ingredients"]))
         lines.append("")
 
-    for i, opt in enumerate(t["options"], start=1):
-        lines.append(f"*Option {i}*")
-        lines.append(f"🍛 {opt['protein']['name']}")
-        lines.append(f"   {_source_line(opt['protein'])}")
-        lines.append(f"🥗 {opt['vegetable']['name']}")
-        lines.append(f"   {_source_line(opt['vegetable'])}")
-        lines.append("   🛒 " + ", ".join(opt["ingredients"]))
-        if opt["needsAdvancePrep"] and opt["prepNotes"]:
-            lines.append("   ⏰ " + "; ".join(opt["prepNotes"]))
-        lines.append("")
+    for index, dish in enumerate(t["dishes"]):
+        label = "Protein" if index == 0 else f"Side {index}"
+        icon = "🍛" if index == 0 else "🥗"
+        lines.append(f"*{label}* — {icon} {dish['name']}")
+        lines.append(f"   {_source_line(dish)}")
+    lines.append("")
+    lines.append("🛒 *Combined shopping list:* " + ", ".join(t["ingredients"]))
+    if t["prepNotes"]:
+        lines.append("⏰ " + "; ".join(t["prepNotes"]))
+    lines.append("")
+    lines.append("*Actions:* Cook this · Swap a dish in the app · Open the combined shopping list")
+    lines.append("")
 
     tomorrow = payload["advanceNoticeForTomorrow"]
     if tomorrow:
-        prep_dishes = []
-        for opt in tomorrow["options"]:
-            if opt["needsAdvancePrep"]:
-                dish_name = opt["protein"]["name"] if opt["protein"].get("advancePrep") else opt["vegetable"]["name"]
-                prep_dishes.append(dish_name)
+        prep_dishes = [dish["name"] for dish in tomorrow["dishes"] if dish.get("advancePrep")]
         lines.append(f"📅 *Heads up for tomorrow:* {', '.join(prep_dishes)} — if you might pick that, start prep tonight.")
         lines.append("")
 

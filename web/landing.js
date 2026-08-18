@@ -1,0 +1,24 @@
+import { DEFAULT_PREFERENCES, buildMenu, formatDate, normalizePreferences, todayInKolkata } from "./menu-engine.js";
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>'"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character]);
+}
+
+const preview = document.getElementById("livePreview");
+try {
+  const response = await fetch("../data/dishes.json");
+  if (!response.ok) throw new Error("Menu unavailable");
+  const catalog = await response.json();
+  let stored = DEFAULT_PREFERENCES;
+  try { stored = JSON.parse(localStorage.getItem("whatsinmenu.preferences.v2")) || stored; } catch { /* default */ }
+  const menu = buildMenu(catalog, todayInKolkata(), normalizePreferences(stored));
+  preview.innerHTML = `
+    <div class="preview-top"><p class="eyebrow">Live preview · ${escapeHtml(formatDate(menu.date))}</p><h2>Tonight’s menu</h2></div>
+    <div class="preview-content">
+      <div class="preview-dishes">${menu.dishes.map((dish, index) => `<div class="preview-dish"><small>${index === 0 ? "Protein" : `Side ${index}`}</small><strong>${escapeHtml(dish.name)}</strong></div>`).join("")}</div>
+      <div class="preview-meta"><span>Approx. ₹${menu.estimatedCost}</span><span>·</span><span>${menu.cookingMinutes} min</span><span>·</span><span>Serves ${menu.servings}</span></div>
+      <a class="pill-button full-width" href="today.html">View recipes, swap, and shop</a>
+    </div>`;
+} catch {
+  preview.innerHTML = `<div class="preview-placeholder"><p>Tonight’s menu will appear when the site is served.</p></div>`;
+}
