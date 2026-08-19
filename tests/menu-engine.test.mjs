@@ -31,4 +31,8 @@ assert.ok(pantryMenu.choices.some((choice) => choice.dishes.some((dish) => dish.
 const vegetarian = buildMenu(catalog, "2026-09-01", { ...preferences, diet: "vegetarian" });
 assert.ok(vegetarian.choices.every((choice) => !["chicken", "fish", "mutton"].includes(choice.dishes[0].proteinFamily)));
 
+const chineseOnly = buildMenu(catalog, "2026-08-19", { ...preferences, cuisines: ["chinese"] });
+assert.equal(chineseOnly.category, "chinese");
+assert.ok(chineseOnly.choices.every((choice) => choice.dishes.every((dish) => dish.id.startsWith("c_"))));
+
 console.log("menu-engine tests passed");

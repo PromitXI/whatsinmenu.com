@@ -1,4 +1,4 @@
-import { DEFAULT_PREFERENCES, buildMenu, buildShoppingList, formatDate, menuShareText, normalizePreferences, todayInKolkata } from "./menu-engine.js?v=6";
+import { DEFAULT_PREFERENCES, buildMenu, buildShoppingList, formatDate, menuShareText, normalizePreferences, todayInKolkata } from "./menu-engine.js?v=7";
 
 const STORAGE = { preferences: "whatsinmenu.preferences.v3", swaps: "whatsinmenu.swaps.v3", selected: "whatsinmenu.selected.v3", feedback: "whatsinmenu.feedback.v3", history: "whatsinmenu.history.v3" };
 const state = { date: todayInKolkata(), catalog: null, menu: null, preferences: loadJson(STORAGE.preferences, DEFAULT_PREFERENCES), swaps: loadJson(STORAGE.swaps, {}), selected: loadJson(STORAGE.selected, {}) };

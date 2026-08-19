@@ -288,7 +288,10 @@ function enrichDish(dish, kind, family, category, prefs) {
 
 function categoryForFamily(family, rng, prefs, coldStart) {
   let allowed = prefs.cuisines.slice();
-  if (coldStart) allowed = allowed.filter((category) => category !== "chinese");
+  if (coldStart) {
+    const familiarOptions = allowed.filter((category) => category !== "chinese");
+    if (familiarOptions.length) allowed = familiarOptions;
+  }
   if (!allowed.length) allowed = ["bengali", "otherIndian"];
   if (family === "chicken") return chooseChickenCategory(rng, allowed);
   const preferred = (FAMILY_CATEGORIES[family] || []).find((category) => allowed.includes(category));
