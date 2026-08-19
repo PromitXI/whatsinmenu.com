@@ -42,11 +42,11 @@ def load_style():
 
 
 def prompt_for(choice, style):
-    dishes = ", ".join(dish["name"] for dish in choice["dishes"])
+    dishes = " with ".join(dish["name"] for dish in choice["dishes"])
     avoid = "; ".join(style["avoid"])
     return (
-        f"Create one photorealistic image for {choice['label']}, a complete Indian home dinner containing exactly: {dishes}. "
-        f"{style['direction']} {style['composition']} {style['lighting']} {style['palette']} "
+        f"{style['promptTemplate'].replace('{name}', dishes)} "
+        f"{style['framing']} {style['look']} "
         f"Avoid: {avoid}. ABSOLUTELY NO visible words, captions, dish labels, typography, or graphic overlays anywhere in the image."
     )
 

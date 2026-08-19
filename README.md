@@ -49,7 +49,7 @@ Copy `.env.example` to `.env`, then place your key on the `GEMINI_API_KEY` line.
 GEMINI_API_KEY=your-key
 ```
 
-The reusable image direction is in `config/image_style.json`. Edit its direction, composition, lighting, palette, or avoid list to change the style without touching Python. Keep the model set to `gemini-3.1-flash-image`.
+The reusable image direction is in `config/image_style.json`. Its `promptTemplate` uses `{name}` as the placeholder for the dishes in each meal choice. Edit the template, framing, look, or avoid list to change the style without touching Python. Keep the model set to `gemini-3.1-flash-image`.
 
 Generate all three complete-meal images for a day:
 
