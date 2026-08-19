@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
 """
-Renders an Instagram-ready 1080x1080 PNG for a given date's complete dinner, using
+Renders an Instagram-ready 1080x1080 PNG for a given date's first meal choice, using
 Playwright + the pre-installed Chromium (no external image-gen API needed).
 
-This is a styled branded graphic, not an AI photo of the actual dish — a
-real food photo would need an image-gen API key (OpenAI/Gemini), which
-Promit hasn't provided yet. This is the no-extra-cost placeholder so the
-Instagram posting pipeline can be demoed end-to-end today.
+This is a styled branded graphic, not an AI food photograph. Actual meal
+photographs are generated separately with Gemini 3.1 Flash Image.
 
 Usage:
     python3 render_insta_image.py 2026-08-18 out.png
@@ -26,7 +24,7 @@ TEMPLATE = (REPO_ROOT / "web" / "insta_template.html").read_text()
 def render(date_str: str, out_path: str):
     payload = build_daily_payload(date_str)
     t = payload["today"]
-    protein, side_one, side_two = t["dishes"]
+    protein, side_one, side_two = t["choices"][0]["dishes"]
     src = SOURCES.get(protein.get("sourceSite"), {}).get("name", "trusted source")
 
     html = (

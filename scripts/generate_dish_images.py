@@ -99,7 +99,8 @@ def selected_dishes(args):
             raise ValueError("Unknown dish IDs: " + ", ".join(sorted(missing)))
         return selected
     date_str = args.date or datetime.now(IST).strftime("%Y-%m-%d")
-    return generate_for_date(date_str)["dishes"]
+    choices = generate_for_date(date_str)["choices"]
+    return list({dish["id"]: dish for choice in choices for dish in choice["dishes"]}.values())
 
 
 def main():

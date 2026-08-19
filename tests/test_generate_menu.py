@@ -10,10 +10,12 @@ from generate_menu import DISHES, RECIPE_URLS, build_daily_payload, generate_for
 
 
 class DailyMenuTests(unittest.TestCase):
-    def test_menu_is_one_protein_and_two_unique_sides(self):
+    def test_menu_has_three_choices_with_three_dishes_each(self):
         menu = generate_for_date("2026-08-19")
-        self.assertEqual([dish["role"] for dish in menu["dishes"]], ["protein", "side", "side"])
-        self.assertEqual(len({dish["id"] for dish in menu["dishes"]}), 3)
+        self.assertEqual(len(menu["choices"]), 3)
+        for choice in menu["choices"]:
+            self.assertEqual([dish["role"] for dish in choice["dishes"]], ["protein", "side", "side"])
+            self.assertEqual(len({dish["id"] for dish in choice["dishes"]}), 3)
 
     def test_same_date_is_deterministic(self):
         first = generate_for_date("2026-09-12")
@@ -25,7 +27,7 @@ class DailyMenuTests(unittest.TestCase):
         for offset in range(90):
             current = start + timedelta(days=offset)
             menu = generate_for_date(current.isoformat())
-            self.assertEqual(menu["proteinFamily"], menu["dishes"][0]["proteinFamily"])
+            self.assertEqual(menu["proteinFamily"], menu["choices"][0]["dishes"][0]["proteinFamily"])
 
     def test_daily_payload_warns_about_tomorrow(self):
         payload = build_daily_payload("2026-08-19")

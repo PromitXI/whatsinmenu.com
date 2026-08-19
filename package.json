@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "test": "node tests/menu-engine.test.mjs && python3 -m unittest discover -s tests -p 'test_*.py'",
-    "serve": "python3 -m http.server 8000"
+    "serve": "python3 -m http.server 8000",
+    "images": "python3 scripts/generate_meal_images.py"
   }
 }

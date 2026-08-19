@@ -1,14 +1,15 @@
 # WhatsInMenu
 
-WhatsInMenu removes the nightly “what should we cook?” discussion. Every day it assembles one complete dinner—one protein and two sides—around a household’s cuisine preferences, budget, diet, dislikes, pantry, and weekly protein rhythm.
+WhatsInMenu removes the nightly “what should we cook?” discussion. Every day it assembles three complete dinner choices, each with three coordinated dishes, around a household’s cuisine preferences, budget, diet, dislikes, pantry, and weekly protein rhythm.
 
 It decides **what** to cook. Trusted publishers such as Bong Eats, Sanjeev Kapoor, and Hebbar’s Kitchen explain **how** to cook it.
 
 ## Current experience
 
 - A real daily-menu preview near the top of the homepage
-- One deterministic three-dish dinner each day
-- Individual dish swaps without rebuilding the rest of the meal
+- Three deterministic meal choices every day, with three dishes in each choice
+- One complete Gemini-generated meal image for every choice
+- Select a choice, then swap individual dishes without rebuilding the other choices
 - Household, portion, budget, cuisine, diet, allergy, and dislike preferences
 - Estimated cooking time, household cost, servings, kcal, and core macros
 - Expandable nutrition details with honest confidence language
@@ -38,25 +39,25 @@ python3 src/generate_menu.py 2026-08-20
 
 Install the optional Instagram renderer with `pip install -r requirements.txt`, then install Playwright’s Chromium browser once.
 
-## Gemini dish photography
+## Gemini meal photography
 
 All generated project imagery must use Google’s **Gemini 3.1 Flash Image** model. The generator is pinned to the official model ID `gemini-3.1-flash-image`; it does not fall back to another model.
 
-Set the key in your environment—never in browser code or a committed file:
+Copy `.env.example` to `.env`, then place your key on the `GEMINI_API_KEY` line. `.env` is ignored by Git and never loaded in browser code:
 
 ```bash
-export GEMINI_API_KEY="your-key"
-python3 scripts/generate_dish_images.py --date 2026-08-20
+GEMINI_API_KEY=your-key
 ```
 
-Useful alternatives:
+The reusable image direction is in `config/image_style.json`. Edit its direction, composition, lighting, palette, or avoid list to change the style without touching Python. Keep the model set to `gemini-3.1-flash-image`.
+
+Generate all three complete-meal images for a day:
 
 ```bash
-python3 scripts/generate_dish_images.py --id b_p_04 --id b_v_01
-python3 scripts/generate_dish_images.py --all
+npm run images -- --date 2026-08-20
 ```
 
-Generated photos are saved under `web/assets/dishes/`. Until a photo exists, the website intentionally uses a branded color field rather than an image from another generator.
+Generated photos are saved under `web/assets/meals/`. Until a photo exists, the website intentionally uses a branded color field rather than an image from another generator.
 
 ## WhatsApp delivery
 

@@ -16,8 +16,8 @@ WhatsApp send, and Instagram post always agree on the same day's answer):
       multi-component assembly) — standard one-pan/one-pot home cooking only.
 
   COOK AGENT — from what the Mother agent allows, picks the actual dishes:
-    - Builds one complete dinner: one protein and two vegetable sides.
-    - Attaches a combined shopping/ingredient list to the meal.
+    - Builds three complete dinner choices, each with three coordinated dishes.
+    - Attaches a combined shopping/ingredient list to every choice.
     - Flags anything that needs advance prep (soak/marinate) a day ahead.
 
 Everything is deterministic per date (seeded hash of the date string) so the
@@ -47,6 +47,12 @@ IST = ZoneInfo("Asia/Kolkata")
 LAUNCH_DATE = date(2026, 8, 18)
 COLD_START_DAYS = 10
 SIDES_PER_MEAL = 2
+OWNER_EXAMPLE_DATE = "2026-08-19"
+OWNER_EXAMPLE_CHOICES = [
+    ["b_p_15", "b_v_13", "b_v_21"],
+    ["b_p_16", "b_v_17", "b_v_19"],
+    ["b_p_17", "b_v_18", "b_v_20"],
+]
 # "Once a year" dishes (festival specials, and later Promit's own list of
 # rare/expensive dishes) never show up before this many days from launch.
 FESTIVAL_GATE_DAYS = 100
@@ -72,6 +78,9 @@ RECIPE_URLS = {
     "b_p_11": "https://www.bongeats.com/recipe/chingri-bhaape",
     "b_p_12": "https://www.bongeats.com/recipe/pressure-cooker-chicken",
     "b_p_14": "https://www.bongeats.com/recipe/chicken-curry",
+    "b_p_15": "https://www.bongeats.com/recipe/dimer-dalna",
+    "b_p_16": "https://www.bongeats.com/recipe/chicken-curry",
+    "b_p_17": "https://www.bongeats.com/recipe/katla-kalia",
     "b_v_01": "https://www.bongeats.com/recipe/alu-posto",
     "b_v_02": "https://www.bongeats.com/recipe/shukto",
     "b_v_03": "https://www.bongeats.com/recipe/cholar-dal",
@@ -88,6 +97,11 @@ RECIPE_URLS = {
     "b_v_14": "https://www.bongeats.com/recipe/korola-bhaja",
     "b_v_15": "https://www.bongeats.com/recipe/bota-soho-begun-bhaja",
     "b_v_16": "https://www.bongeats.com/recipe/aloo-bhorta",
+    "b_v_17": "https://www.bongeats.com/recipe/potoler-tel-jhol",
+    "b_v_18": "https://www.bongeats.com/recipe/ilish-maachh-bhaja",
+    "b_v_19": "https://www.bongeats.com/recipe/jhuri-alu-bhaja",
+    "b_v_20": "https://www.bongeats.com/recipe/potol-posto",
+    "b_v_21": "https://hebbarskitchen.com/bhindi-fry-recipe-bhindi-ki-sabji/",
     "c_p_01": "https://www.sanjeevkapoor.com/Recipe/Chinese-Chilli-Chicken-Sirf-30-minute-FoodFood.html",
     "c_p_02": "https://www.sanjeevkapoor.com/Recipe/Lemon-Chicken.html",
     "c_p_03": "https://www.sanjeevkapoor.com/Recipe/Garlic-Chicken-Sanjeev-Kapoor-Kitchen-FoodFood.html",
@@ -233,14 +247,32 @@ def generate_for_date(date_str: str) -> dict:
     veg_pool = _mother_agent_filter(DISHES[category]["vegetable"], excluded)
 
     family_pool = [d for d in protein_pool if d.get("proteinFamily") == family]
-    lead_pool = family_pool or protein_pool  # fall back if the family has no dish in this category
+    protein_order = fisher_yates(rng, family_pool or protein_pool)
+    protein_order += fisher_yates(mulberry32(hash_seed(f"{date_str}-alternatives")), [d for d in protein_pool if d not in protein_order])
+    side_order = fisher_yates(rng, veg_pool)
 
-    protein = fisher_yates(rng, lead_pool)[0]
-    veggies = fisher_yates(rng, veg_pool)[:SIDES_PER_MEAL]
-    dishes = [_dish_with_source(protein, "protein")]
-    dishes.extend(_dish_with_source(veg, "side") for veg in veggies)
-    ingredients = sorted(set(item for dish in dishes for item in dish.get("ingredients", [])))
-    prep_notes = [dish.get("prepNote") for dish in dishes if dish.get("advancePrep") and dish.get("prepNote")]
+    choices = []
+    for choice_index in range(3):
+        owner_example = OWNER_EXAMPLE_CHOICES[choice_index] if date_str == OWNER_EXAMPLE_DATE and category == "bengali" else None
+        if owner_example:
+            protein = next(dish for dish in protein_pool if dish["id"] == owner_example[0])
+            first_side = next(dish for dish in veg_pool if dish["id"] == owner_example[1])
+            second_side = next(dish for dish in veg_pool if dish["id"] == owner_example[2])
+        else:
+            protein = protein_order[choice_index % len(protein_order)]
+            first_side = side_order[(choice_index * 2) % len(side_order)]
+            remaining = [dish for dish in side_order if dish["id"] != first_side["id"]]
+            second_side = remaining[(choice_index * 2 + 1) % len(remaining)]
+        dishes = [_dish_with_source(protein, "protein"), _dish_with_source(first_side, "side"), _dish_with_source(second_side, "side")]
+        choices.append({
+            "id": f"{date_str}-choice-{choice_index + 1}",
+            "label": f"Choice {choice_index + 1}",
+            "dishes": dishes,
+            "ingredients": sorted(set(item for dish in dishes for item in dish.get("ingredients", []))),
+            "prepNotes": [dish.get("prepNote") for dish in dishes if dish.get("advancePrep") and dish.get("prepNote")],
+            "anyNeedsAdvancePrep": any(dish.get("advancePrep") for dish in dishes),
+            "imagePath": f"web/assets/meals/{date_str}-choice-{choice_index + 1}.jpg",
+        })
 
     return {
         "date": date_str,
@@ -248,10 +280,8 @@ def generate_for_date(date_str: str) -> dict:
         "categoryLabel": CATEGORY_LABELS[category],
         "coldStart": cold_start,
         "proteinFamily": family,
-        "dishes": dishes,
-        "ingredients": ingredients,
-        "prepNotes": prep_notes,
-        "anyNeedsAdvancePrep": any(dish.get("advancePrep") for dish in dishes),
+        "choices": choices,
+        "anyNeedsAdvancePrep": any(choice["anyNeedsAdvancePrep"] for choice in choices),
     }
 
 
@@ -291,22 +321,15 @@ def format_whatsapp_message(payload: dict, group_share: bool = True) -> str:
         lines.append("   🛒 " + ", ".join(fest["dish"]["ingredients"]))
         lines.append("")
 
-    for index, dish in enumerate(t["dishes"]):
-        label = "Protein" if index == 0 else f"Side {index}"
-        icon = "🍛" if index == 0 else "🥗"
-        lines.append(f"*{label}* — {icon} {dish['name']}")
-        lines.append(f"   {_source_line(dish)}")
+    for choice in t["choices"]:
+        lines.append(f"*{choice['label']}* — " + " + ".join(dish["name"] for dish in choice["dishes"]))
     lines.append("")
-    lines.append("🛒 *Combined shopping list:* " + ", ".join(t["ingredients"]))
-    if t["prepNotes"]:
-        lines.append("⏰ " + "; ".join(t["prepNotes"]))
-    lines.append("")
-    lines.append("*Actions:* Cook this · Swap a dish in the app · Open the combined shopping list")
+    lines.append("*Actions:* Choose one meal · Swap any dish · Open that choice's shopping list")
     lines.append("")
 
     tomorrow = payload["advanceNoticeForTomorrow"]
     if tomorrow:
-        prep_dishes = [dish["name"] for dish in tomorrow["dishes"] if dish.get("advancePrep")]
+        prep_dishes = [dish["name"] for choice in tomorrow["choices"] for dish in choice["dishes"] if dish.get("advancePrep")]
         lines.append(f"📅 *Heads up for tomorrow:* {', '.join(prep_dishes)} — if you might pick that, start prep tonight.")
         lines.append("")
 

@@ -33,7 +33,10 @@
       { "id": "b_p_09", "name": "Katla Kalia", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "bongeats", "proteinFamily": "fish", "complexity": "simple", "ingredients": ["Katla fish", "onion paste", "ginger paste", "yogurt", "garam masala"] },
       { "id": "b_p_11", "name": "Chingri Bhape (Steamed Prawn)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "proteinFamily": "fish", "complexity": "simple", "ingredients": ["prawns", "mustard paste", "coconut", "green chili", "mustard oil"] },
       { "id": "b_p_12", "name": "Pressure-Cooker Chicken Curry", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "bongeats", "proteinFamily": "chicken", "complexity": "simple", "ingredients": ["chicken", "onion", "potato", "ginger-garlic paste", "garam masala"] },
-      { "id": "b_p_14", "name": "Chicken Jhol (Everyday Chicken Curry)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "proteinFamily": "chicken", "complexity": "simple", "ingredients": ["chicken", "potato", "onion", "turmeric", "cumin-coriander powder"] }
+      { "id": "b_p_14", "name": "Chicken Jhol (Everyday Chicken Curry)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "proteinFamily": "chicken", "complexity": "simple", "ingredients": ["chicken", "potato", "onion", "turmeric", "cumin-coriander powder"] },
+      { "id": "b_p_15", "name": "Dim Posto", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "proteinFamily": "egg", "complexity": "simple", "ingredients": ["eggs", "poppy seed paste", "green chili", "mustard oil"] },
+      { "id": "b_p_16", "name": "Plain Chicken Curry", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "proteinFamily": "chicken", "complexity": "simple", "ingredients": ["chicken", "potato", "onion", "ginger", "turmeric"] },
+      { "id": "b_p_17", "name": "Doi Katla", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "proteinFamily": "fish", "complexity": "simple", "ingredients": ["Katla fish", "yogurt", "onion", "ginger", "mustard oil"] }
     ],
     "vegetable": [
       { "id": "b_v_01", "name": "Alu Posto (Potato in Poppy Seed)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "complexity": "simple", "ingredients": ["potato", "poppy seed paste", "mustard oil", "green chili"] },
@@ -51,7 +54,12 @@
       { "id": "b_v_13", "name": "Aloo Bhaja (Fried Potato Sticks)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "complexity": "simple", "ingredients": ["potato", "turmeric", "mustard oil", "green chili"] },
       { "id": "b_v_14", "name": "Korola Bhaja (Bitter Gourd Fry)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "complexity": "simple", "ingredients": ["bitter gourd", "turmeric", "mustard oil"] },
       { "id": "b_v_15", "name": "Bota-soho Begun Bhaja", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "complexity": "simple", "ingredients": ["eggplant", "turmeric", "mustard oil", "rice flour"] },
-      { "id": "b_v_16", "name": "Aloo Bharta (Mashed Potato)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "complexity": "simple", "ingredients": ["potato", "onion", "mustard oil", "green chili"] }
+      { "id": "b_v_16", "name": "Aloo Bharta (Mashed Potato)", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "complexity": "simple", "ingredients": ["potato", "onion", "mustard oil", "green chili"] },
+      { "id": "b_v_17", "name": "Aloo Potol", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "complexity": "simple", "ingredients": ["potato", "pointed gourd", "turmeric", "mustard oil", "green chili"] },
+      { "id": "b_v_18", "name": "Mach Bhaja", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "proteinFamily": "fish", "complexity": "simple", "ingredients": ["fish", "turmeric", "salt", "mustard oil"] },
+      { "id": "b_v_19", "name": "Aloo Capsicum Fry", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "complexity": "simple", "ingredients": ["potato", "capsicum", "turmeric", "mustard oil"] },
+      { "id": "b_v_20", "name": "Ghee Bhaat", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "bongeats", "complexity": "simple", "ingredients": ["rice", "ghee", "salt"] },
+      { "id": "b_v_21", "name": "Bhindi Bhaja", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["okra", "turmeric", "mustard oil"] }
     ]
   },
   "chinese": {

@@ -1,0 +1,17 @@
+{
+  "model": "gemini-3.1-flash-image",
+  "aspectRatio": "4:3",
+  "imageSize": "1K",
+  "direction": "Warm editorial photography of achievable Bengali and Indian home cooking, not restaurant plating.",
+  "composition": "Show the entire three-dish meal together in one coherent frame. Every named dish must be clearly visible in its own simple cream ceramic bowl or plate, arranged naturally on a worn wooden dining table.",
+  "lighting": "Soft natural window light, gentle shadows, realistic food texture, inviting evening-at-home atmosphere.",
+  "palette": "Warm cream, mustard yellow, chilli red and dark green accents with restrained Bengali textile details.",
+  "avoid": [
+    "people or hands",
+    "text, lettering, labels, logos or watermarks",
+    "collage or split-screen composition",
+    "luxury restaurant plating",
+    "invented dishes or ingredients not named in the meal",
+    "plastic-looking or overly glossy food"
+  ]
+}

@@ -73,6 +73,28 @@ details summary { cursor: pointer; color: var(--green); font-weight: 800; }
 .dish-actions a { color: var(--red); font-size: .83rem; font-weight: 800; }
 .dish-actions button { padding: 0; color: var(--green); text-decoration: underline; text-underline-offset: 3px; font-size: .8rem; }
 
+.choice-card { min-width: 0; overflow: hidden; border-radius: var(--radius); background: var(--paper); border: 1px solid var(--line); box-shadow: var(--shadow); display: flex; flex-direction: column; transition: transform .2s ease, border-color .2s ease; }
+.choice-card.is-selected { border: 2px solid var(--green); transform: translateY(-4px); }
+.choice-photo { aspect-ratio: 4 / 3; position: relative; overflow: hidden; display: grid; place-items: center; background: radial-gradient(circle at 30% 20%, var(--clay), #7f3425 75%); color: rgba(255,255,255,.78); font: 800 4.5rem/1 Georgia, serif; }
+.choice-card:nth-child(2) .choice-photo { background: radial-gradient(circle at 30% 20%, var(--green-soft), var(--green) 80%); }
+.choice-card:nth-child(3) .choice-photo { background: radial-gradient(circle at 30% 20%, var(--butter), #a26d1f 85%); }
+.choice-photo::after { content: "Gemini meal image pending"; position: absolute; right: 12px; bottom: 10px; font: 700 .58rem/1 sans-serif; text-transform: uppercase; letter-spacing: .12em; color: rgba(255,255,255,.78); }
+.choice-photo.has-image::after, .choice-photo.has-image > span { display: none; }
+.choice-photo img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.choice-body { padding: 20px; display: flex; flex: 1; flex-direction: column; }
+.choice-heading { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+.choice-heading h2 { margin: 0 0 16px; font-size: 1.35rem; line-height: 1.2; }
+.selected-badge { flex: 0 0 auto; padding: 5px 8px; border-radius: 999px; background: var(--green-soft); color: var(--green); font-size: .65rem; font-weight: 850; text-transform: uppercase; }
+.choice-dishes { border-top: 1px solid var(--line); }
+.choice-dish { display: flex; justify-content: space-between; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--line); }
+.choice-dish small { color: var(--red); text-transform: uppercase; letter-spacing: .1em; font-weight: 850; }
+.choice-dish h3 { margin: 3px 0; font: 750 1.02rem/1.25 Georgia, serif; }
+.choice-dish p { margin: 0; color: var(--muted); font-size: .72rem; }
+.choice-dish-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.choice-dish-actions a, .choice-dish-actions button { padding: 0; border: 0; background: none; color: var(--green); font-size: .72rem; font-weight: 800; cursor: pointer; text-decoration: underline; }
+.choice-meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 15px 0; }
+.choice-meta span { background: #f4ecdf; border-radius: 999px; padding: 6px 8px; font-size: .7rem; font-weight: 750; }
+
 .meal-summary, .pantry-card, .feedback-card { margin-top: 24px; border-radius: var(--radius); padding: clamp(22px, 4vw, 36px); }
 .meal-summary { background: var(--green); color: white; }
 .meal-summary .eyebrow { color: var(--butter); }
@@ -155,6 +177,8 @@ legend { font-size: .82rem; font-weight: 800; }
   .pantry-card { grid-template-columns: 1fr; }
   .preview-card { transform: none; }
   .promise-panel { min-height: 280px; }
+  .choice-card { display: grid; grid-template-columns: minmax(180px, 35%) 1fr; }
+  .choice-photo { aspect-ratio: auto; min-height: 100%; }
 }
 
 @media (max-width: 560px) {
@@ -169,6 +193,8 @@ legend { font-size: .82rem; font-weight: 800; }
   .inline-form { display: grid; }
   .form-grid { grid-template-columns: 1fr; }
   .hero { padding-top: 34px; }
+  .choice-card { display: flex; }
+  .choice-photo { aspect-ratio: 4 / 2.7; }
 }
 
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

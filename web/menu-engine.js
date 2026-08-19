@@ -16,6 +16,9 @@ const RECIPE_URLS = {
   b_p_11: "https://www.bongeats.com/recipe/chingri-bhaape",
   b_p_12: "https://www.bongeats.com/recipe/pressure-cooker-chicken",
   b_p_14: "https://www.bongeats.com/recipe/chicken-curry",
+  b_p_15: "https://www.bongeats.com/recipe/dimer-dalna",
+  b_p_16: "https://www.bongeats.com/recipe/chicken-curry",
+  b_p_17: "https://www.bongeats.com/recipe/katla-kalia",
   b_v_01: "https://www.bongeats.com/recipe/alu-posto",
   b_v_02: "https://www.bongeats.com/recipe/shukto",
   b_v_03: "https://www.bongeats.com/recipe/cholar-dal",
@@ -32,6 +35,11 @@ const RECIPE_URLS = {
   b_v_14: "https://www.bongeats.com/recipe/korola-bhaja",
   b_v_15: "https://www.bongeats.com/recipe/bota-soho-begun-bhaja",
   b_v_16: "https://www.bongeats.com/recipe/aloo-bhorta",
+  b_v_17: "https://www.bongeats.com/recipe/potoler-tel-jhol",
+  b_v_18: "https://www.bongeats.com/recipe/ilish-maachh-bhaja",
+  b_v_19: "https://www.bongeats.com/recipe/jhuri-alu-bhaja",
+  b_v_20: "https://www.bongeats.com/recipe/potol-posto",
+  b_v_21: "https://hebbarskitchen.com/bhindi-fry-recipe-bhindi-ki-sabji/",
   c_p_01: "https://www.sanjeevkapoor.com/Recipe/Chinese-Chilli-Chicken-Sirf-30-minute-FoodFood.html",
   c_p_02: "https://www.sanjeevkapoor.com/Recipe/Lemon-Chicken.html",
   c_p_03: "https://www.sanjeevkapoor.com/Recipe/Garlic-Chicken-Sanjeev-Kapoor-Kitchen-FoodFood.html",
@@ -90,6 +98,12 @@ const CHICKEN_CATEGORY_WEIGHTS = [
   ["otherIndian", 0.1],
 ];
 const PORTION_SCALE = { light: 0.8, regular: 1, hearty: 1.25 };
+const OWNER_EXAMPLE_DATE = "2026-08-19";
+const OWNER_EXAMPLE_CHOICES = [
+  ["b_p_15", "b_v_13", "b_v_21"],
+  ["b_p_16", "b_v_17", "b_v_19"],
+  ["b_p_17", "b_v_18", "b_v_20"],
+];
 
 const PROTEIN_NUTRITION = {
   chicken: { energy: 285, protein: 27, carbs: 10, fat: 15, fibre: 2, sodium: 510, sugar: 4, cost: 85 },
@@ -252,8 +266,6 @@ function enrichDish(dish, kind, family, category, prefs) {
     kind,
     sourceName: SOURCES[dish.sourceSite]?.name || "Trusted source",
     recipeUrl: recipeFor(dish),
-    imagePath: `assets/dishes/${dish.id}.jpg`,
-    imagePrompt: `Editorial overhead food photograph of ${dish.name}, served in a simple Bengali home kitchen, warm natural window light, cream ceramic plate, subtle chilli-red and dark-green accents, realistic food texture, no people, no text, no logos`,
     cookingMinutes,
     servingLabel: kind === "protein" ? "1 bowl" : "1 small bowl",
     nutrition,
@@ -272,7 +284,7 @@ function categoryForFamily(family, rng, prefs, coldStart) {
   return preferred || allowed[0];
 }
 
-export function buildMenu(catalog, dateStr, inputPreferences = {}, swapOffsets = [0, 0, 0]) {
+export function buildMenu(catalog, dateStr, inputPreferences = {}, swapOffsets = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]) {
   const prefs = normalizePreferences(inputPreferences);
   const day = daysBetween(LAUNCH_DATE, dateStr);
   const weekIndex = Math.floor(day / 7);
@@ -322,22 +334,42 @@ export function buildMenu(catalog, dateStr, inputPreferences = {}, swapOffsets =
       proteins.filter((dish) => !matchingProteins.some((match) => match.id === dish.id)),
     ),
   );
-  const protein = proteinCandidates[Math.abs(Number(swapOffsets[0]) || 0) % proteinCandidates.length];
   const vegetableOrder = preferPantry(shuffle(rng, vegetables), prefs);
-  const firstSide = vegetableOrder[Math.abs(Number(swapOffsets[1]) || 0) % vegetableOrder.length];
-  const remainingSides = vegetableOrder.filter((dish) => dish.id !== firstSide.id);
-  const secondSide = remainingSides[Math.abs(Number(swapOffsets[2]) || 0) % remainingSides.length];
-  const dishes = [
-    enrichDish(protein, "protein", family, category, prefs),
-    enrichDish(firstSide, "vegetable", family, category, prefs),
-    enrichDish(secondSide, "vegetable", family, category, prefs),
-  ];
-  const totals = dishes.reduce((result, dish) => {
-    for (const key of ["energy", "protein", "carbs", "fat", "fibre", "sodium", "sugar"]) {
-      result[key] += dish.nutrition[key];
-    }
-    return result;
-  }, { energy: 0, protein: 0, carbs: 0, fat: 0, fibre: 0, sodium: 0, sugar: 0 });
+
+  const choices = Array.from({ length: 3 }, (_, choiceIndex) => {
+    const offsets = Array.isArray(swapOffsets[choiceIndex]) ? swapOffsets[choiceIndex] : [0, 0, 0];
+    const ownerExample = dateStr === OWNER_EXAMPLE_DATE && category === "bengali" && prefs.diet === "omnivore" ? OWNER_EXAMPLE_CHOICES[choiceIndex] : null;
+    const proteinStart = ownerExample ? Math.max(0, proteinCandidates.findIndex((dish) => dish.id === ownerExample[0])) : choiceIndex;
+    const protein = proteinCandidates[(proteinStart + Math.abs(Number(offsets[0]) || 0)) % proteinCandidates.length];
+    const defaultFirstSideIndex = ownerExample ? Math.max(0, vegetableOrder.findIndex((dish) => dish.id === ownerExample[1])) : choiceIndex * 2;
+    const firstSideIndex = (defaultFirstSideIndex + Math.abs(Number(offsets[1]) || 0)) % vegetableOrder.length;
+    const firstSide = vegetableOrder[firstSideIndex];
+    const remainingSides = vegetableOrder.filter((dish) => dish.id !== firstSide.id);
+    const defaultSecondSideIndex = ownerExample ? Math.max(0, remainingSides.findIndex((dish) => dish.id === ownerExample[2])) : choiceIndex * 2 + 1;
+    const secondSide = remainingSides[(defaultSecondSideIndex + Math.abs(Number(offsets[2]) || 0)) % remainingSides.length];
+    const dishes = [
+      enrichDish(protein, "protein", family, category, prefs),
+      enrichDish(firstSide, "vegetable", family, category, prefs),
+      enrichDish(secondSide, "vegetable", family, category, prefs),
+    ];
+    const totals = dishes.reduce((result, dish) => {
+      for (const key of ["energy", "protein", "carbs", "fat", "fibre", "sodium", "sugar"]) result[key] += dish.nutrition[key];
+      return result;
+    }, { energy: 0, protein: 0, carbs: 0, fat: 0, fibre: 0, sodium: 0, sugar: 0 });
+    return {
+      id: `${dateStr}-choice-${choiceIndex + 1}`,
+      label: `Choice ${choiceIndex + 1}`,
+      dishes,
+      totals,
+      servings: prefs.householdSize,
+      estimatedCost: dishes.reduce((sum, dish) => sum + dish.estimatedCostPerServing, 0) * prefs.householdSize,
+      cookingMinutes: Math.max(...dishes.map((dish) => dish.cookingMinutes)),
+      needsAdvancePrep: dishes.some((dish) => dish.advancePrep),
+      imagePath: `assets/meals/${dateStr}-choice-${choiceIndex + 1}.jpg`,
+      imagePrompt: `A complete ${CATEGORY_LABELS[category]} home dinner containing ${dishes.map((dish) => dish.name).join(", ")}`,
+      preferences: prefs,
+    };
+  });
 
   return {
     date: dateStr,
@@ -345,12 +377,7 @@ export function buildMenu(catalog, dateStr, inputPreferences = {}, swapOffsets =
     categoryLabel: CATEGORY_LABELS[category],
     proteinFamily: family,
     coldStart,
-    dishes,
-    totals,
-    servings: prefs.householdSize,
-    estimatedCost: dishes.reduce((sum, dish) => sum + dish.estimatedCostPerServing, 0) * prefs.householdSize,
-    cookingMinutes: Math.max(...dishes.map((dish) => dish.cookingMinutes)),
-    needsAdvancePrep: dishes.some((dish) => dish.advancePrep),
+    choices,
     preferences: prefs,
   };
 }
@@ -392,6 +419,7 @@ export function formatDate(dateStr) {
 }
 
 export function menuShareText(menu) {
-  const dishes = menu.dishes.map((dish) => dish.name).join(" + ");
-  return `Tonight on WhatsInMenu: ${dishes}. About ₹${menu.estimatedCost}, ${menu.cookingMinutes} min, serves ${menu.servings}. View the menu: ${location.href}`;
+  const choices = menu.choices.map((choice) => `${choice.label}: ${choice.dishes.map((dish) => dish.name).join(" + ")}`).join("\n");
+  const pageUrl = typeof location === "undefined" ? "" : `\nView the menu: ${location.href}`;
+  return `Tonight's three WhatsInMenu choices:\n${choices}${pageUrl}`;
 }

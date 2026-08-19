@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#294b3a">
   <title>Tonight’s menu · WhatsInMenu</title>
-  <meta name="description" content="A practical three-dish dinner, chosen for your taste, budget, and kitchen.">
+  <meta name="description" content="Three complete dinner choices, each with three coordinated dishes.">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="app-page">
@@ -21,16 +21,16 @@
   <main id="main" class="menu-shell">
     <section class="menu-intro" aria-labelledby="menuTitle">
       <p class="eyebrow" id="dateLabel"></p>
-      <h1 id="menuTitle">Tonight is decided.</h1>
-      <p class="intro-copy">One protein and two sides, selected together for a complete home dinner.</p>
+      <h1 id="menuTitle">Three ways to dinner.</h1>
+      <p class="intro-copy">Choose one of three complete meals. Every choice has three coordinated dishes and its own image.</p>
       <div class="menu-facts" id="menuFacts" aria-label="Menu overview"></div>
       <p class="selection-note" id="selectionNote"></p>
     </section>
     <div class="error-message" id="errorMessage" role="alert" hidden></div>
-    <section class="dish-grid" id="dishGrid" aria-label="Tonight’s three dishes" aria-live="polite"></section>
+    <section class="dish-grid" id="dishGrid" aria-label="Tonight’s three meal choices" aria-live="polite"></section>
     <section class="meal-summary" id="mealSummary" aria-labelledby="mealSummaryTitle"></section>
     <section class="primary-actions" aria-label="Dinner actions">
-      <button class="pill-button" id="shoppingButton" type="button">Make shopping list</button>
+      <button class="pill-button" id="shoppingButton" type="button">Shop for selected choice</button>
       <button class="outline-button" id="whatsappButton" type="button">Share on WhatsApp</button>
     </section>
     <section class="pantry-card" aria-labelledby="pantryTitle">

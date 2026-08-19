@@ -13,10 +13,10 @@ try {
   try { stored = JSON.parse(localStorage.getItem("whatsinmenu.preferences.v2")) || stored; } catch { /* default */ }
   const menu = buildMenu(catalog, todayInKolkata(), normalizePreferences(stored));
   preview.innerHTML = `
-    <div class="preview-top"><p class="eyebrow">Live preview · ${escapeHtml(formatDate(menu.date))}</p><h2>Tonight’s menu</h2></div>
+    <div class="preview-top"><p class="eyebrow">Live preview · ${escapeHtml(formatDate(menu.date))}</p><h2>Three choices tonight</h2></div>
     <div class="preview-content">
-      <div class="preview-dishes">${menu.dishes.map((dish, index) => `<div class="preview-dish"><small>${index === 0 ? "Protein" : `Side ${index}`}</small><strong>${escapeHtml(dish.name)}</strong></div>`).join("")}</div>
-      <div class="preview-meta"><span>Approx. ₹${menu.estimatedCost}</span><span>·</span><span>${menu.cookingMinutes} min</span><span>·</span><span>Serves ${menu.servings}</span></div>
+      <div class="preview-dishes">${menu.choices.map((choice) => `<div class="preview-dish"><small>${choice.label}</small><strong>${choice.dishes.map((dish) => escapeHtml(dish.name)).join(" · ")}</strong></div>`).join("")}</div>
+      <div class="preview-meta"><span>Three complete meals</span><span>·</span><span>Choose one</span><span>·</span><span>Shop once</span></div>
       <a class="pill-button full-width" href="today.html">View recipes, swap, and shop</a>
     </div>`;
 } catch {

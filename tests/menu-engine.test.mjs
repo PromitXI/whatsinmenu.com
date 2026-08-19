@@ -6,26 +6,29 @@ const catalog = JSON.parse(await readFile(new URL("../data/dishes.json", import.
 const preferences = { householdSize: 3, budget: "balanced", portion: "regular" };
 const menu = buildMenu(catalog, "2026-08-19", preferences);
 
-assert.equal(menu.dishes.length, 3);
-assert.equal(menu.dishes[0].kind, "protein");
-assert.equal(menu.dishes[1].kind, "vegetable");
-assert.equal(menu.dishes[2].kind, "vegetable");
-assert.equal(new Set(menu.dishes.map((dish) => dish.id)).size, 3);
-assert.equal(menu.proteinFamily, menu.dishes[0].proteinFamily);
-assert.deepEqual(menu.dishes.map((dish) => dish.id), ["b_p_07", "b_v_03", "b_v_16"]);
-assert.ok(menu.totals.energy > 0);
-assert.ok(menu.estimatedCost > 0);
+assert.equal(menu.choices.length, 3);
+for (const choice of menu.choices) {
+  assert.equal(choice.dishes.length, 3);
+  assert.equal(choice.dishes[0].kind, "protein");
+  assert.equal(choice.dishes[1].kind, "vegetable");
+  assert.equal(choice.dishes[2].kind, "vegetable");
+  assert.equal(new Set(choice.dishes.map((dish) => dish.id)).size, 3);
+  assert.ok(choice.totals.energy > 0);
+  assert.ok(choice.estimatedCost > 0);
+  assert.match(choice.imagePath, /choice-[123]\.jpg$/);
+}
 
-const swapped = buildMenu(catalog, "2026-08-19", preferences, [1, 1, 1]);
-assert.notDeepEqual(swapped.dishes.map((dish) => dish.id), menu.dishes.map((dish) => dish.id));
+const swapped = buildMenu(catalog, "2026-08-19", preferences, [[1, 1, 1], [0, 0, 0], [0, 0, 0]]);
+assert.notDeepEqual(swapped.choices[0].dishes.map((dish) => dish.id), menu.choices[0].dishes.map((dish) => dish.id));
+assert.deepEqual(swapped.choices[1].dishes.map((dish) => dish.id), menu.choices[1].dishes.map((dish) => dish.id));
 
-const pantryIngredient = menu.dishes.flatMap((dish) => dish.ingredients)[0];
+const pantryIngredient = menu.choices[0].dishes.flatMap((dish) => dish.ingredients)[0];
 const pantryMenu = buildMenu(catalog, "2026-08-19", { ...preferences, pantry: [pantryIngredient] });
-const shopping = buildShoppingList(pantryMenu);
+const shopping = buildShoppingList(pantryMenu.choices[0]);
 assert.ok(Object.values(shopping).flat().some((item) => item.atHome));
-assert.ok(pantryMenu.dishes.some((dish) => dish.ingredients.includes(pantryIngredient)));
+assert.ok(pantryMenu.choices.some((choice) => choice.dishes.some((dish) => dish.ingredients.includes(pantryIngredient))));
 
 const vegetarian = buildMenu(catalog, "2026-09-01", { ...preferences, diet: "vegetarian" });
-assert.ok(!["chicken", "fish", "mutton"].includes(vegetarian.dishes[0].proteinFamily));
+assert.ok(vegetarian.choices.every((choice) => !["chicken", "fish", "mutton"].includes(choice.dishes[0].proteinFamily)));
 
 console.log("menu-engine tests passed");
