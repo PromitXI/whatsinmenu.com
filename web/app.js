@@ -1,4 +1,4 @@
-import { DEFAULT_PREFERENCES, buildMenu, buildShoppingList, formatDate, menuShareText, normalizePreferences, todayInKolkata } from "./menu-engine.js?v=5";
+import { DEFAULT_PREFERENCES, buildMenu, buildShoppingList, formatDate, menuShareText, normalizePreferences, todayInKolkata } from "./menu-engine.js?v=6";
 
 const STORAGE = { preferences: "whatsinmenu.preferences.v3", swaps: "whatsinmenu.swaps.v3", selected: "whatsinmenu.selected.v3", feedback: "whatsinmenu.feedback.v3", history: "whatsinmenu.history.v3" };
 const state = { date: todayInKolkata(), catalog: null, menu: null, preferences: loadJson(STORAGE.preferences, DEFAULT_PREFERENCES), swaps: loadJson(STORAGE.swaps, {}), selected: loadJson(STORAGE.selected, {}) };
@@ -7,7 +7,7 @@ const elements = Object.fromEntries(["dateLabel", "menuFacts", "selectionNote", 
 function loadJson(key, fallback) { try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch { return fallback; } }
 function saveJson(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
 function escapeHtml(value) { return String(value).replace(/[&<>'"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character]); }
-async function loadCatalog() { const response = await fetch("../data/dishes.json?v=5", { cache: "no-store" }); if (!response.ok) throw new Error("The dish catalogue could not be loaded."); return response.json(); }
+async function loadCatalog() { const response = await fetch("../data/dishes.json?v=6", { cache: "no-store" }); if (!response.ok) throw new Error("The dish catalogue could not be loaded."); return response.json(); }
 function blankOffsets() { return [[0, 0, 0], [0, 0, 0], [0, 0, 0]]; }
 function currentOffsets() { return state.swaps[state.date] || blankOffsets(); }
 function selectedIndex() { return Math.min(2, Math.max(0, Number(state.selected[state.date]) || 0)); }
@@ -35,7 +35,7 @@ function renderMenu() {
   elements.dishGrid.innerHTML = menu.choices.map((choice, index) => choiceCard(choice, index)).join("");
   elements.dishGrid.querySelectorAll("[data-swap]").forEach((button) => button.addEventListener("click", () => swapDish(Number(button.dataset.choice), Number(button.dataset.dish))));
   elements.dishGrid.querySelectorAll("[data-select]").forEach((button) => button.addEventListener("click", () => chooseMeal(Number(button.dataset.select))));
-  elements.dishGrid.querySelectorAll("[data-image]").forEach((image) => { image.addEventListener("load", () => image.closest(".choice-photo").classList.add("has-image")); image.addEventListener("error", () => image.remove()); });
+  elements.dishGrid.querySelectorAll("[data-image]").forEach((image) => { image.addEventListener("load", () => image.closest(".dish-image").classList.add("has-image")); image.addEventListener("error", () => image.remove()); });
   renderMealSummary();
   elements.pantryInput.value = state.preferences.pantry.join(", ");
 }
@@ -43,9 +43,8 @@ function renderMenu() {
 function choiceCard(choice, choiceIndex) {
   const selected = choiceIndex === selectedIndex();
   return `<article class="choice-card ${selected ? "is-selected" : ""}">
-    <div class="choice-photo" aria-hidden="true"><span>${choiceIndex + 1}</span><img data-image src="${escapeHtml(choice.imagePath)}" alt=""></div>
     <div class="choice-body">
-      <div class="choice-heading"><div><p class="eyebrow">${choice.label}</p><h2>${choice.dishes.map((dish) => escapeHtml(dish.name)).join(" · ")}</h2></div>${selected ? "<span class=\"selected-badge\">Selected</span>" : ""}</div>
+      <div class="choice-heading"><div><p class="eyebrow">${choice.label}</p><h2>Complete three-dish dinner</h2></div>${selected ? "<span class=\"selected-badge\">Selected</span>" : ""}</div>
       <div class="choice-dishes">${choice.dishes.map((dish, dishIndex) => dishRow(dish, choiceIndex, dishIndex)).join("")}</div>
       <div class="choice-meta"><span>₹${choice.estimatedCost}</span><span>${choice.cookingMinutes} min</span><span>${choice.totals.energy} kcal/person</span><span>Serves ${choice.servings}</span></div>
       <button class="${selected ? "outline-button" : "pill-button"} full-width" type="button" data-select="${choiceIndex}">${selected ? "This is tonight’s meal" : `Choose ${choice.label}`}</button>
@@ -54,7 +53,8 @@ function choiceCard(choice, choiceIndex) {
 }
 
 function dishRow(dish, choiceIndex, dishIndex) {
-  return `<section class="choice-dish"><div><small>${dishIndex === 0 ? "Main" : `Dish ${dishIndex + 1}`}</small><h3>${escapeHtml(dish.name)}</h3><p>${dish.nutrition.energy} kcal · ${dish.nutrition.protein} g protein</p></div><div class="choice-dish-actions"><a href="${escapeHtml(dish.recipeUrl)}" target="_blank" rel="noopener">Recipe</a><button type="button" data-swap data-choice="${choiceIndex}" data-dish="${dishIndex}">Swap</button></div></section>`;
+  const initials = dish.name.split(/\s+/).slice(0, 2).map((word) => word[0]).join("");
+  return `<section class="choice-dish"><div class="dish-image" aria-hidden="true"><span>${escapeHtml(initials)}</span><img data-image src="${escapeHtml(dish.imagePath)}" alt=""></div><div class="choice-dish-content"><div><small>${dishIndex === 0 ? "Main" : `Dish ${dishIndex + 1}`}</small><h3>${escapeHtml(dish.name)}</h3><p>${dish.nutrition.energy} kcal · ${dish.nutrition.protein} g protein</p></div><div class="choice-dish-actions"><a href="${escapeHtml(dish.recipeUrl)}" target="_blank" rel="noopener">Recipe by ${escapeHtml(dish.sourceName)}</a><button type="button" data-swap data-choice="${choiceIndex}" data-dish="${dishIndex}" aria-label="Swap ${escapeHtml(dish.name)}"><span aria-hidden="true">↻</span> Swap</button></div></div></section>`;
 }
 
 function renderMealSummary() {

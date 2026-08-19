@@ -8,7 +8,7 @@ It decides **what** to cook. Trusted publishers such as Bong Eats, Sanjeev Kapoo
 
 - A real daily-menu preview near the top of the homepage
 - Three deterministic meal choices every day, with three dishes in each choice
-- One complete Gemini-generated meal image for every choice
+- One Gemini-generated photograph for every individual dish
 - Select a choice, then swap individual dishes without rebuilding the other choices
 - Household, portion, budget, cuisine, diet, allergy, and dislike preferences
 - Estimated cooking time, household cost, servings, kcal, and core macros
@@ -49,15 +49,15 @@ Copy `.env.example` to `.env`, then place your key on the `GEMINI_API_KEY` line.
 GEMINI_API_KEY=your-key
 ```
 
-The reusable image direction is in `config/image_style.json`. Its `promptTemplate` uses `{name}` as the placeholder for the dishes in each meal choice. Edit the template, framing, look, or avoid list to change the style without touching Python. Keep the model set to `gemini-3.1-flash-image`.
+The reusable image direction is in `config/image_style.json`. Its `promptTemplate` uses `{name}` as the placeholder for one dish. Edit the template, framing, look, or avoid list to change the style without touching Python. Keep the model set to `gemini-3.1-flash-image`.
 
-Generate all three complete-meal images for a day:
+Generate the individual images for every dish across a day’s three choices:
 
 ```bash
 npm run images -- --date 2026-08-20
 ```
 
-Generated photos are saved under `web/assets/meals/`. Until a photo exists, the website intentionally uses a branded color field rather than an image from another generator.
+Generated photos are saved under `web/assets/dishes/`. Until a photo exists, the website intentionally uses a branded color field rather than an image from another generator.
 
 ## WhatsApp delivery
 

@@ -78,9 +78,9 @@ RECIPE_URLS = {
     "b_p_11": "https://www.bongeats.com/recipe/chingri-bhaape",
     "b_p_12": "https://www.bongeats.com/recipe/pressure-cooker-chicken",
     "b_p_14": "https://www.bongeats.com/recipe/chicken-curry",
-    "b_p_15": "https://www.bongeats.com/recipe/dimer-dalna",
+    "b_p_15": "https://mitarcooking.com/dim-posto/",
     "b_p_16": "https://www.bongeats.com/recipe/chicken-curry",
-    "b_p_17": "https://www.bongeats.com/recipe/katla-kalia",
+    "b_p_17": "https://jayeetacha.com/2020/04/27/doi-katla-katla-fish-in-rich-yogurt-gravy/",
     "b_v_01": "https://www.bongeats.com/recipe/alu-posto",
     "b_v_02": "https://www.bongeats.com/recipe/shukto",
     "b_v_03": "https://www.bongeats.com/recipe/cholar-dal",
@@ -97,11 +97,11 @@ RECIPE_URLS = {
     "b_v_14": "https://www.bongeats.com/recipe/korola-bhaja",
     "b_v_15": "https://www.bongeats.com/recipe/bota-soho-begun-bhaja",
     "b_v_16": "https://www.bongeats.com/recipe/aloo-bhorta",
-    "b_v_17": "https://www.bongeats.com/recipe/potoler-tel-jhol",
-    "b_v_18": "https://www.bongeats.com/recipe/ilish-maachh-bhaja",
-    "b_v_19": "https://www.bongeats.com/recipe/jhuri-alu-bhaja",
-    "b_v_20": "https://www.bongeats.com/recipe/potol-posto",
-    "b_v_21": "https://hebbarskitchen.com/bhindi-fry-recipe-bhindi-ki-sabji/",
+    "b_v_17": "https://www.sanjeevkapoor.com/Recipe/Aloo-Potol---SK-Khazana.html",
+    "b_v_18": "https://www.cookingandme.com/bengali-fish-fry-mach-bhaja-recipe/",
+    "b_v_19": "https://www.vegrecipesofindia.com/aloo-capsicum-indian-recipe-made-with-capsicum-potatoes/",
+    "b_v_20": "https://kitchenofdebjani.com/2014/10/ghee-bhat/",
+    "b_v_21": "https://simpleindianrecipes.com/Home/Bhendi-Bhaja.aspx",
     "c_p_01": "https://www.sanjeevkapoor.com/Recipe/Chinese-Chilli-Chicken-Sirf-30-minute-FoodFood.html",
     "c_p_02": "https://www.sanjeevkapoor.com/Recipe/Lemon-Chicken.html",
     "c_p_03": "https://www.sanjeevkapoor.com/Recipe/Garlic-Chicken-Sanjeev-Kapoor-Kitchen-FoodFood.html",
@@ -121,6 +121,15 @@ RECIPE_URLS = {
     "o_v_02": "https://hebbarskitchen.com/aloo-gobi-masala-recipe-aloo-gobi-curry/",
     "o_v_03": "https://hebbarskitchen.com/bhindi-masala-recipe-bhindi-ki-gravy/",
     "o_v_04": "https://hebbarskitchen.com/mix-veg-recipe-mixed-vegetable-curry/",
+}
+RECIPE_SOURCE_NAMES = {
+    "b_p_15": "Mitar Cooking",
+    "b_p_17": "Cooking Delight",
+    "b_v_17": "Sanjeev Kapoor",
+    "b_v_18": "Cooking and Me",
+    "b_v_19": "Dassana's Veg Recipes",
+    "b_v_20": "Debjanir Rannaghar",
+    "b_v_21": "Simple Indian Recipes",
 }
 
 # Which category(ies) can supply each protein family.
@@ -218,7 +227,7 @@ def _dish_with_source(dish, role):
     source = SOURCES.get(dish.get("sourceSite"), {})
     enriched.update({
         "role": role,
-        "sourceName": source.get("name", "Trusted source"),
+        "sourceName": RECIPE_SOURCE_NAMES.get(dish["id"], source.get("name", "Trusted source")),
         "recipeUrl": RECIPE_URLS.get(dish["id"], source.get("url", "")),
     })
     return enriched
@@ -271,7 +280,6 @@ def generate_for_date(date_str: str) -> dict:
             "ingredients": sorted(set(item for dish in dishes for item in dish.get("ingredients", []))),
             "prepNotes": [dish.get("prepNote") for dish in dishes if dish.get("advancePrep") and dish.get("prepNote")],
             "anyNeedsAdvancePrep": any(dish.get("advancePrep") for dish in dishes),
-            "imagePath": f"web/assets/meals/{date_str}-choice-{choice_index + 1}.jpg",
         })
 
     return {

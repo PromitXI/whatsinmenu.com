@@ -16,9 +16,9 @@ const RECIPE_URLS = {
   b_p_11: "https://www.bongeats.com/recipe/chingri-bhaape",
   b_p_12: "https://www.bongeats.com/recipe/pressure-cooker-chicken",
   b_p_14: "https://www.bongeats.com/recipe/chicken-curry",
-  b_p_15: "https://www.bongeats.com/recipe/dimer-dalna",
+  b_p_15: "https://mitarcooking.com/dim-posto/",
   b_p_16: "https://www.bongeats.com/recipe/chicken-curry",
-  b_p_17: "https://www.bongeats.com/recipe/katla-kalia",
+  b_p_17: "https://jayeetacha.com/2020/04/27/doi-katla-katla-fish-in-rich-yogurt-gravy/",
   b_v_01: "https://www.bongeats.com/recipe/alu-posto",
   b_v_02: "https://www.bongeats.com/recipe/shukto",
   b_v_03: "https://www.bongeats.com/recipe/cholar-dal",
@@ -35,11 +35,11 @@ const RECIPE_URLS = {
   b_v_14: "https://www.bongeats.com/recipe/korola-bhaja",
   b_v_15: "https://www.bongeats.com/recipe/bota-soho-begun-bhaja",
   b_v_16: "https://www.bongeats.com/recipe/aloo-bhorta",
-  b_v_17: "https://www.bongeats.com/recipe/potoler-tel-jhol",
-  b_v_18: "https://www.bongeats.com/recipe/ilish-maachh-bhaja",
-  b_v_19: "https://www.bongeats.com/recipe/jhuri-alu-bhaja",
-  b_v_20: "https://www.bongeats.com/recipe/potol-posto",
-  b_v_21: "https://hebbarskitchen.com/bhindi-fry-recipe-bhindi-ki-sabji/",
+  b_v_17: "https://www.sanjeevkapoor.com/Recipe/Aloo-Potol---SK-Khazana.html",
+  b_v_18: "https://www.cookingandme.com/bengali-fish-fry-mach-bhaja-recipe/",
+  b_v_19: "https://www.vegrecipesofindia.com/aloo-capsicum-indian-recipe-made-with-capsicum-potatoes/",
+  b_v_20: "https://kitchenofdebjani.com/2014/10/ghee-bhat/",
+  b_v_21: "https://simpleindianrecipes.com/Home/Bhendi-Bhaja.aspx",
   c_p_01: "https://www.sanjeevkapoor.com/Recipe/Chinese-Chilli-Chicken-Sirf-30-minute-FoodFood.html",
   c_p_02: "https://www.sanjeevkapoor.com/Recipe/Lemon-Chicken.html",
   c_p_03: "https://www.sanjeevkapoor.com/Recipe/Garlic-Chicken-Sanjeev-Kapoor-Kitchen-FoodFood.html",
@@ -59,6 +59,16 @@ const RECIPE_URLS = {
   o_v_02: "https://hebbarskitchen.com/aloo-gobi-masala-recipe-aloo-gobi-curry/",
   o_v_03: "https://hebbarskitchen.com/bhindi-masala-recipe-bhindi-ki-gravy/",
   o_v_04: "https://hebbarskitchen.com/mix-veg-recipe-mixed-vegetable-curry/",
+};
+
+const RECIPE_SOURCE_NAMES = {
+  b_p_15: "Mitar Cooking",
+  b_p_17: "Cooking Delight",
+  b_v_17: "Sanjeev Kapoor",
+  b_v_18: "Cooking and Me",
+  b_v_19: "Dassana’s Veg Recipes",
+  b_v_20: "Debjanir Rannaghar",
+  b_v_21: "Simple Indian Recipes",
 };
 
 export const DEFAULT_PREFERENCES = {
@@ -264,8 +274,9 @@ function enrichDish(dish, kind, family, category, prefs) {
   return {
     ...dish,
     kind,
-    sourceName: SOURCES[dish.sourceSite]?.name || "Trusted source",
+    sourceName: RECIPE_SOURCE_NAMES[dish.id] || SOURCES[dish.sourceSite]?.name || "Trusted source",
     recipeUrl: recipeFor(dish),
+    imagePath: `assets/dishes/${dish.id}.jpg`,
     cookingMinutes,
     servingLabel: kind === "protein" ? "1 bowl" : "1 small bowl",
     nutrition,
@@ -365,8 +376,6 @@ export function buildMenu(catalog, dateStr, inputPreferences = {}, swapOffsets =
       estimatedCost: dishes.reduce((sum, dish) => sum + dish.estimatedCostPerServing, 0) * prefs.householdSize,
       cookingMinutes: Math.max(...dishes.map((dish) => dish.cookingMinutes)),
       needsAdvancePrep: dishes.some((dish) => dish.advancePrep),
-      imagePath: `assets/meals/${dateStr}-choice-${choiceIndex + 1}.jpg`,
-      imagePrompt: `A complete ${CATEGORY_LABELS[category]} home dinner containing ${dishes.map((dish) => dish.name).join(", ")}`,
       preferences: prefs,
     };
   });

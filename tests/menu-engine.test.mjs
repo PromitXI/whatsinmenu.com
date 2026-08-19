@@ -15,7 +15,7 @@ for (const choice of menu.choices) {
   assert.equal(new Set(choice.dishes.map((dish) => dish.id)).size, 3);
   assert.ok(choice.totals.energy > 0);
   assert.ok(choice.estimatedCost > 0);
-  assert.match(choice.imagePath, /choice-[123]\.jpg$/);
+  assert.ok(choice.dishes.every((dish) => /assets\/dishes\/.+\.jpg$/.test(dish.imagePath)));
 }
 
 const swapped = buildMenu(catalog, "2026-08-19", preferences, [[1, 1, 1], [0, 0, 0], [0, 0, 0]]);

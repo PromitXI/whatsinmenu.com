@@ -3,7 +3,7 @@
   "aspectRatio": "4:3",
   "imageSize": "1K",
   "promptTemplate": "Create an image of the dish: {name}, in a homely Indian setting, served in a normal bowl or dish placed in an Indian kitchen or on a dining table. Focus on the food—the dish is the hero. Suggested garnishing is optional.",
-  "framing": "Show the complete meal in one coherent, close food-focused frame. Every named item must be clearly visible and recognizable.",
+  "framing": "Show one dish only in a close, food-focused frame. The named dish must be clearly visible and recognizable.",
   "look": "Natural household presentation, realistic food texture and soft natural light. The result should feel achievable in a family kitchen, not styled like a luxury restaurant.",
   "avoid": [
     "people or hands",
