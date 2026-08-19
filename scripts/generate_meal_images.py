@@ -47,7 +47,7 @@ def prompt_for(choice, style):
     return (
         f"Create one photorealistic image for {choice['label']}, a complete Indian home dinner containing exactly: {dishes}. "
         f"{style['direction']} {style['composition']} {style['lighting']} {style['palette']} "
-        f"Avoid: {avoid}."
+        f"Avoid: {avoid}. ABSOLUTELY NO visible words, captions, dish labels, typography, or graphic overlays anywhere in the image."
     )
 
 
@@ -92,6 +92,7 @@ def generate(choice, date_str, style, api_key, force=False):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--date", help="Menu date in YYYY-MM-DD; defaults to today in Kolkata")
+    parser.add_argument("--choice", type=int, choices=(1, 2, 3), help="Generate only one numbered choice")
     parser.add_argument("--force", action="store_true", help="Replace existing images")
     args = parser.parse_args()
     load_dotenv()
@@ -100,7 +101,10 @@ def main():
         raise SystemExit("Add GEMINI_API_KEY=your_key to the repository's .env file.")
     date_str = args.date or datetime.now(IST).strftime("%Y-%m-%d")
     style = load_style()
-    for choice in generate_for_date(date_str)["choices"]:
+    choices = generate_for_date(date_str)["choices"]
+    if args.choice:
+        choices = [choices[args.choice - 1]]
+    for choice in choices:
         generate(choice, date_str, style, api_key, args.force)
 
 
