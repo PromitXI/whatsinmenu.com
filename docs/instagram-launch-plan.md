@@ -13,7 +13,7 @@ Use Instagram to turn the daily dinner decision into a simple ritual: show three
 5. Complete the profile:
    - Name: `WhatsInMenu · Dinner Decided`
    - Category: `Food & beverage` or `Kitchen/cooking`
-   - Bio: `Three practical dinner choices every day. Pick one, swap a dish, and shop once. Mostly Bengali, always made for home.`
+   - Bio: `Three practical Indian dinner choices every day. Pick one, swap a dish, and shop once. Always made for home.`
    - Link: the public WhatsInMenu URL once the site is deployed
    - Profile image: the WhatsInMenu wordmark or a simple brand mark
 
@@ -61,7 +61,7 @@ Which one are you cooking—1, 2, or 3?
 Recipes are linked to their original publishers inside WhatsInMenu.
 Images are AI-generated serving suggestions. Nutrition and cost are planning estimates.
 
-#WhatsInMenu #BengaliFood #IndianHomeCooking #DinnerIdeas #HomeCooking
+#WhatsInMenu #IndianFood #IndianHomeCooking #DinnerIdeas #HomeCooking
 ```
 
 Use a small, relevant hashtag set. Avoid copying long generic hashtag blocks.

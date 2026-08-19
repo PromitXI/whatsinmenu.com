@@ -35,4 +35,12 @@ const chineseOnly = buildMenu(catalog, "2026-08-19", { ...preferences, cuisines:
 assert.equal(chineseOnly.category, "chinese");
 assert.ok(chineseOnly.choices.every((choice) => choice.dishes.every((dish) => dish.id.startsWith("c_"))));
 
+for (const [category, prefix] of [["andhra", "a_"], ["southIndian", "s_"]]) {
+  const cuisineOnly = buildMenu(catalog, "2026-08-19", { ...preferences, cuisines: [category] });
+  assert.equal(cuisineOnly.category, category);
+  assert.equal(cuisineOnly.choices.length, 3);
+  assert.ok(cuisineOnly.choices.every((choice) => choice.dishes.length === 3));
+  assert.ok(cuisineOnly.choices.every((choice) => choice.dishes.every((dish) => dish.id.startsWith(prefix))));
+}
+
 console.log("menu-engine tests passed");

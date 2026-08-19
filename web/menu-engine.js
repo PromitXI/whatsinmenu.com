@@ -2,6 +2,11 @@ const SOURCES = {
   bongeats: { name: "Bong Eats", url: "https://www.bongeats.com/recipes" },
   sanjeevkapoor: { name: "Sanjeev Kapoor", url: "https://www.sanjeevkapoor.com/Recipe" },
   hebbarskitchen: { name: "Hebbar's Kitchen", url: "https://hebbarskitchen.com/" },
+  swasthis: { name: "Swasthi's Recipes", url: "https://www.indianhealthyrecipes.com/" },
+  yummytummy: { name: "Yummy Tummy Aarthi", url: "https://www.yummytummyaarthi.com/" },
+  subbuskitchen: { name: "Subbus Kitchen", url: "https://www.subbuskitchen.com/" },
+  dassanas: { name: "Dassana's Veg Recipes", url: "https://www.vegrecipesofindia.com/" },
+  archanas: { name: "Archana's Kitchen", url: "https://www.archanaskitchen.com/" },
 };
 
 const RECIPE_URLS = {
@@ -50,6 +55,28 @@ const RECIPE_URLS = {
   c_v_03: "https://hebbarskitchen.com/manchurian-gravy-recipe-veg-manchurian/",
   c_v_04: "https://hebbarskitchen.com/chilli-garlic-fried-rice-recipe/",
   c_v_05: "https://hebbarskitchen.com/schezwan-fried-rice-recipe-schezwan-rice/",
+  a_p_01: "https://www.indianhealthyrecipes.com/gongura-chicken-curry-chicken-with-red-sorrel-leaves/",
+  a_p_02: "https://www.yummytummyaarthi.com/andhra-spicy-fish-curry-recipe-andhra/",
+  a_p_03: "https://www.sanjeevkapoor.com/Recipe/Kodi-Guddu-Pulusu-Sirf-30-minute-FoodFood.html",
+  a_p_04: "https://www.archanaskitchen.com/recipe/andhra-style-palak-kura-pappu-recipe-spinach-dal-recipe",
+  a_p_05: "https://www.indianhealthyrecipes.com/tomato-pappu-recipe/",
+  a_v_01: "https://www.vegrecipesofindia.com/gutti-vankaya-kura-recipe/",
+  a_v_02: "https://hebbarskitchen.com/bendakaya-pulusu-recipe-okra-in-tamarind/",
+  a_v_03: "https://www.subbuskitchen.com/dondakaya-vepudu/",
+  a_v_04: "https://hebbarskitchen.com/pulihora-recipe-chintapandu-pulihora/",
+  a_v_05: "https://www.vegrecipesofindia.com/gongura-pachadi/",
+  a_v_06: "https://www.indianhealthyrecipes.com/cabbage-curry-recipe/",
+  s_p_01: "https://www.indianhealthyrecipes.com/chicken-chettinad/",
+  s_p_02: "https://www.indianhealthyrecipes.com/kerala-meen-fish-curry/",
+  s_p_03: "https://www.indianhealthyrecipes.com/egg-kurma-recipe/",
+  s_p_04: "https://hebbarskitchen.com/south-indian-vegetable-sambar-recipe/",
+  s_p_05: "https://hebbarskitchen.com/paneer-chettinad-curry-recipe-chettinad/",
+  s_v_01: "https://www.indianhealthyrecipes.com/lemon-rice-recipe/",
+  s_v_02: "https://hebbarskitchen.com/carrot-beans-poriyal-recipe/",
+  s_v_03: "https://hebbarskitchen.com/cabbage-poriyal-cabbage-thoran-stir-fry/",
+  s_v_04: "https://hebbarskitchen.com/avial-recipe-aviyal/",
+  s_v_05: "https://www.indianhealthyrecipes.com/coconut-rice-recipe/",
+  s_v_06: "https://www.indianhealthyrecipes.com/tomato-rasam-recipe/",
   o_p_01: "https://hebbarskitchen.com/rajma-recipe-punjabi-rajma-masala/",
   o_p_02: "https://hebbarskitchen.com/chana-masala-recipe-chickpea-masala/",
   o_p_03: "https://hebbarskitchen.com/punjabi-dal-makhani-recipe/",
@@ -75,7 +102,7 @@ export const DEFAULT_PREFERENCES = {
   householdSize: 3,
   portion: "regular",
   budget: "balanced",
-  cuisines: ["bengali", "chinese", "otherIndian"],
+  cuisines: ["bengali", "chinese", "otherIndian", "andhra", "southIndian"],
   diet: "omnivore",
   allergies: [],
   dislikes: [],
@@ -90,22 +117,26 @@ export const CATEGORY_LABELS = {
   bengali: "Bengali",
   chinese: "Chinese-style",
   otherIndian: "North Indian",
+  andhra: "Andhra",
+  southIndian: "South Indian",
 };
 
 const LAUNCH_DATE = "2026-08-18";
 const COLD_START_DAYS = 10;
 const FAMILY_CATEGORIES = {
-  fish: ["bengali"],
+  fish: ["bengali", "andhra", "southIndian"],
   mutton: ["bengali"],
-  egg: ["bengali"],
-  chicken: ["bengali", "chinese", "otherIndian"],
-  paneer: ["otherIndian"],
-  lentil: ["otherIndian"],
+  egg: ["bengali", "andhra", "southIndian"],
+  chicken: ["bengali", "chinese", "otherIndian", "andhra", "southIndian"],
+  paneer: ["otherIndian", "southIndian"],
+  lentil: ["otherIndian", "andhra", "southIndian"],
 };
 const CHICKEN_CATEGORY_WEIGHTS = [
-  ["bengali", 0.7],
-  ["chinese", 0.2],
+  ["bengali", 0.55],
+  ["chinese", 0.15],
   ["otherIndian", 0.1],
+  ["andhra", 0.1],
+  ["southIndian", 0.1],
 ];
 const PORTION_SCALE = { light: 0.8, regular: 1, hearty: 1.25 };
 const OWNER_EXAMPLE_DATE = "2026-08-19";

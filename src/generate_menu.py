@@ -63,6 +63,8 @@ CATEGORY_LABELS = {
     "bengali": "Bengali",
     "chinese": "Chinese",
     "otherIndian": "North Indian",
+    "andhra": "Andhra",
+    "southIndian": "South Indian",
 }
 SPICE_ICON = {"mild": "🌶️", "medium": "🌶️🌶️", "spicy": "🌶️🌶️🌶️"}
 SOURCES = DISHES.get("sources", {})
@@ -112,6 +114,28 @@ RECIPE_URLS = {
     "c_v_03": "https://hebbarskitchen.com/manchurian-gravy-recipe-veg-manchurian/",
     "c_v_04": "https://hebbarskitchen.com/chilli-garlic-fried-rice-recipe/",
     "c_v_05": "https://hebbarskitchen.com/schezwan-fried-rice-recipe-schezwan-rice/",
+    "a_p_01": "https://www.indianhealthyrecipes.com/gongura-chicken-curry-chicken-with-red-sorrel-leaves/",
+    "a_p_02": "https://www.yummytummyaarthi.com/andhra-spicy-fish-curry-recipe-andhra/",
+    "a_p_03": "https://www.sanjeevkapoor.com/Recipe/Kodi-Guddu-Pulusu-Sirf-30-minute-FoodFood.html",
+    "a_p_04": "https://www.archanaskitchen.com/recipe/andhra-style-palak-kura-pappu-recipe-spinach-dal-recipe",
+    "a_p_05": "https://www.indianhealthyrecipes.com/tomato-pappu-recipe/",
+    "a_v_01": "https://www.vegrecipesofindia.com/gutti-vankaya-kura-recipe/",
+    "a_v_02": "https://hebbarskitchen.com/bendakaya-pulusu-recipe-okra-in-tamarind/",
+    "a_v_03": "https://www.subbuskitchen.com/dondakaya-vepudu/",
+    "a_v_04": "https://hebbarskitchen.com/pulihora-recipe-chintapandu-pulihora/",
+    "a_v_05": "https://www.vegrecipesofindia.com/gongura-pachadi/",
+    "a_v_06": "https://www.indianhealthyrecipes.com/cabbage-curry-recipe/",
+    "s_p_01": "https://www.indianhealthyrecipes.com/chicken-chettinad/",
+    "s_p_02": "https://www.indianhealthyrecipes.com/kerala-meen-fish-curry/",
+    "s_p_03": "https://www.indianhealthyrecipes.com/egg-kurma-recipe/",
+    "s_p_04": "https://hebbarskitchen.com/south-indian-vegetable-sambar-recipe/",
+    "s_p_05": "https://hebbarskitchen.com/paneer-chettinad-curry-recipe-chettinad/",
+    "s_v_01": "https://www.indianhealthyrecipes.com/lemon-rice-recipe/",
+    "s_v_02": "https://hebbarskitchen.com/carrot-beans-poriyal-recipe/",
+    "s_v_03": "https://hebbarskitchen.com/cabbage-poriyal-cabbage-thoran-stir-fry/",
+    "s_v_04": "https://hebbarskitchen.com/avial-recipe-aviyal/",
+    "s_v_05": "https://www.indianhealthyrecipes.com/coconut-rice-recipe/",
+    "s_v_06": "https://www.indianhealthyrecipes.com/tomato-rasam-recipe/",
     "o_p_01": "https://hebbarskitchen.com/rajma-recipe-punjabi-rajma-masala/",
     "o_p_02": "https://hebbarskitchen.com/chana-masala-recipe-chickpea-masala/",
     "o_p_03": "https://hebbarskitchen.com/punjabi-dal-makhani-recipe/",
@@ -134,17 +158,21 @@ RECIPE_SOURCE_NAMES = {
 
 # Which category(ies) can supply each protein family.
 FAMILY_CATEGORIES = {
-    "fish": ["bengali"],
+    "fish": ["bengali", "andhra", "southIndian"],
     "mutton": ["bengali"],
-    "egg": ["bengali"],
-    "chicken": ["bengali", "chinese", "otherIndian"],
-    "paneer": ["otherIndian"],
-    "lentil": ["otherIndian"],
+    "egg": ["bengali", "andhra", "southIndian"],
+    "chicken": ["bengali", "chinese", "otherIndian", "andhra", "southIndian"],
+    "paneer": ["otherIndian", "southIndian"],
+    "lentil": ["otherIndian", "andhra", "southIndian"],
 }
-# How often a "chicken" day leans Bengali vs Chinese vs North Indian —
-# tuned so the week still lands close to the ~70-75% Bengali target once
-# the fish/mutton/egg days (always Bengali) are added in.
-CHICKEN_CATEGORY_WEIGHTS = [("bengali", 0.70), ("chinese", 0.20), ("otherIndian", 0.10)]
+# How often a chicken day leans into each selected launch cuisine.
+CHICKEN_CATEGORY_WEIGHTS = [
+    ("bengali", 0.55),
+    ("chinese", 0.15),
+    ("otherIndian", 0.10),
+    ("andhra", 0.10),
+    ("southIndian", 0.10),
+]
 
 
 # ---------- helpers ----------
@@ -318,7 +346,7 @@ def format_whatsapp_message(payload: dict, group_share: bool = True) -> str:
     t = payload["today"]
     lines = [
         "🍽️ *WhatsInMenu — Tonight's Menu*",
-        f"_{t['categoryLabel']} style_" + (" _(cold-start window: Bengali/North Indian only)_" if t["coldStart"] else ""),
+        f"_{t['categoryLabel']} style_" + (" _(cold-start window: Chinese-style menus are paused)_" if t["coldStart"] else ""),
         "",
     ]
 

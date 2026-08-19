@@ -49,7 +49,9 @@ def load_style():
 
 
 def all_catalogue_dishes():
-    for category in ("bengali", "chinese", "otherIndian"):
+    for category, collection in DISHES.items():
+        if not isinstance(collection, dict) or "protein" not in collection or "vegetable" not in collection:
+            continue
         for kind in ("protein", "vegetable"):
             yield from DISHES[category][kind]
 

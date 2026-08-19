@@ -1,4 +1,4 @@
-import { DEFAULT_PREFERENCES, buildMenu, formatDate, normalizePreferences, todayInKolkata } from "./menu-engine.js?v=7";
+import { DEFAULT_PREFERENCES, buildMenu, formatDate, normalizePreferences, todayInKolkata } from "./menu-engine.js?v=8";
 
 function escapeHtml(value) {
   return String(value).replace(/[&<>'"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character]);
@@ -6,7 +6,7 @@ function escapeHtml(value) {
 
 const preview = document.getElementById("livePreview");
 try {
-  const response = await fetch("../data/dishes.json?v=6", { cache: "no-store" });
+  const response = await fetch("../data/dishes.json?v=7", { cache: "no-store" });
   if (!response.ok) throw new Error("Menu unavailable");
   const catalog = await response.json();
   let stored = DEFAULT_PREFERENCES;

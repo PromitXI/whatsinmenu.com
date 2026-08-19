@@ -42,7 +42,8 @@ class DailyMenuTests(unittest.TestCase):
     def test_every_active_dish_has_a_specific_recipe(self):
         active_ids = {
             dish["id"]
-            for category in ("bengali", "chinese", "otherIndian")
+            for category, collection in DISHES.items()
+            if isinstance(collection, dict) and "protein" in collection and "vegetable" in collection
             for kind in ("protein", "vegetable")
             for dish in DISHES[category][kind]
         }

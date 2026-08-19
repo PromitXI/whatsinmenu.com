@@ -2,7 +2,12 @@
   "sources": {
     "bongeats": { "name": "Bong Eats", "url": "https://www.bongeats.com/recipes" },
     "sanjeevkapoor": { "name": "Sanjeev Kapoor", "url": "https://www.sanjeevkapoor.com/Recipe" },
-    "hebbarskitchen": { "name": "Hebbar's Kitchen", "url": "https://hebbarskitchen.com/" }
+    "hebbarskitchen": { "name": "Hebbar's Kitchen", "url": "https://hebbarskitchen.com/" },
+    "swasthis": { "name": "Swasthi's Recipes", "url": "https://www.indianhealthyrecipes.com/" },
+    "yummytummy": { "name": "Yummy Tummy Aarthi", "url": "https://www.yummytummyaarthi.com/" },
+    "subbuskitchen": { "name": "Subbus Kitchen", "url": "https://www.subbuskitchen.com/" },
+    "dassanas": { "name": "Dassana's Veg Recipes", "url": "https://www.vegrecipesofindia.com/" },
+    "archanas": { "name": "Archana's Kitchen", "url": "https://www.archanaskitchen.com/" }
   },
   "_festivalNote": "Dates verified by web search for 2026 only (lunisolar festivals shift every year) — this table needs a fresh lookup each year. Gated by FESTIVAL_GATE_DAYS (100 days from launch) in generate_menu.py, so none of these 2026 dates will actually surface (Aug 18 2026 + 100 days = Nov 26 2026, after every festival listed here) — add 2027 dates before next use.",
   "festivals": [
@@ -76,6 +81,40 @@
       { "id": "c_v_03", "name": "Veg Manchurian", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "hebbarskitchen", "complexity": "standard", "ingredients": ["cabbage", "carrot", "cornflour", "soy sauce", "garlic"] },
       { "id": "c_v_04", "name": "Chilli Garlic Fried Rice", "advancePrep": false, "spiceLevel": "spicy", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["rice", "mixed vegetables", "garlic", "dried red chili", "soy sauce"] },
       { "id": "c_v_05", "name": "Schezwan Fried Rice", "advancePrep": false, "spiceLevel": "spicy", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["rice", "schezwan sauce", "mixed vegetables", "spring onion"] }
+    ]
+  },
+  "andhra": {
+    "protein": [
+      { "id": "a_p_01", "name": "Gongura Chicken", "advancePrep": false, "spiceLevel": "spicy", "sourceSite": "swasthis", "proteinFamily": "chicken", "complexity": "simple", "ingredients": ["chicken", "gongura leaves", "onion", "green chili", "ginger-garlic paste"] },
+      { "id": "a_p_02", "name": "Chepala Pulusu", "advancePrep": false, "spiceLevel": "spicy", "sourceSite": "yummytummy", "proteinFamily": "fish", "complexity": "simple", "ingredients": ["fish", "tamarind", "onion", "tomato", "curry leaves"] },
+      { "id": "a_p_03", "name": "Kodi Guddu Pulusu", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "sanjeevkapoor", "proteinFamily": "egg", "complexity": "simple", "ingredients": ["eggs", "tamarind", "onion", "tomato", "curry leaves"] },
+      { "id": "a_p_04", "name": "Palakura Pappu", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "archanas", "proteinFamily": "lentil", "complexity": "simple", "ingredients": ["toor dal", "spinach", "tomato", "garlic", "cumin"] },
+      { "id": "a_p_05", "name": "Tomato Pappu", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "swasthis", "proteinFamily": "lentil", "complexity": "simple", "ingredients": ["toor dal", "tomato", "green chili", "curry leaves", "mustard seeds"] }
+    ],
+    "vegetable": [
+      { "id": "a_v_01", "name": "Gutti Vankaya", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "dassanas", "complexity": "standard", "ingredients": ["baby eggplant", "peanuts", "sesame", "coconut", "tamarind"] },
+      { "id": "a_v_02", "name": "Bendakaya Pulusu", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["okra", "tamarind", "tomato", "garlic", "curry leaves"] },
+      { "id": "a_v_03", "name": "Dondakaya Vepudu", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "subbuskitchen", "complexity": "simple", "ingredients": ["ivy gourd", "onion", "peanuts", "curry leaves", "chili powder"] },
+      { "id": "a_v_04", "name": "Pulihora", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["rice", "tamarind", "peanuts", "curry leaves", "mustard seeds"] },
+      { "id": "a_v_05", "name": "Gongura Pachadi", "advancePrep": false, "spiceLevel": "spicy", "sourceSite": "dassanas", "complexity": "simple", "ingredients": ["gongura leaves", "red chili", "garlic", "cumin", "mustard seeds"] },
+      { "id": "a_v_06", "name": "Cabbage Koora", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "swasthis", "complexity": "simple", "ingredients": ["cabbage", "chana dal", "coconut", "curry leaves", "mustard seeds"] }
+    ]
+  },
+  "southIndian": {
+    "protein": [
+      { "id": "s_p_01", "name": "Chicken Chettinad", "advancePrep": false, "spiceLevel": "spicy", "sourceSite": "swasthis", "proteinFamily": "chicken", "complexity": "standard", "ingredients": ["chicken", "coconut", "black pepper", "fennel", "curry leaves"] },
+      { "id": "s_p_02", "name": "Kerala Fish Curry", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "swasthis", "proteinFamily": "fish", "complexity": "simple", "ingredients": ["fish", "coconut milk", "tamarind", "curry leaves", "chili powder"] },
+      { "id": "s_p_03", "name": "South Indian Egg Kurma", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "swasthis", "proteinFamily": "egg", "complexity": "simple", "ingredients": ["eggs", "coconut", "onion", "tomato", "fennel"] },
+      { "id": "s_p_04", "name": "Vegetable Sambar", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "hebbarskitchen", "proteinFamily": "lentil", "complexity": "simple", "ingredients": ["toor dal", "mixed vegetables", "tamarind", "sambar powder", "curry leaves"] },
+      { "id": "s_p_05", "name": "Paneer Chettinad", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "hebbarskitchen", "proteinFamily": "paneer", "complexity": "standard", "ingredients": ["paneer", "coconut", "black pepper", "fennel", "curry leaves"] }
+    ],
+    "vegetable": [
+      { "id": "s_v_01", "name": "Lemon Rice", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "swasthis", "complexity": "simple", "ingredients": ["rice", "lemon", "peanuts", "curry leaves", "mustard seeds"] },
+      { "id": "s_v_02", "name": "Carrot Beans Poriyal", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["green beans", "carrot", "coconut", "curry leaves", "mustard seeds"] },
+      { "id": "s_v_03", "name": "Cabbage Thoran", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["cabbage", "coconut", "green chili", "curry leaves", "mustard seeds"] },
+      { "id": "s_v_04", "name": "Avial", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "hebbarskitchen", "complexity": "standard", "ingredients": ["mixed vegetables", "coconut", "yogurt", "curry leaves", "cumin"] },
+      { "id": "s_v_05", "name": "Coconut Rice", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "swasthis", "complexity": "simple", "ingredients": ["rice", "coconut", "cashews", "curry leaves", "mustard seeds"] },
+      { "id": "s_v_06", "name": "Tomato Rasam", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["tomato", "tamarind", "black pepper", "cumin", "curry leaves"] }
     ]
   },
   "otherIndian": {
