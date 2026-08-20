@@ -7,6 +7,15 @@ const SOURCES = {
   subbuskitchen: { name: "Subbus Kitchen", url: "https://www.subbuskitchen.com/" },
   dassanas: { name: "Dassana's Veg Recipes", url: "https://www.vegrecipesofindia.com/" },
   archanas: { name: "Archana's Kitchen", url: "https://www.archanaskitchen.com/" },
+  notoutofthebox: { name: "Not Out of the Box", url: "https://notoutofthebox.in/" },
+  gastronomad: { name: "Experiences of a Gastronomad", url: "https://experiencesofagastronomad.com/" },
+  pikturenama: { name: "Pikturenama", url: "https://pikturenama.com/" },
+  mitarcooking: { name: "Mitar Cooking", url: "https://mitarcooking.com/" },
+  spicypunch: { name: "SpicyPunch", url: "https://www.spicypunch.com/" },
+  cookingandme: { name: "Cooking and Me", url: "https://www.cookingandme.com/" },
+  debjani: { name: "Debjanir Rannaghar", url: "https://kitchenofdebjani.com/" },
+  simpleindian: { name: "Simple Indian Recipes", url: "https://simpleindianrecipes.com/" },
+  atanur: { name: "Atanur Rannaghar", url: "https://atanurrannagharrecipe.com/" },
 };
 
 const RECIPE_URLS = {
@@ -22,16 +31,16 @@ const RECIPE_URLS = {
   b_p_12: "https://www.bongeats.com/recipe/pressure-cooker-chicken",
   b_p_14: "https://www.bongeats.com/recipe/chicken-curry",
   b_p_15: "https://mitarcooking.com/dim-posto/",
-  b_p_16: "https://www.bongeats.com/recipe/chicken-curry",
-  b_p_17: "https://jayeetacha.com/2020/04/27/doi-katla-katla-fish-in-rich-yogurt-gravy/",
-  b_v_01: "https://www.bongeats.com/recipe/alu-posto",
+  b_p_16: "https://atanurrannagharrecipe.com/easy-simple-chicken-curry-recipe/",
+  b_p_17: "https://www.spicypunch.com/doi-maach-recipe/",
+  b_v_01: "https://notoutofthebox.in/2014/08/aloo-posto/",
   b_v_02: "https://www.bongeats.com/recipe/shukto",
-  b_v_03: "https://www.bongeats.com/recipe/cholar-dal",
+  b_v_03: "https://experiencesofagastronomad.com/narkol-diye-cholar-dal-bengali-chana-dal-with-fried-coconut-slices-recipe/",
   b_v_04: "https://www.bongeats.com/recipe/dhokar-dalna",
   b_v_05: "https://www.bongeats.com/recipe/niramish-aloo-dum",
   b_v_06: "https://www.bongeats.com/recipe/labra",
   b_v_07: "https://www.bongeats.com/recipe/begun-bhaja",
-  b_v_08: "https://www.bongeats.com/recipe/mochar-ghonto",
+  b_v_08: "https://pikturenama.com/mochar-ghonto-bengali-recipe-banana-blossom/",
   b_v_09: "https://www.bongeats.com/recipe/palong-shaaker-ghonto",
   b_v_10: "https://www.bongeats.com/recipe/sheemer-bhorta",
   b_v_11: "https://www.bongeats.com/recipe/potoler-dorma-with-dal-stuffing",
@@ -100,7 +109,7 @@ const RECIPE_URLS = {
 
 const RECIPE_SOURCE_NAMES = {
   b_p_15: "Mitar Cooking",
-  b_p_17: "Cooking Delight",
+  b_p_17: "SpicyPunch",
   b_v_17: "Sanjeev Kapoor",
   b_v_18: "Cooking and Me",
   b_v_19: "Dassana’s Veg Recipes",
@@ -375,7 +384,8 @@ export function buildMenu(catalog, dateStr, inputPreferences = {}, swapOffsets =
   const day = daysBetween(LAUNCH_DATE, dateStr);
   const weekIndex = Math.floor(day / 7);
   const dayOffset = ((day % 7) + 7) % 7;
-  let family = isMonthlyMuttonDay(dateStr, prefs) ? "mutton" : weeklyProteinPlan(weekIndex, prefs)[dayOffset];
+  const monthlyMuttonDay = isMonthlyMuttonDay(dateStr, prefs);
+  let family = monthlyMuttonDay ? "mutton" : weeklyProteinPlan(weekIndex, prefs)[dayOffset];
   const defaultPlanning = prefs.budget === "balanced"
     && prefs.diet === "omnivore"
     && prefs.cuisines.join("|") === DEFAULT_PREFERENCES.cuisines.join("|");
@@ -385,14 +395,14 @@ export function buildMenu(catalog, dateStr, inputPreferences = {}, swapOffsets =
   let category = categoryForFamily(family, rng, prefs, coldStart);
   let categoryData = catalog[category];
 
-  let proteins = (categoryData?.protein || []).filter((dish) => isAllowed(dish, prefs));
+  let proteins = (categoryData?.protein || []).filter((dish) => isAllowed(dish, prefs) && (monthlyMuttonDay || dish.proteinFamily !== "mutton"));
   let vegetables = (categoryData?.vegetable || []).filter((dish) => isAllowed(dish, prefs));
   let matchingProteins = proteins.filter((dish) => dish.proteinFamily === family);
 
   if (!matchingProteins.length) {
     for (const fallbackCategory of prefs.cuisines) {
       const fallback = catalog[fallbackCategory];
-      const pool = (fallback?.protein || []).filter((dish) => isAllowed(dish, prefs));
+      const pool = (fallback?.protein || []).filter((dish) => isAllowed(dish, prefs) && (monthlyMuttonDay || dish.proteinFamily !== "mutton"));
       const matching = pool.filter((dish) => dish.proteinFamily === family);
       if (matching.length && (fallback?.vegetable || []).length >= 2) {
         category = fallbackCategory;

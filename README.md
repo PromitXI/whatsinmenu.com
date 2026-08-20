@@ -116,5 +116,6 @@ npm test
 - Ilish/Hilsa is blocked by a permanent runtime rule, complex recipes remain filtered, and mutton can appear only on the fourth Sunday of a month (and never on the economical budget).
 - The product is a dinner helper, not a calorie tracker, social network, or generic recipe library.
 - Every active catalogue dish has a dish-specific publisher URL; source changes should be verified before release.
+- Bengali suggestions are backed by dish-specific recipes from at least ten distinct publishers; the automated test prevents that source diversity from dropping below ten.
 
 The product and design brief is in `WhatsInMenu_Product_and_Design_Recommendations.docx`.

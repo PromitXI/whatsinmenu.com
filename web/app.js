@@ -1,4 +1,4 @@
-import { DEFAULT_PREFERENCES, buildMenu, buildShoppingList, formatDate, menuShareText, nextSwapOffsets, normalizePreferences, todayInKolkata } from "./menu-engine.js?v=10";
+import { DEFAULT_PREFERENCES, buildMenu, buildShoppingList, formatDate, menuShareText, nextSwapOffsets, normalizePreferences, todayInKolkata } from "./menu-engine.js?v=11";
 
 const STORAGE = { preferences: "whatsinmenu.preferences.v3", swaps: "whatsinmenu.swaps.v3", selected: "whatsinmenu.selected.v3", feedback: "whatsinmenu.feedback.v3", history: "whatsinmenu.history.v3" };
 const state = { date: todayInKolkata(), catalog: null, imageLibrary: {}, menu: null, preferences: loadJson(STORAGE.preferences, DEFAULT_PREFERENCES), swaps: loadJson(STORAGE.swaps, {}), selected: loadJson(STORAGE.selected, {}) };
@@ -7,7 +7,7 @@ const elements = Object.fromEntries(["dateLabel", "menuFacts", "selectionNote", 
 function loadJson(key, fallback) { try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch { return fallback; } }
 function saveJson(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
 function escapeHtml(value) { return String(value).replace(/[&<>'"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character]); }
-async function loadCatalog() { const response = await fetch("../data/dishes.json?v=8", { cache: "no-store" }); if (!response.ok) throw new Error("The dish catalogue could not be loaded."); return response.json(); }
+async function loadCatalog() { const response = await fetch("../data/dishes.json?v=9", { cache: "no-store" }); if (!response.ok) throw new Error("The dish catalogue could not be loaded."); return response.json(); }
 async function loadImageLibrary() { const response = await fetch("image-library.json?v=1", { cache: "no-store" }); return response.ok ? response.json() : {}; }
 function blankOffsets() { return [[0, 0, 0], [0, 0, 0], [0, 0, 0]]; }
 function currentOffsets() { return state.swaps[state.date] || blankOffsets(); }

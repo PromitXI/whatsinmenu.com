@@ -81,16 +81,16 @@ RECIPE_URLS = {
     "b_p_12": "https://www.bongeats.com/recipe/pressure-cooker-chicken",
     "b_p_14": "https://www.bongeats.com/recipe/chicken-curry",
     "b_p_15": "https://mitarcooking.com/dim-posto/",
-    "b_p_16": "https://www.bongeats.com/recipe/chicken-curry",
-    "b_p_17": "https://jayeetacha.com/2020/04/27/doi-katla-katla-fish-in-rich-yogurt-gravy/",
-    "b_v_01": "https://www.bongeats.com/recipe/alu-posto",
+    "b_p_16": "https://atanurrannagharrecipe.com/easy-simple-chicken-curry-recipe/",
+    "b_p_17": "https://www.spicypunch.com/doi-maach-recipe/",
+    "b_v_01": "https://notoutofthebox.in/2014/08/aloo-posto/",
     "b_v_02": "https://www.bongeats.com/recipe/shukto",
-    "b_v_03": "https://www.bongeats.com/recipe/cholar-dal",
+    "b_v_03": "https://experiencesofagastronomad.com/narkol-diye-cholar-dal-bengali-chana-dal-with-fried-coconut-slices-recipe/",
     "b_v_04": "https://www.bongeats.com/recipe/dhokar-dalna",
     "b_v_05": "https://www.bongeats.com/recipe/niramish-aloo-dum",
     "b_v_06": "https://www.bongeats.com/recipe/labra",
     "b_v_07": "https://www.bongeats.com/recipe/begun-bhaja",
-    "b_v_08": "https://www.bongeats.com/recipe/mochar-ghonto",
+    "b_v_08": "https://pikturenama.com/mochar-ghonto-bengali-recipe-banana-blossom/",
     "b_v_09": "https://www.bongeats.com/recipe/palong-shaaker-ghonto",
     "b_v_10": "https://www.bongeats.com/recipe/sheemer-bhorta",
     "b_v_11": "https://www.bongeats.com/recipe/potoler-dorma-with-dal-stuffing",
@@ -158,7 +158,7 @@ RECIPE_URLS = {
 }
 RECIPE_SOURCE_NAMES = {
     "b_p_15": "Mitar Cooking",
-    "b_p_17": "Cooking Delight",
+    "b_p_17": "SpicyPunch",
     "b_v_17": "Sanjeev Kapoor",
     "b_v_18": "Cooking and Me",
     "b_v_19": "Dassana's Veg Recipes",
@@ -304,7 +304,8 @@ def generate_for_date(date_str: str) -> dict:
     # --- Mother agent: decide today's protein family + category ---
     week_index = _week_index(date_str)
     day_offset = _day_offset_in_week(date_str)
-    family = "mutton" if is_monthly_mutton_day(date_str) else weekly_protein_plan(week_index)[day_offset]
+    monthly_mutton_day = is_monthly_mutton_day(date_str)
+    family = "mutton" if monthly_mutton_day else weekly_protein_plan(week_index)[day_offset]
 
     rng = rng_for_date(date_str)  # day-level rng, independent of the week-level rng above
     if family == "chicken":
@@ -316,7 +317,11 @@ def generate_for_date(date_str: str) -> dict:
         category = "bengali"  # cold-start override: no Chinese in the first 10 days
 
     # --- Cook agent: pick actual dishes within what Mother allows ---
-    protein_pool = _mother_agent_filter(DISHES[category]["protein"], excluded)
+    protein_pool = [
+        dish
+        for dish in _mother_agent_filter(DISHES[category]["protein"], excluded)
+        if monthly_mutton_day or dish.get("proteinFamily") != "mutton"
+    ]
     veg_pool = _mother_agent_filter(DISHES[category]["vegetable"], excluded)
 
     family_pool = [d for d in protein_pool if d.get("proteinFamily") == family]

@@ -1,4 +1,4 @@
-import { DEFAULT_PREFERENCES, buildMenu, formatDate, normalizePreferences, todayInKolkata } from "./menu-engine.js?v=10";
+import { DEFAULT_PREFERENCES, buildMenu, formatDate, normalizePreferences, todayInKolkata } from "./menu-engine.js?v=11";
 
 function escapeHtml(value) {
   return String(value).replace(/[&<>'"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character]);

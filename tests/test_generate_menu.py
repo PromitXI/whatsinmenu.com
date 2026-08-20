@@ -2,6 +2,7 @@ import sys
 import unittest
 from datetime import date, timedelta
 from pathlib import Path
+from urllib.parse import urlparse
 
 ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(ROOT / "src"))
@@ -10,6 +11,10 @@ from generate_menu import DISHES, RECIPE_URLS, _mother_agent_filter, build_daily
 
 
 class DailyMenuTests(unittest.TestCase):
+    def test_mach_bhaja_is_a_fry_not_a_second_main(self):
+        mach_bhaja = next(dish for dish in DISHES["bengali"]["vegetable"] if dish["id"] == "b_v_18")
+        self.assertEqual(mach_bhaja["mealRole"], "fry")
+
     def test_menu_has_three_choices_with_three_dishes_each(self):
         menu = generate_for_date("2026-08-19")
         self.assertEqual(len(menu["choices"]), 3)
@@ -56,6 +61,14 @@ class DailyMenuTests(unittest.TestCase):
         self.assertEqual(len(mutton_days), 12)
         self.assertTrue(all(generate_for_date(current)["proteinFamily"] == "mutton" for current in mutton_days))
         self.assertNotEqual(generate_for_date("2026-08-20")["proteinFamily"], "mutton")
+        for current in dates:
+            menu = generate_for_date(current)
+            shows_mutton = any(
+                dish.get("proteinFamily") == "mutton"
+                for choice in menu["choices"]
+                for dish in choice["dishes"]
+            )
+            self.assertFalse(shows_mutton and not is_monthly_mutton_day(current), current)
 
     def test_hilsa_is_permanently_excluded(self):
         hilsa = {"id": "blocked", "name": "Shorshe Ilish", "ingredients": ["hilsa"], "complexity": "simple"}
@@ -71,6 +84,19 @@ class DailyMenuTests(unittest.TestCase):
             for dish in DISHES[category][kind]
         }
         self.assertEqual(active_ids - RECIPE_URLS.keys(), set())
+
+    def test_bengali_recipes_use_at_least_ten_publishers(self):
+        bengali_ids = {
+            dish["id"]
+            for kind in ("protein", "vegetable")
+            for dish in DISHES["bengali"][kind]
+            if dish.get("complexity") != "complex"
+        }
+        domains = {
+            urlparse(RECIPE_URLS[dish_id]).netloc.removeprefix("www.")
+            for dish_id in bengali_ids
+        }
+        self.assertGreaterEqual(len(domains), 10)
 
 
 if __name__ == "__main__":
