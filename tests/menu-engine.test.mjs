@@ -1,10 +1,11 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { buildMenu, buildShoppingList, nextSwapOffsets } from "../web/menu-engine.js";
+import { buildMenu, buildShoppingList, isMonthlyMuttonDay, isNeverSuggested, nextSwapOffsets } from "../web/menu-engine.js";
 
 const catalog = JSON.parse(await readFile(new URL("../data/dishes.json", import.meta.url), "utf8"));
 const preferences = { householdSize: 3, budget: "balanced", portion: "regular" };
 const menu = buildMenu(catalog, "2026-08-20", preferences);
+assert.notEqual(menu.proteinFamily, "mutton");
 
 assert.equal(menu.choices.length, 3);
 for (const choice of menu.choices) {
@@ -32,6 +33,15 @@ assert.ok(pantryMenu.choices.some((choice) => choice.dishes.some((dish) => dish.
 
 const vegetarian = buildMenu(catalog, "2026-09-01", { ...preferences, diet: "vegetarian" });
 assert.ok(vegetarian.choices.every((choice) => !["chicken", "fish", "mutton"].includes(choice.dishes[0].proteinFamily)));
+
+const muttonDays2026 = Array.from({ length: 365 }, (_, offset) => {
+  const date = new Date(Date.UTC(2026, 0, 1 + offset)).toISOString().slice(0, 10);
+  return isMonthlyMuttonDay(date, preferences) ? date : null;
+}).filter(Boolean);
+assert.equal(muttonDays2026.length, 12);
+assert.ok(muttonDays2026.every((date) => buildMenu(catalog, date, { ...preferences, cuisines: ["bengali"] }).proteinFamily === "mutton"));
+assert.equal(isMonthlyMuttonDay("2026-08-23", { ...preferences, budget: "economical" }), false);
+assert.equal(isNeverSuggested({ name: "Shorshe Ilish", ingredients: ["hilsa"] }), true);
 
 const chineseOnly = buildMenu(catalog, "2026-08-19", { ...preferences, cuisines: ["chinese"] });
 assert.equal(chineseOnly.category, "chinese");

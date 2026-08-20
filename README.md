@@ -81,10 +81,10 @@ python3 scripts/build_image_repository.py --discover-catalog
 Discovery never publishes or downloads a candidate automatically. First verify that the photo really depicts the named dish and change its `reviewStatus` to `approved`. Then run:
 
 ```bash
-python3 scripts/build_image_repository.py --download-approved
+python3 scripts/build_image_repository.py --approve DISH_ID --download-approved
 ```
 
-Creator, source page, licence, and licence URL are retained for attribution. Ordinary recipe-site photographs must not be copied into the app unless the owner grants permission; a visible recipe page is not an image licence.
+Approved catalogue images are added to `web/image-library.json`, displayed automatically when a generated image is missing, and carry a visible creator/licence link on the card. Creator, source page, licence, and licence URL are retained for attribution. Ordinary recipe-site photographs must not be copied into the app unless the owner grants permission; a visible recipe page is not an image licence.
 
 ## WhatsApp delivery
 
@@ -113,7 +113,7 @@ npm test
 ## Important product boundaries
 
 - Nutrition and cost values are planning estimates, not medical or accounting advice.
-- Ilish remains excluded, complex recipes remain filtered, and the default weekly rhythm limits expensive proteins.
+- Ilish/Hilsa is blocked by a permanent runtime rule, complex recipes remain filtered, and mutton can appear only on the fourth Sunday of a month (and never on the economical budget).
 - The product is a dinner helper, not a calorie tracker, social network, or generic recipe library.
 - Every active catalogue dish has a dish-specific publisher URL; source changes should be verified before release.
 

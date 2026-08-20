@@ -220,13 +220,13 @@ function daysBetween(first, second) {
 
 function weeklyProteinPlan(weekIndex, prefs) {
   let base = ["chicken", "chicken", "chicken", "fish", "egg", "paneer"];
-  let seventh = weekIndex % 2 === 0 ? "mutton" : "paneer";
+  let seventh = "paneer";
   if (prefs.budget === "economical") {
     base = ["chicken", "chicken", "egg", "egg", "paneer", "lentil"];
     seventh = "lentil";
   } else if (prefs.budget === "generous") {
     base = ["chicken", "chicken", "chicken", "fish", "fish", "paneer"];
-    seventh = weekIndex % 2 === 0 ? "mutton" : "egg";
+    seventh = "egg";
   }
   if (prefs.diet === "vegetarian") base = ["paneer", "lentil", "egg", "paneer", "lentil", "egg"];
   if (prefs.diet === "vegan") base = ["lentil", "lentil", "lentil", "lentil", "lentil", "lentil"];
@@ -234,6 +234,18 @@ function weeklyProteinPlan(weekIndex, prefs) {
   const defaultPlan = prefs.budget === "balanced" && prefs.diet === "omnivore";
   const seed = defaultPlan ? `week-${weekIndex}` : `week-${weekIndex}-${prefs.budget}-${prefs.diet}`;
   return shuffle(mulberry32(hashSeed(seed)), families);
+}
+
+export function isMonthlyMuttonDay(dateStr, prefs = DEFAULT_PREFERENCES) {
+  const normalized = normalizePreferences(prefs);
+  if (normalized.diet !== "omnivore" || normalized.budget === "economical") return false;
+  const [year, month, day] = dateStr.split("-").map(Number);
+  return day >= 22 && day <= 28 && new Date(Date.UTC(year, month - 1, day)).getUTCDay() === 0;
+}
+
+export function isNeverSuggested(dish) {
+  const label = `${dish.name || ""} ${(dish.ingredients || []).join(" ")}`.toLowerCase();
+  return /ilish|hilsa/.test(label);
 }
 
 function chooseChickenCategory(rng, allowed) {
@@ -250,6 +262,7 @@ function chooseChickenCategory(rng, allowed) {
 }
 
 function isAllowed(dish, prefs) {
+  if (isNeverSuggested(dish)) return false;
   if (dish.complexity === "complex") return false;
   if (prefs.skippedDishIds.includes(dish.id)) return false;
   const haystack = `${dish.id} ${dish.name} ${(dish.ingredients || []).join(" ")}`.toLowerCase();
@@ -362,7 +375,7 @@ export function buildMenu(catalog, dateStr, inputPreferences = {}, swapOffsets =
   const day = daysBetween(LAUNCH_DATE, dateStr);
   const weekIndex = Math.floor(day / 7);
   const dayOffset = ((day % 7) + 7) % 7;
-  let family = weeklyProteinPlan(weekIndex, prefs)[dayOffset];
+  let family = isMonthlyMuttonDay(dateStr, prefs) ? "mutton" : weeklyProteinPlan(weekIndex, prefs)[dayOffset];
   const defaultPlanning = prefs.budget === "balanced"
     && prefs.diet === "omnivore"
     && prefs.cuisines.join("|") === DEFAULT_PREFERENCES.cuisines.join("|");

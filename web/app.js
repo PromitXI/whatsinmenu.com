@@ -1,23 +1,36 @@
-import { DEFAULT_PREFERENCES, buildMenu, buildShoppingList, formatDate, menuShareText, nextSwapOffsets, normalizePreferences, todayInKolkata } from "./menu-engine.js?v=9";
+import { DEFAULT_PREFERENCES, buildMenu, buildShoppingList, formatDate, menuShareText, nextSwapOffsets, normalizePreferences, todayInKolkata } from "./menu-engine.js?v=10";
 
 const STORAGE = { preferences: "whatsinmenu.preferences.v3", swaps: "whatsinmenu.swaps.v3", selected: "whatsinmenu.selected.v3", feedback: "whatsinmenu.feedback.v3", history: "whatsinmenu.history.v3" };
-const state = { date: todayInKolkata(), catalog: null, menu: null, preferences: loadJson(STORAGE.preferences, DEFAULT_PREFERENCES), swaps: loadJson(STORAGE.swaps, {}), selected: loadJson(STORAGE.selected, {}) };
+const state = { date: todayInKolkata(), catalog: null, imageLibrary: {}, menu: null, preferences: loadJson(STORAGE.preferences, DEFAULT_PREFERENCES), swaps: loadJson(STORAGE.swaps, {}), selected: loadJson(STORAGE.selected, {}) };
 const elements = Object.fromEntries(["dateLabel", "menuFacts", "selectionNote", "dishGrid", "mealSummary", "errorMessage", "preferencesDialog", "preferencesForm", "shoppingDialog", "shoppingList", "historyDialog", "historyList", "pantryForm", "pantryInput", "feedbackStatus"].map((id) => [id, document.getElementById(id)]));
 
 function loadJson(key, fallback) { try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch { return fallback; } }
 function saveJson(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
 function escapeHtml(value) { return String(value).replace(/[&<>'"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character]); }
-async function loadCatalog() { const response = await fetch("../data/dishes.json?v=7", { cache: "no-store" }); if (!response.ok) throw new Error("The dish catalogue could not be loaded."); return response.json(); }
+async function loadCatalog() { const response = await fetch("../data/dishes.json?v=8", { cache: "no-store" }); if (!response.ok) throw new Error("The dish catalogue could not be loaded."); return response.json(); }
+async function loadImageLibrary() { const response = await fetch("image-library.json?v=1", { cache: "no-store" }); return response.ok ? response.json() : {}; }
 function blankOffsets() { return [[0, 0, 0], [0, 0, 0], [0, 0, 0]]; }
 function currentOffsets() { return state.swaps[state.date] || blankOffsets(); }
 function selectedIndex() { return Math.min(2, Math.max(0, Number(state.selected[state.date]) || 0)); }
 function selectedChoice() { return state.menu.choices[selectedIndex()]; }
 
+function applyImageLibrary(menu) {
+  for (const choice of menu.choices) {
+    for (const dish of choice.dishes) {
+      const approved = state.imageLibrary[dish.id];
+      if (!approved) continue;
+      dish.imagePath = approved.imagePath;
+      dish.imageCredit = approved;
+    }
+  }
+  return menu;
+}
+
 function rebuildMenu() {
   elements.errorMessage.hidden = true;
   try {
     state.preferences = normalizePreferences(state.preferences);
-    state.menu = buildMenu(state.catalog, state.date, state.preferences, currentOffsets());
+    state.menu = applyImageLibrary(buildMenu(state.catalog, state.date, state.preferences, currentOffsets()));
     renderMenu();
     rememberMenu();
   } catch (error) {
@@ -55,7 +68,8 @@ function choiceCard(choice, choiceIndex) {
 function dishRow(dish, choiceIndex, dishIndex) {
   const initials = dish.name.split(/\s+/).slice(0, 2).map((word) => word[0]).join("");
   const labels = { protein: "Protein", vegetable: "Vegetable", starch: "Rice / noodles", dal: "Dal / rasam", fry: "Fry", accompaniment: "Accompaniment" };
-  return `<section class="choice-dish"><div class="dish-image" aria-hidden="true"><span>${escapeHtml(initials)}</span><img data-image src="${escapeHtml(dish.imagePath)}" alt=""></div><div class="choice-dish-content"><div><small>${labels[dish.mealRole] || `Dish ${dishIndex + 1}`}</small><h3>${escapeHtml(dish.name)}</h3><p>${dish.nutrition.energy} kcal · ${dish.nutrition.protein} g protein</p></div><div class="choice-dish-actions"><a href="${escapeHtml(dish.recipeUrl)}" target="_blank" rel="noopener">Recipe by ${escapeHtml(dish.sourceName)}</a><button type="button" data-swap data-choice="${choiceIndex}" data-dish="${dishIndex}" aria-label="Swap ${escapeHtml(dish.name)}"><span aria-hidden="true">↻</span> Swap</button></div></div></section>`;
+  const credit = dish.imageCredit ? `<a class="image-credit" href="${escapeHtml(dish.imageCredit.sourcePage)}" target="_blank" rel="noopener">Photo: ${escapeHtml(dish.imageCredit.creator)} · ${escapeHtml(dish.imageCredit.license)}</a>` : "";
+  return `<section class="choice-dish"><div class="dish-image"><span aria-hidden="true">${escapeHtml(initials)}</span><img data-image src="${escapeHtml(dish.imagePath)}" alt="${escapeHtml(dish.name)}">${credit}</div><div class="choice-dish-content"><div><small>${labels[dish.mealRole] || `Dish ${dishIndex + 1}`}</small><h3>${escapeHtml(dish.name)}</h3><p>${dish.nutrition.energy} kcal · ${dish.nutrition.protein} g protein</p></div><div class="choice-dish-actions"><a href="${escapeHtml(dish.recipeUrl)}" target="_blank" rel="noopener">Recipe by ${escapeHtml(dish.sourceName)}</a><button type="button" data-swap data-choice="${choiceIndex}" data-dish="${dishIndex}" aria-label="Swap ${escapeHtml(dish.name)}"><span aria-hidden="true">↻</span> Swap</button></div></div></section>`;
 }
 
 function renderMealSummary() {
@@ -103,4 +117,4 @@ elements.pantryForm.addEventListener("submit", (event) => { event.preventDefault
 document.querySelectorAll("[data-feedback]").forEach((button) => button.addEventListener("click", () => recordFeedback(button.dataset.feedback)));
 document.querySelectorAll("[data-close]").forEach((button) => button.addEventListener("click", () => document.getElementById(button.dataset.close).close()));
 
-try { state.catalog = await loadCatalog(); rebuildMenu(); if (location.hash === "#preferences") openPreferences(); } catch (error) { elements.errorMessage.textContent = `${error.message} Open the app through its local or hosted web address rather than directly from the file system.`; elements.errorMessage.hidden = false; }
+try { [state.catalog, state.imageLibrary] = await Promise.all([loadCatalog(), loadImageLibrary()]); rebuildMenu(); if (location.hash === "#preferences") openPreferences(); } catch (error) { elements.errorMessage.textContent = `${error.message} Open the app through its local or hosted web address rather than directly from the file system.`; elements.errorMessage.hidden = false; }

@@ -1045,7 +1045,7 @@
       "cuisine": "andhra",
       "dish_name": "Beerakaya Tomato Koora",
       "dishId": "a_v_07",
-      "query": "Beerakaya Tomato Koora andhra cuisine",
+      "query": "Beerakaya Tomato Koora Andhra food",
       "status": "no_confident_match",
       "candidates": []
     },
@@ -1054,9 +1054,9 @@
       "dish_name": "Aloo Bharta (Mashed Potato)",
       "dishId": "b_v_16",
       "query": "Aloo Bharta (Mashed Potato) bengali cuisine",
-      "status": "candidate_found",
-      "reviewStatus": "needs_visual_review",
-      "publishable": false,
+      "status": "downloaded",
+      "reviewStatus": "approved",
+      "publishable": true,
       "candidate": {
         "score": 0.5,
         "fileTitle": "File:Home made Alu vorta (Bengali mashed potato).jpg",
@@ -1069,22 +1069,47 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "attribution": ""
       },
-      "alternatives": []
+      "alternatives": [],
+      "localPath": "web/assets/repository/bengali/b_v_16.jpg"
     },
     {
       "cuisine": "bengali",
       "dish_name": "Begun Bhaja (Fried Eggplant)",
       "dishId": "b_v_07",
-      "query": "Begun Bhaja (Fried Eggplant) bengali cuisine",
+      "query": "Begun Bhaja (Fried Eggplant) Bengali food",
       "status": "no_confident_match",
       "candidates": [
         {
           "score": 0.0,
-          "fileTitle": "File:A Traditional Bengali Lunch.jpg",
-          "sourcePage": "https://commons.wikimedia.org/wiki/File:A_Traditional_Bengali_Lunch.jpg",
-          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/82/A_Traditional_Bengali_Lunch.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/8/82/A_Traditional_Bengali_Lunch.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-          "creator": "Sukanya Konar",
+          "fileTitle": "File:Ilish Bhaat.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Ilish_Bhaat.jpg",
+          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Ilish_Bhaat.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Ilish_Bhaat.jpg/1280px-Ilish_Bhaat.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "creator": "Sohel Commons",
+          "credit": "Own work",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": ""
+        },
+        {
+          "score": 0.0,
+          "fileTitle": "File:A traditional Bengali dish served on a banana leaf surrounded by flower petals.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:A_traditional_Bengali_dish_served_on_a_banana_leaf_surrounded_by_flower_petals.jpg",
+          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/08/A_traditional_Bengali_dish_served_on_a_banana_leaf_surrounded_by_flower_petals.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/A_traditional_Bengali_dish_served_on_a_banana_leaf_surrounded_by_flower_petals.jpg/1280px-A_traditional_Bengali_dish_served_on_a_banana_leaf_surrounded_by_flower_petals.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "creator": "Antik Jana",
+          "credit": "Own work",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": ""
+        },
+        {
+          "score": 0.0,
+          "fileTitle": "File:Traditional Bengali food served on a banana leaf.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Traditional_Bengali_food_served_on_a_banana_leaf.jpg",
+          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Traditional_Bengali_food_served_on_a_banana_leaf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Traditional_Bengali_food_served_on_a_banana_leaf.jpg/1280px-Traditional_Bengali_food_served_on_a_banana_leaf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "creator": "Antik Jana",
           "credit": "Own work",
           "license": "CC BY-SA 4.0",
           "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
@@ -1096,7 +1121,7 @@
       "cuisine": "bengali",
       "dish_name": "Bota-soho Begun Bhaja",
       "dishId": "b_v_15",
-      "query": "Bota-soho Begun Bhaja bengali cuisine",
+      "query": "Bota-soho Begun Bhaja Bengali food",
       "status": "no_confident_match",
       "candidates": []
     },
@@ -1104,7 +1129,7 @@
       "cuisine": "bengali",
       "dish_name": "Korola Bhaja (Bitter Gourd Fry)",
       "dishId": "b_v_14",
-      "query": "Korola Bhaja (Bitter Gourd Fry) bengali cuisine",
+      "query": "Korola Bhaja (Bitter Gourd Fry) Bengali food",
       "status": "no_confident_match",
       "candidates": []
     },
@@ -1112,23 +1137,52 @@
       "cuisine": "bengali",
       "dish_name": "Mochar Ghonto (Banana Flower)",
       "dishId": "b_v_08",
-      "query": "Mochar Ghonto (Banana Flower) bengali cuisine",
-      "status": "no_confident_match",
-      "candidates": []
+      "query": "File:Mochar ghonto-MB04.jpg",
+      "status": "downloaded",
+      "reviewStatus": "approved",
+      "publishable": true,
+      "candidate": {
+        "score": 1.0,
+        "fileTitle": "File:Mochar ghonto-MB04.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Mochar_ghonto-MB04.jpg",
+        "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/35/Mochar_ghonto-MB04.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Mochar_ghonto-MB04.jpg/1280px-Mochar_ghonto-MB04.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "creator": "Rajeeb Dutta",
+        "credit": "Own work",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": ""
+      },
+      "alternatives": [],
+      "localPath": "web/assets/repository/bengali/b_v_08.jpg"
     },
     {
       "cuisine": "bengali",
       "dish_name": "Palong Shaak Bhaja (Spinach)",
       "dishId": "b_v_12",
-      "query": "Palong Shaak Bhaja (Spinach) bengali cuisine",
-      "status": "no_confident_match",
-      "candidates": []
+      "query": "Palong Shaak Bhaja (Spinach) Bengali food",
+      "status": "candidate_found",
+      "reviewStatus": "needs_visual_review",
+      "publishable": false,
+      "candidate": {
+        "score": 0.75,
+        "fileTitle": "File:Rohu fish fry with palong shaak spinach and brinjal fry - Kolkata - West Bengal.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Rohu_fish_fry_with_palong_shaak_spinach_and_brinjal_fry_-_Kolkata_-_West_Bengal.jpg",
+        "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Rohu_fish_fry_with_palong_shaak_spinach_and_brinjal_fry_-_Kolkata_-_West_Bengal.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Rohu_fish_fry_with_palong_shaak_spinach_and_brinjal_fry_-_Kolkata_-_West_Bengal.jpg/1280px-Rohu_fish_fry_with_palong_shaak_spinach_and_brinjal_fry_-_Kolkata_-_West_Bengal.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "creator": "Pkd2512",
+        "credit": "Own work",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": ""
+      },
+      "alternatives": []
     },
     {
       "cuisine": "bengali",
       "dish_name": "Palong Shaaker Ghonto",
       "dishId": "b_v_09",
-      "query": "Palong Shaaker Ghonto bengali cuisine",
+      "query": "Palong Shaaker Ghonto Bengali food",
       "status": "no_confident_match",
       "candidates": []
     },
@@ -1136,7 +1190,7 @@
       "cuisine": "bengali",
       "dish_name": "Potol er Dolma (Stuffed Pointed Gourd)",
       "dishId": "b_v_11",
-      "query": "Potol er Dolma (Stuffed Pointed Gourd) bengali cuisine",
+      "query": "Potol er Dolma (Stuffed Pointed Gourd) Bengali food",
       "status": "no_confident_match",
       "candidates": []
     },
@@ -1144,7 +1198,7 @@
       "cuisine": "bengali",
       "dish_name": "Sheemer Bhorta (Broad Beans)",
       "dishId": "b_v_10",
-      "query": "Sheemer Bhorta (Broad Beans) bengali cuisine",
+      "query": "Sheemer Bhorta (Broad Beans) Bengali food",
       "status": "no_confident_match",
       "candidates": []
     },
@@ -1153,9 +1207,9 @@
       "dish_name": "Chilli Baby Corn",
       "dishId": "c_v_09",
       "query": "Chilli Baby Corn chinese cuisine",
-      "status": "candidate_found",
-      "reviewStatus": "needs_visual_review",
-      "publishable": false,
+      "status": "downloaded",
+      "reviewStatus": "approved",
+      "publishable": true,
       "candidate": {
         "score": 1.0,
         "fileTitle": "File:Chilli Baby Corn-Nellore-Andhra Pradesh-DED 003.jpg",
@@ -1168,58 +1222,22 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "attribution": ""
       },
-      "alternatives": []
+      "alternatives": [],
+      "localPath": "web/assets/repository/chinese/c_v_09.jpg"
     },
     {
       "cuisine": "chinese",
       "dish_name": "Chilli Mushroom",
       "dishId": "c_v_07",
-      "query": "Chilli Mushroom chinese cuisine",
+      "query": "Chilli Mushroom Indo-Chinese food",
       "status": "no_confident_match",
-      "candidates": [
-        {
-          "score": 0.0,
-          "fileTitle": "File:Fancy doughnuts - Dunkin Donuts, Kad Suan Kaew.jpg",
-          "sourcePage": "https://commons.wikimedia.org/wiki/File:Fancy_doughnuts_-_Dunkin_Donuts,_Kad_Suan_Kaew.jpg",
-          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/68/Fancy_doughnuts_-_Dunkin_Donuts%2C_Kad_Suan_Kaew.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Fancy_doughnuts_-_Dunkin_Donuts%2C_Kad_Suan_Kaew.jpg/1280px-Fancy_doughnuts_-_Dunkin_Donuts%2C_Kad_Suan_Kaew.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "creator": "Alpha from Melbourne, Australia",
-          "credit": "Fancy doughnuts - Dunkin Donuts, Kad Suan Kaew Uploaded by JohnnyMrNinja",
-          "license": "CC BY-SA 2.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
-          "attribution": ""
-        },
-        {
-          "score": 0.0,
-          "fileTitle": "File:Lamb and Carrot Dumplings - Original Taste - Alpha.jpg",
-          "sourcePage": "https://commons.wikimedia.org/wiki/File:Lamb_and_Carrot_Dumplings_-_Original_Taste_-_Alpha.jpg",
-          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/73/Lamb_and_Carrot_Dumplings_-_Original_Taste_-_Alpha.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Lamb_and_Carrot_Dumplings_-_Original_Taste_-_Alpha.jpg/1280px-Lamb_and_Carrot_Dumplings_-_Original_Taste_-_Alpha.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "creator": "avlxyz",
-          "credit": "https://www.flickr.com/photos/10559879@N00/2299407445/",
-          "license": "CC BY-SA 2.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
-          "attribution": ""
-        },
-        {
-          "score": 0.0,
-          "fileTitle": "File:Lunch at Curry Leaf Cafe 2024-01-20.jpg",
-          "sourcePage": "https://commons.wikimedia.org/wiki/File:Lunch_at_Curry_Leaf_Cafe_2024-01-20.jpg",
-          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/40/Lunch_at_Curry_Leaf_Cafe_2024-01-20.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Lunch_at_Curry_Leaf_Cafe_2024-01-20.jpg/1280px-Lunch_at_Curry_Leaf_Cafe_2024-01-20.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "creator": "Andy Li",
-          "credit": "Own work",
-          "license": "CC0",
-          "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-          "attribution": ""
-        }
-      ]
+      "candidates": []
     },
     {
       "cuisine": "chinese",
       "dish_name": "Chinese Mix Veg Crispy",
       "dishId": "c_v_08",
-      "query": "Chinese Mix Veg Crispy chinese cuisine",
+      "query": "Chinese Mix Veg Crispy Indo-Chinese food",
       "status": "no_confident_match",
       "candidates": []
     },
@@ -1227,17 +1245,25 @@
       "cuisine": "chinese",
       "dish_name": "Chinese-style Stir-Fried Vegetables",
       "dishId": "c_v_06",
-      "query": "Chinese-style Stir-Fried Vegetables chinese cuisine",
+      "query": "Chinese-style Stir-Fried Vegetables Indo-Chinese food",
+      "status": "no_confident_match",
+      "candidates": []
+    },
+    {
+      "cuisine": "chinese",
+      "dish_name": "Veg Manchurian",
+      "dishId": "c_v_03",
+      "query": "Veg Manchurian Indo-Chinese food",
       "status": "candidate_found",
       "reviewStatus": "needs_visual_review",
       "publishable": false,
       "candidate": {
-        "score": 0.5,
-        "fileTitle": "File:Stir-fried Water Convolvulus (炒空心菜).jpg",
-        "sourcePage": "https://commons.wikimedia.org/wiki/File:Stir-fried_Water_Convolvulus_(%E7%82%92%E7%A9%BA%E5%BF%83%E8%8F%9C).jpg",
-        "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Stir-fried_Water_Convolvulus_%28%E7%82%92%E7%A9%BA%E5%BF%83%E8%8F%9C%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-        "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Stir-fried_Water_Convolvulus_%28%E7%82%92%E7%A9%BA%E5%BF%83%E8%8F%9C%29.jpg/1280px-Stir-fried_Water_Convolvulus_%28%E7%82%92%E7%A9%BA%E5%BF%83%E8%8F%9C%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-        "creator": "NeoBatfreak",
+        "score": 1.0,
+        "fileTitle": "File:Veg fried rice with manchurian made by me.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Veg_fried_rice_with_manchurian_made_by_me.jpg",
+        "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/da/Veg_fried_rice_with_manchurian_made_by_me.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/d/da/Veg_fried_rice_with_manchurian_made_by_me.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "creator": "YKanchan07",
         "credit": "Own work",
         "license": "CC BY-SA 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
@@ -1246,71 +1272,14 @@
       "alternatives": [
         {
           "score": 0.5,
-          "fileTitle": "File:DFC 2102 Crispy fried pork stir-fried with vibrant morning glory and chili peppers glistening with savory sauce.jpg",
-          "sourcePage": "https://commons.wikimedia.org/wiki/File:DFC_2102_Crispy_fried_pork_stir-fried_with_vibrant_morning_glory_and_chili_peppers_glistening_with_savory_sauce.jpg",
-          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/46/DFC_2102_Crispy_fried_pork_stir-fried_with_vibrant_morning_glory_and_chili_peppers_glistening_with_savory_sauce.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/DFC_2102_Crispy_fried_pork_stir-fried_with_vibrant_morning_glory_and_chili_peppers_glistening_with_savory_sauce.jpg/1280px-DFC_2102_Crispy_fried_pork_stir-fried_with_vibrant_morning_glory_and_chili_peppers_glistening_with_savory_sauce.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "creator": "PattayaPatrol",
-          "credit": "Flickr",
-          "license": "CC BY-SA 4.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-          "attribution": ""
-        },
-        {
-          "score": 0.0,
-          "fileTitle": "File:Phat khana mu krop.jpg",
-          "sourcePage": "https://commons.wikimedia.org/wiki/File:Phat_khana_mu_krop.jpg",
-          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/12/Phat_khana_mu_krop.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Phat_khana_mu_krop.jpg/1280px-Phat_khana_mu_krop.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "creator": "Takeaway",
-          "credit": "Own work",
-          "license": "CC BY-SA 3.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-          "attribution": ""
-        }
-      ]
-    },
-    {
-      "cuisine": "chinese",
-      "dish_name": "Veg Manchurian",
-      "dishId": "c_v_03",
-      "query": "Veg Manchurian chinese cuisine",
-      "status": "no_confident_match",
-      "candidates": [
-        {
-          "score": 0.0,
-          "fileTitle": "File:Chinese Dishes - Dejavu - Meghalaya - DSC 005.jpg",
-          "sourcePage": "https://commons.wikimedia.org/wiki/File:Chinese_Dishes_-_Dejavu_-_Meghalaya_-_DSC_005.jpg",
-          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Chinese_Dishes_-_Dejavu_-_Meghalaya_-_DSC_005.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Chinese_Dishes_-_Dejavu_-_Meghalaya_-_DSC_005.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-          "creator": "Gitika Gayan",
+          "fileTitle": "File:Manchurian.jpg",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Manchurian.jpg",
+          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Manchurian.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Manchurian.jpg/1280px-Manchurian.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "creator": "Mahato Rohit",
           "credit": "Own work",
           "license": "CC BY-SA 4.0",
           "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-          "attribution": ""
-        },
-        {
-          "score": 0.0,
-          "fileTitle": "File:Delicious Asian Dishes - Centre Point - Meghalaya.png",
-          "sourcePage": "https://commons.wikimedia.org/wiki/File:Delicious_Asian_Dishes_-_Centre_Point_-_Meghalaya.png",
-          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/66/Delicious_Asian_Dishes_-_Centre_Point_-_Meghalaya.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Delicious_Asian_Dishes_-_Centre_Point_-_Meghalaya.png/1280px-Delicious_Asian_Dishes_-_Centre_Point_-_Meghalaya.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "creator": "Gitika Gayan",
-          "credit": "Own work",
-          "license": "CC BY-SA 4.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-          "attribution": ""
-        },
-        {
-          "score": 0.0,
-          "fileTitle": "File:Lunch at Curry Leaf Cafe 2024-01-20.jpg",
-          "sourcePage": "https://commons.wikimedia.org/wiki/File:Lunch_at_Curry_Leaf_Cafe_2024-01-20.jpg",
-          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/40/Lunch_at_Curry_Leaf_Cafe_2024-01-20.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Lunch_at_Curry_Leaf_Cafe_2024-01-20.jpg/1280px-Lunch_at_Curry_Leaf_Cafe_2024-01-20.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "creator": "Andy Li",
-          "credit": "Own work",
-          "license": "CC0",
-          "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
           "attribution": ""
         }
       ]
@@ -1319,55 +1288,33 @@
       "cuisine": "otherIndian",
       "dish_name": "Aloo Gobi",
       "dishId": "o_v_02",
-      "query": "Aloo Gobi otherIndian cuisine",
-      "status": "no_confident_match",
-      "candidates": [
-        {
-          "score": 0.0,
-          "fileTitle": "File:Stuffed Parantha (North Indian cuisine).jpg",
-          "sourcePage": "https://commons.wikimedia.org/wiki/File:Stuffed_Parantha_(North_Indian_cuisine).jpg",
-          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Stuffed_Parantha_%28North_Indian_cuisine%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Stuffed_Parantha_%28North_Indian_cuisine%29.jpg/1280px-Stuffed_Parantha_%28North_Indian_cuisine%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "creator": "SwatiGupta1986",
-          "credit": "Own work",
-          "license": "CC BY-SA 4.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-          "attribution": ""
-        },
-        {
-          "score": 0.0,
-          "fileTitle": "File:Cuisine (220) 41.jpg",
-          "sourcePage": "https://commons.wikimedia.org/wiki/File:Cuisine_(220)_41.jpg",
-          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Cuisine_%28220%29_41.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Cuisine_%28220%29_41.jpg/1280px-Cuisine_%28220%29_41.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "creator": "AmanAgrahari01",
-          "credit": "Own work",
-          "license": "CC BY-SA 4.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-          "attribution": ""
-        },
-        {
-          "score": 0.0,
-          "fileTitle": "File:Cuisine (220) 42.jpg",
-          "sourcePage": "https://commons.wikimedia.org/wiki/File:Cuisine_(220)_42.jpg",
-          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Cuisine_%28220%29_42.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Cuisine_%28220%29_42.jpg/1280px-Cuisine_%28220%29_42.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "creator": "AmanAgrahari01",
-          "credit": "Own work",
-          "license": "CC BY-SA 4.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-          "attribution": ""
-        }
-      ]
+      "query": "File:Aaloo Gobhi.JPG",
+      "status": "downloaded",
+      "reviewStatus": "approved",
+      "publishable": true,
+      "candidate": {
+        "score": 1.0,
+        "fileTitle": "File:Aaloo Gobhi.JPG",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Aaloo_Gobhi.JPG",
+        "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Aaloo_Gobhi.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Aaloo_Gobhi.JPG/1280px-Aaloo_Gobhi.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "creator": "Miansari66",
+        "credit": "Own work",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "attribution": ""
+      },
+      "alternatives": [],
+      "localPath": "web/assets/repository/otherIndian/o_v_02.jpg"
     },
     {
       "cuisine": "otherIndian",
       "dish_name": "Bhindi Masala (Okra)",
       "dishId": "o_v_03",
       "query": "Bhindi Masala (Okra) otherIndian cuisine",
-      "status": "candidate_found",
-      "reviewStatus": "needs_visual_review",
-      "publishable": false,
+      "status": "downloaded",
+      "reviewStatus": "approved",
+      "publishable": true,
       "candidate": {
         "score": 0.5,
         "fileTitle": "File:Bhinda (Gujarati style okra curry) at Prashad, Bradford.jpg",
@@ -1380,61 +1327,40 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
         "attribution": ""
       },
-      "alternatives": []
+      "alternatives": [],
+      "localPath": "web/assets/repository/otherIndian/o_v_03.jpg"
     },
     {
       "cuisine": "otherIndian",
       "dish_name": "Boondi Raita",
       "dishId": "o_v_07",
-      "query": "Boondi Raita otherIndian cuisine",
-      "status": "no_confident_match",
-      "candidates": [
-        {
-          "score": 0.0,
-          "fileTitle": "File:Indian Chatkara.jpg",
-          "sourcePage": "https://commons.wikimedia.org/wiki/File:Indian_Chatkara.jpg",
-          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Indian_Chatkara.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Indian_Chatkara.jpg/1280px-Indian_Chatkara.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "creator": "Nirmalbansal62",
-          "credit": "Own work",
-          "license": "CC BY-SA 4.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-          "attribution": ""
-        },
-        {
-          "score": 0.0,
-          "fileTitle": "File:Indian Meal with Roti and Rice - DSCI0006.jpg",
-          "sourcePage": "https://commons.wikimedia.org/wiki/File:Indian_Meal_with_Roti_and_Rice_-_DSCI0006.jpg",
-          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/78/Indian_Meal_with_Roti_and_Rice_-_DSCI0006.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Indian_Meal_with_Roti_and_Rice_-_DSCI0006.jpg/1280px-Indian_Meal_with_Roti_and_Rice_-_DSCI0006.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "creator": "Mr Thinktank",
-          "credit": "https://www.flickr.com/photos/tahini/7186023248/",
-          "license": "CC BY 2.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-          "attribution": ""
-        },
-        {
-          "score": 0.0,
-          "fileTitle": "File:Special thaal - Harikanth Restaurant - Lucknow - Uttar Pradesh - DSC 002.jpg",
-          "sourcePage": "https://commons.wikimedia.org/wiki/File:Special_thaal_-_Harikanth_Restaurant_-_Lucknow_-_Uttar_Pradesh_-_DSC_002.jpg",
-          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Special_thaal_-_Harikanth_Restaurant_-_Lucknow_-_Uttar_Pradesh_-_DSC_002.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Special_thaal_-_Harikanth_Restaurant_-_Lucknow_-_Uttar_Pradesh_-_DSC_002.jpg/1280px-Special_thaal_-_Harikanth_Restaurant_-_Lucknow_-_Uttar_Pradesh_-_DSC_002.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "creator": "Utkarshkmr27",
-          "credit": "Own work",
-          "license": "CC BY-SA 4.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-          "attribution": ""
-        }
-      ]
+      "query": "File:Boondi Raita.jpg",
+      "status": "downloaded",
+      "reviewStatus": "approved",
+      "publishable": true,
+      "candidate": {
+        "score": 1.0,
+        "fileTitle": "File:Boondi Raita.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Boondi_Raita.jpg",
+        "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Boondi_Raita.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Boondi_Raita.jpg/1280px-Boondi_Raita.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "creator": "Ravi Dwivedi",
+        "credit": "Own work",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": ""
+      },
+      "alternatives": [],
+      "localPath": "web/assets/repository/otherIndian/o_v_07.jpg"
     },
     {
       "cuisine": "otherIndian",
       "dish_name": "Butter Chicken",
       "dishId": "o_p_04",
       "query": "Butter Chicken otherIndian cuisine",
-      "status": "candidate_found",
-      "reviewStatus": "needs_visual_review",
-      "publishable": false,
+      "status": "downloaded",
+      "reviewStatus": "approved",
+      "publishable": true,
       "candidate": {
         "score": 1.0,
         "fileTitle": "File:2020-02-22 20 57 16 Butter chicken in tomato sauce with fenugreek at Karma Modern Indian in Washington, D.C.jpg",
@@ -1472,63 +1398,39 @@
           "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
           "attribution": ""
         }
-      ]
+      ],
+      "localPath": "web/assets/repository/otherIndian/o_p_04.jpg"
     },
     {
       "cuisine": "otherIndian",
       "dish_name": "Chole (Chickpea Curry)",
       "dishId": "o_p_02",
-      "query": "Chole (Chickpea Curry) otherIndian cuisine",
+      "query": "File:Chana-Masala.jpg",
       "status": "candidate_found",
       "reviewStatus": "needs_visual_review",
       "publishable": false,
       "candidate": {
-        "score": 0.5,
-        "fileTitle": "File:Chole Bhature-Noida-UP-SP002.jpg",
-        "sourcePage": "https://commons.wikimedia.org/wiki/File:Chole_Bhature-Noida-UP-SP002.jpg",
-        "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Chole_Bhature-Noida-UP-SP002.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-        "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Chole_Bhature-Noida-UP-SP002.jpg/1280px-Chole_Bhature-Noida-UP-SP002.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-        "creator": "Sutapa Pal",
+        "score": 1.0,
+        "fileTitle": "File:Chana-Masala.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Chana-Masala.jpg",
+        "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/78/Chana-Masala.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Chana-Masala.jpg/1280px-Chana-Masala.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "creator": "Rashid Jorvee",
         "credit": "Own work",
         "license": "CC BY-SA 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "attribution": ""
       },
-      "alternatives": [
-        {
-          "score": 0.5,
-          "fileTitle": "File:Chole Bhattura, Paneer Tikka, Strawberry Milkshake - Kurry Patta, Kolkata West Bengal DSC023.jpg",
-          "sourcePage": "https://commons.wikimedia.org/wiki/File:Chole_Bhattura,_Paneer_Tikka,_Strawberry_Milkshake_-_Kurry_Patta,_Kolkata_West_Bengal_DSC023.jpg",
-          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/71/Chole_Bhattura%2C_Paneer_Tikka%2C_Strawberry_Milkshake_-_Kurry_Patta%2C_Kolkata_West_Bengal_DSC023.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/7/71/Chole_Bhattura%2C_Paneer_Tikka%2C_Strawberry_Milkshake_-_Kurry_Patta%2C_Kolkata_West_Bengal_DSC023.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-          "creator": "Pratiti090",
-          "credit": "Own work",
-          "license": "CC BY-SA 4.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-          "attribution": ""
-        },
-        {
-          "score": 0.5,
-          "fileTitle": "File:Chole Bhattura, Paneer Tikka, Strawberry Milkshake - Kurry Patta, Kolkata West Bengal DSC024.jpg",
-          "sourcePage": "https://commons.wikimedia.org/wiki/File:Chole_Bhattura,_Paneer_Tikka,_Strawberry_Milkshake_-_Kurry_Patta,_Kolkata_West_Bengal_DSC024.jpg",
-          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/40/Chole_Bhattura%2C_Paneer_Tikka%2C_Strawberry_Milkshake_-_Kurry_Patta%2C_Kolkata_West_Bengal_DSC024.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/4/40/Chole_Bhattura%2C_Paneer_Tikka%2C_Strawberry_Milkshake_-_Kurry_Patta%2C_Kolkata_West_Bengal_DSC024.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-          "creator": "Pratiti090",
-          "credit": "Own work",
-          "license": "CC BY-SA 4.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-          "attribution": ""
-        }
-      ]
+      "alternatives": []
     },
     {
       "cuisine": "otherIndian",
       "dish_name": "Dal Makhani",
       "dishId": "o_p_03",
       "query": "Dal Makhani otherIndian cuisine",
-      "status": "candidate_found",
-      "reviewStatus": "needs_visual_review",
-      "publishable": false,
+      "status": "downloaded",
+      "reviewStatus": "approved",
+      "publishable": true,
       "candidate": {
         "score": 1.0,
         "fileTitle": "File:Dal makhani.jpg",
@@ -1541,31 +1443,70 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "attribution": ""
       },
-      "alternatives": []
+      "alternatives": [],
+      "localPath": "web/assets/repository/otherIndian/o_p_03.jpg"
     },
     {
       "cuisine": "otherIndian",
       "dish_name": "Jeera Rice",
       "dishId": "o_v_05",
-      "query": "Jeera Rice otherIndian cuisine",
-      "status": "no_confident_match",
-      "candidates": []
+      "query": "File:Jeera rice.jpg",
+      "status": "downloaded",
+      "reviewStatus": "approved",
+      "publishable": true,
+      "candidate": {
+        "score": 1.0,
+        "fileTitle": "File:Jeera rice.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Jeera_rice.jpg",
+        "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/77/Jeera_rice.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Jeera_rice.jpg/1280px-Jeera_rice.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "creator": "Marajozkee",
+        "credit": "Own work",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": ""
+      },
+      "alternatives": [],
+      "localPath": "web/assets/repository/otherIndian/o_v_05.jpg"
     },
     {
       "cuisine": "otherIndian",
       "dish_name": "Kachumber Salad",
       "dishId": "o_v_08",
-      "query": "Kachumber Salad otherIndian cuisine",
+      "query": "File:Kachumber Salad.JPG",
+      "status": "downloaded",
+      "reviewStatus": "approved",
+      "publishable": true,
+      "candidate": {
+        "score": 1.0,
+        "fileTitle": "File:Kachumber Salad.JPG",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Kachumber_Salad.JPG",
+        "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/12/Kachumber_Salad.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Kachumber_Salad.JPG/1280px-Kachumber_Salad.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "creator": "Miansari66",
+        "credit": "Own work",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "attribution": ""
+      },
+      "alternatives": [],
+      "localPath": "web/assets/repository/otherIndian/o_v_08.jpg"
+    },
+    {
+      "cuisine": "otherIndian",
+      "dish_name": "Masala Papad",
+      "dishId": "o_v_06",
+      "query": "File:Fried Masala Papad.jpg",
       "status": "candidate_found",
       "reviewStatus": "needs_visual_review",
       "publishable": false,
       "candidate": {
         "score": 1.0,
-        "fileTitle": "File:Mixed salad (Kosambri or Kachumber).jpg",
-        "sourcePage": "https://commons.wikimedia.org/wiki/File:Mixed_salad_(Kosambri_or_Kachumber).jpg",
-        "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/79/Mixed_salad_%28Kosambri_or_Kachumber%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-        "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Mixed_salad_%28Kosambri_or_Kachumber%29.jpg/1280px-Mixed_salad_%28Kosambri_or_Kachumber%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-        "creator": "Talupu",
+        "fileTitle": "File:Fried Masala Papad.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Fried_Masala_Papad.jpg",
+        "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/29/Fried_Masala_Papad.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Fried_Masala_Papad.jpg/1280px-Fried_Masala_Papad.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "creator": "Rajeeb ( Marajozkee )",
         "credit": "Own work",
         "license": "CC BY-SA 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
@@ -1575,114 +1516,100 @@
     },
     {
       "cuisine": "otherIndian",
-      "dish_name": "Masala Papad",
-      "dishId": "o_v_06",
-      "query": "Masala Papad otherIndian cuisine",
-      "status": "no_confident_match",
-      "candidates": [
-        {
-          "score": 0.0,
-          "fileTitle": "File:Cuisine (207).jpg",
-          "sourcePage": "https://commons.wikimedia.org/wiki/File:Cuisine_(207).jpg",
-          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Cuisine_%28207%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Cuisine_%28207%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-          "creator": "AmanAgrahari01",
-          "credit": "Own work",
-          "license": "CC BY-SA 4.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-          "attribution": ""
-        }
-      ]
-    },
-    {
-      "cuisine": "otherIndian",
       "dish_name": "Mixed Veg Curry",
       "dishId": "o_v_04",
-      "query": "Mixed Veg Curry otherIndian cuisine",
-      "status": "no_confident_match",
-      "candidates": []
-    },
-    {
-      "cuisine": "otherIndian",
-      "dish_name": "Palak Paneer",
-      "dishId": "o_v_01",
-      "query": "Palak Paneer otherIndian cuisine",
-      "status": "candidate_found",
-      "reviewStatus": "needs_visual_review",
-      "publishable": false,
+      "query": "File:Mixed vegetable curry 1.jpg",
+      "status": "downloaded",
+      "reviewStatus": "approved",
+      "publishable": true,
       "candidate": {
         "score": 1.0,
-        "fileTitle": "File:Palak paneer Kichdi with aachar and papad, Kichdi experiment, Bangalore, Karnataka.jpg",
-        "sourcePage": "https://commons.wikimedia.org/wiki/File:Palak_paneer_Kichdi_with_aachar_and_papad,_Kichdi_experiment,_Bangalore,_Karnataka.jpg",
-        "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/76/Palak_paneer_Kichdi_with_aachar_and_papad%2C_Kichdi_experiment%2C_Bangalore%2C_Karnataka.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-        "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Palak_paneer_Kichdi_with_aachar_and_papad%2C_Kichdi_experiment%2C_Bangalore%2C_Karnataka.jpg/1280px-Palak_paneer_Kichdi_with_aachar_and_papad%2C_Kichdi_experiment%2C_Bangalore%2C_Karnataka.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-        "creator": "Bhuvana Meenakshi",
+        "fileTitle": "File:Mixed vegetable curry 1.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Mixed_vegetable_curry_1.jpg",
+        "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/67/Mixed_vegetable_curry_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Mixed_vegetable_curry_1.jpg/1280px-Mixed_vegetable_curry_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "creator": "Dolon Prova",
         "credit": "Own work",
         "license": "CC BY-SA 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "attribution": ""
       },
-      "alternatives": [
-        {
-          "score": 1.0,
-          "fileTitle": "File:Chapati palak paneer and brinjal semi gravy homemade by Sujatha aunty karnataka.jpg 02.jpg",
-          "sourcePage": "https://commons.wikimedia.org/wiki/File:Chapati_palak_paneer_and_brinjal_semi_gravy_homemade_by_Sujatha_aunty_karnataka.jpg_02.jpg",
-          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/98/Chapati_palak_paneer_and_brinjal_semi_gravy_homemade_by_Sujatha_aunty_karnataka.jpg_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Chapati_palak_paneer_and_brinjal_semi_gravy_homemade_by_Sujatha_aunty_karnataka.jpg_02.jpg/1280px-Chapati_palak_paneer_and_brinjal_semi_gravy_homemade_by_Sujatha_aunty_karnataka.jpg_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "creator": "Draupadigamy9305",
-          "credit": "Own work",
-          "license": "CC BY-SA 4.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-          "attribution": ""
-        },
-        {
-          "score": 0.0,
-          "fileTitle": "File:Palakpaneer Rayagada Odisha 0009.jpg",
-          "sourcePage": "https://commons.wikimedia.org/wiki/File:Palakpaneer_Rayagada_Odisha_0009.jpg",
-          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Palakpaneer_Rayagada_Odisha_0009.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Palakpaneer_Rayagada_Odisha_0009.jpg/1280px-Palakpaneer_Rayagada_Odisha_0009.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "creator": "Lopanayak",
-          "credit": "Own work",
-          "license": "CC BY-SA 4.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-          "attribution": ""
-        }
-      ]
+      "alternatives": [],
+      "localPath": "web/assets/repository/otherIndian/o_v_04.jpg"
+    },
+    {
+      "cuisine": "otherIndian",
+      "dish_name": "Palak Paneer",
+      "dishId": "o_v_01",
+      "query": "File:Palak Paneer (Cottage cheese in spinach gravy).jpg",
+      "status": "downloaded",
+      "reviewStatus": "approved",
+      "publishable": true,
+      "candidate": {
+        "score": 1.0,
+        "fileTitle": "File:Palak Paneer (Cottage cheese in spinach gravy).jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Palak_Paneer_(Cottage_cheese_in_spinach_gravy).jpg",
+        "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Palak_Paneer_%28Cottage_cheese_in_spinach_gravy%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Palak_Paneer_%28Cottage_cheese_in_spinach_gravy%29.jpg/1280px-Palak_Paneer_%28Cottage_cheese_in_spinach_gravy%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "creator": "DreamyFlutura11",
+        "credit": "Own work",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": ""
+      },
+      "alternatives": [],
+      "localPath": "web/assets/repository/otherIndian/o_v_01.jpg"
     },
     {
       "cuisine": "otherIndian",
       "dish_name": "Paneer Butter Masala",
       "dishId": "o_p_05",
-      "query": "Paneer Butter Masala otherIndian cuisine",
-      "status": "no_confident_match",
-      "candidates": [
-        {
-          "score": 0.0,
-          "fileTitle": "File:Butterpaneer Rayagada Odisha 0011.jpg",
-          "sourcePage": "https://commons.wikimedia.org/wiki/File:Butterpaneer_Rayagada_Odisha_0011.jpg",
-          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Butterpaneer_Rayagada_Odisha_0011.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Butterpaneer_Rayagada_Odisha_0011.jpg/1280px-Butterpaneer_Rayagada_Odisha_0011.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "creator": "Lopanayak",
-          "credit": "Own work",
-          "license": "CC BY-SA 4.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-          "attribution": ""
-        }
-      ]
+      "query": "File:Paneer Butter Masala - The Indismart Hotel - Salt Lake City - Kolkata 2023-08-13 3304.jpg",
+      "status": "downloaded",
+      "reviewStatus": "approved",
+      "publishable": true,
+      "candidate": {
+        "score": 1.0,
+        "fileTitle": "File:Paneer Butter Masala - The Indismart Hotel - Salt Lake City - Kolkata 2023-08-13 3304.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Paneer_Butter_Masala_-_The_Indismart_Hotel_-_Salt_Lake_City_-_Kolkata_2023-08-13_3304.jpg",
+        "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Paneer_Butter_Masala_-_The_Indismart_Hotel_-_Salt_Lake_City_-_Kolkata_2023-08-13_3304.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Paneer_Butter_Masala_-_The_Indismart_Hotel_-_Salt_Lake_City_-_Kolkata_2023-08-13_3304.jpg/1280px-Paneer_Butter_Masala_-_The_Indismart_Hotel_-_Salt_Lake_City_-_Kolkata_2023-08-13_3304.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "creator": "Biswarup Ganguly",
+        "credit": "Own work",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "attribution": ""
+      },
+      "alternatives": [],
+      "localPath": "web/assets/repository/otherIndian/o_p_05.jpg"
     },
     {
       "cuisine": "otherIndian",
       "dish_name": "Rajma (Kidney Beans)",
       "dishId": "o_p_01",
-      "query": "Rajma (Kidney Beans) otherIndian cuisine",
-      "status": "no_confident_match",
-      "candidates": []
+      "query": "File:Rajma..JPG",
+      "status": "candidate_found",
+      "reviewStatus": "needs_visual_review",
+      "publishable": false,
+      "candidate": {
+        "score": 1.0,
+        "fileTitle": "File:Rajma..JPG",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Rajma..JPG",
+        "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Rajma..JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Rajma..JPG/1280px-Rajma..JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "creator": "Miansari66",
+        "credit": "Own work",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "attribution": ""
+      },
+      "alternatives": []
     },
     {
       "cuisine": "southIndian",
       "dish_name": "Beetroot Poriyal",
       "dishId": "s_v_07",
-      "query": "Beetroot Poriyal southIndian cuisine",
+      "query": "Beetroot Poriyal South Indian food",
       "status": "no_confident_match",
       "candidates": []
     }
@@ -2339,44 +2266,15 @@
     },
     {
       "cuisine": "bengali",
-      "dish_name": "Ilish Bhapa",
-      "query": "Ilish Bhapa bengali cuisine",
-      "status": "candidate_found",
-      "reviewStatus": "needs_visual_review",
-      "publishable": false,
-      "candidate": {
-        "score": 1.0,
-        "fileTitle": "File:Ilish jeere bhapa.jpg",
-        "sourcePage": "https://commons.wikimedia.org/wiki/File:Ilish_jeere_bhapa.jpg",
-        "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/76/Ilish_jeere_bhapa.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-        "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Ilish_jeere_bhapa.jpg/1280px-Ilish_jeere_bhapa.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-        "creator": "Atudu",
-        "credit": "Own work",
-        "license": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-        "attribution": ""
-      },
-      "alternatives": [
-        {
-          "score": 0.5,
-          "fileTitle": "File:Kumro Patay Ilish Vapa.jpg",
-          "sourcePage": "https://commons.wikimedia.org/wiki/File:Kumro_Patay_Ilish_Vapa.jpg",
-          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Kumro_Patay_Ilish_Vapa.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Kumro_Patay_Ilish_Vapa.jpg/1280px-Kumro_Patay_Ilish_Vapa.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "creator": "Debeshpaul001",
-          "credit": "Own work",
-          "license": "CC BY-SA 4.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-          "attribution": ""
-        }
-      ]
-    },
-    {
-      "cuisine": "bengali",
       "dish_name": "Jhalmuri",
       "query": "Jhalmuri bengali cuisine",
       "status": "no_confident_match",
       "candidates": []
+    },
+    {
+      "cuisine": "bengali",
+      "dish_name": "Jhinge Aloo Posto",
+      "status": "not_searched"
     },
     {
       "cuisine": "bengali",
@@ -2405,6 +2303,11 @@
       "query": "Joynagarer Moa bengali cuisine",
       "status": "no_confident_match",
       "candidates": []
+    },
+    {
+      "cuisine": "bengali",
+      "dish_name": "Kalo Jeere Diye Aloo",
+      "status": "not_searched"
     },
     {
       "cuisine": "bengali",
@@ -3330,40 +3233,6 @@
       "query": "Sheemer Bhorta bengali cuisine",
       "status": "no_confident_match",
       "candidates": []
-    },
-    {
-      "cuisine": "bengali",
-      "dish_name": "Shorshe Ilish",
-      "query": "Shorshe Ilish bengali cuisine",
-      "status": "candidate_found",
-      "reviewStatus": "needs_visual_review",
-      "publishable": false,
-      "candidate": {
-        "score": 0.5,
-        "fileTitle": "File:Shorshe Illish- Agartala- Tripura.jpg",
-        "sourcePage": "https://commons.wikimedia.org/wiki/File:Shorshe_Illish-_Agartala-_Tripura.jpg",
-        "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Shorshe_Illish-_Agartala-_Tripura.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-        "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Shorshe_Illish-_Agartala-_Tripura.jpg/1280px-Shorshe_Illish-_Agartala-_Tripura.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-        "creator": "Tuhi2001",
-        "credit": "Own work",
-        "license": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-        "attribution": ""
-      },
-      "alternatives": [
-        {
-          "score": 0.0,
-          "fileTitle": "File:ঐতিহ্যবাহী সর্ষে ইলিশ.jpg",
-          "sourcePage": "https://commons.wikimedia.org/wiki/File:%E0%A6%90%E0%A6%A4%E0%A6%BF%E0%A6%B9%E0%A7%8D%E0%A6%AF%E0%A6%AC%E0%A6%BE%E0%A6%B9%E0%A7%80_%E0%A6%B8%E0%A6%B0%E0%A7%8D%E0%A6%B7%E0%A7%87_%E0%A6%87%E0%A6%B2%E0%A6%BF%E0%A6%B6.jpg",
-          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9a/%E0%A6%90%E0%A6%A4%E0%A6%BF%E0%A6%B9%E0%A7%8D%E0%A6%AF%E0%A6%AC%E0%A6%BE%E0%A6%B9%E0%A7%80_%E0%A6%B8%E0%A6%B0%E0%A7%8D%E0%A6%B7%E0%A7%87_%E0%A6%87%E0%A6%B2%E0%A6%BF%E0%A6%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-          "previewUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/%E0%A6%90%E0%A6%A4%E0%A6%BF%E0%A6%B9%E0%A7%8D%E0%A6%AF%E0%A6%AC%E0%A6%BE%E0%A6%B9%E0%A7%80_%E0%A6%B8%E0%A6%B0%E0%A7%8D%E0%A6%B7%E0%A7%87_%E0%A6%87%E0%A6%B2%E0%A6%BF%E0%A6%B6.jpg/1280px-%E0%A6%90%E0%A6%A4%E0%A6%BF%E0%A6%B9%E0%A7%8D%E0%A6%AF%E0%A6%AC%E0%A6%BE%E0%A6%B9%E0%A7%80_%E0%A6%B8%E0%A6%B0%E0%A7%8D%E0%A6%B7%E0%A7%87_%E0%A6%87%E0%A6%B2%E0%A6%BF%E0%A6%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "creator": "রিজওয়ান আহমেদ",
-          "credit": "Own work",
-          "license": "CC BY-SA 4.0",
-          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-          "attribution": ""
-        }
-      ]
     },
     {
       "cuisine": "bengali",

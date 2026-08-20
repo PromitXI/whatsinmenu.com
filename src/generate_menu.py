@@ -9,7 +9,7 @@ WhatsApp send, and Instagram post always agree on the same day's answer):
   MOTHER AGENT — sets the household rules before anything is picked:
     - Ilish (hilsa) is banned outright — too expensive.
     - Weekly protein budget: chicken up to 3x/week, fish/seafood 1x/week,
-      mutton ~once every other week (~1-2x/month), rest filled with
+      mutton on the fourth Sunday only (at most once/month), rest filled with
       egg / paneer / lentil.
     - Skips anything on the wife/kid dislike list.
     - Skips "complex" multi-step recipes (separate mincing, grilling,
@@ -192,6 +192,9 @@ def _excluded_terms():
 
 
 def _is_excluded(dish, excluded_terms):
+    label = f"{dish.get('name', '')} {' '.join(dish.get('ingredients', []))}".lower()
+    if "ilish" in label or "hilsa" in label:
+        return True
     if not excluded_terms:
         return False
     hay = f"{dish['id']} {dish['name']}".lower()
@@ -199,12 +202,11 @@ def _is_excluded(dish, excluded_terms):
 
 
 def _mother_agent_filter(dishes, excluded_terms, allow_complex=False):
-    """Mother agent: drop excluded/complex dishes. Ilish is already fully
-    removed from data/dishes.json, so no runtime check needed for that."""
+    """Mother agent: permanently drop Hilsa/Ilish plus excluded/complex dishes."""
     out = [d for d in dishes if not _is_excluded(d, excluded_terms)]
     if not allow_complex:
         out = [d for d in out if d.get("complexity") != "complex"]
-    return out or dishes  # never return an empty pool
+    return out
 
 
 def _week_index(date_str: str) -> int:
@@ -218,13 +220,18 @@ def _day_offset_in_week(date_str: str) -> int:
 
 
 def weekly_protein_plan(week_index: int):
-    """Mother agent's weekly protein budget, shuffled onto the 7 days of
-    that week. Mutton appears on every OTHER week (~1-2x/month)."""
+    """Mother agent's normal weekly protein budget. Monthly mutton is
+    injected separately so it can never appear more than once per month."""
     base = ["chicken", "chicken", "chicken", "fish", "egg", "paneer"]
-    seventh = "mutton" if week_index % 2 == 0 else "paneer"
+    seventh = "paneer"
     families = base + [seventh]
     rng = mulberry32(hash_seed(f"week-{week_index}"))
     return fisher_yates(rng, families)
+
+
+def is_monthly_mutton_day(date_str: str) -> bool:
+    current = datetime.strptime(date_str, "%Y-%m-%d").date()
+    return 22 <= current.day <= 28 and current.weekday() == 6
 
 
 def _is_cold_start(date_str: str) -> bool:
@@ -297,7 +304,7 @@ def generate_for_date(date_str: str) -> dict:
     # --- Mother agent: decide today's protein family + category ---
     week_index = _week_index(date_str)
     day_offset = _day_offset_in_week(date_str)
-    family = weekly_protein_plan(week_index)[day_offset]
+    family = "mutton" if is_monthly_mutton_day(date_str) else weekly_protein_plan(week_index)[day_offset]
 
     rng = rng_for_date(date_str)  # day-level rng, independent of the week-level rng above
     if family == "chicken":

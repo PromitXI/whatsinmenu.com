@@ -85,6 +85,8 @@ details summary { cursor: pointer; color: var(--green); font-weight: 800; }
 .dish-image::after { content: "Gemini image pending"; position: absolute; right: 10px; bottom: 8px; color: white; font: 750 .55rem/1 sans-serif; letter-spacing: .1em; text-transform: uppercase; }
 .dish-image.has-image::after, .dish-image.has-image > span { display: none; }
 .dish-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.image-credit { position: absolute; z-index: 2; left: 7px; bottom: 7px; max-width: calc(100% - 14px); padding: 4px 6px; border-radius: 5px; background: rgba(35,28,23,.82); color: white; font: 650 .52rem/1.2 sans-serif; text-decoration: none; }
+.image-credit:hover { text-decoration: underline; }
 .choice-dish-content { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; padding: 12px; }
 .choice-dish small { color: var(--red); text-transform: uppercase; letter-spacing: .1em; font-weight: 850; }
 .choice-dish h3 { margin: 3px 0; font: 750 1.02rem/1.25 Georgia, serif; }
