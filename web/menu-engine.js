@@ -55,6 +55,10 @@ const RECIPE_URLS = {
   c_v_03: "https://hebbarskitchen.com/manchurian-gravy-recipe-veg-manchurian/",
   c_v_04: "https://hebbarskitchen.com/chilli-garlic-fried-rice-recipe/",
   c_v_05: "https://hebbarskitchen.com/schezwan-fried-rice-recipe-schezwan-rice/",
+  c_v_06: "https://hebbarskitchen.com/rice-bowl-recipe-indian-paneer-garlic/",
+  c_v_07: "https://hebbarskitchen.com/chilli-mushroom-recipe-mushroom-chilli/",
+  c_v_08: "https://hebbarskitchen.com/crispy-veg-recipe-veg-crispy-chinese/",
+  c_v_09: "https://hebbarskitchen.com/baby-corn-chilli-recipe-chilli-baby-corn/",
   a_p_01: "https://www.indianhealthyrecipes.com/gongura-chicken-curry-chicken-with-red-sorrel-leaves/",
   a_p_02: "https://www.yummytummyaarthi.com/andhra-spicy-fish-curry-recipe-andhra/",
   a_p_03: "https://www.sanjeevkapoor.com/Recipe/Kodi-Guddu-Pulusu-Sirf-30-minute-FoodFood.html",
@@ -66,6 +70,7 @@ const RECIPE_URLS = {
   a_v_04: "https://hebbarskitchen.com/pulihora-recipe-chintapandu-pulihora/",
   a_v_05: "https://www.vegrecipesofindia.com/gongura-pachadi/",
   a_v_06: "https://www.indianhealthyrecipes.com/cabbage-curry-recipe/",
+  a_v_07: "https://www.archanaskitchen.com/recipe/beerakaya-tomato-koora-recipe-andhra-style-ridge-gourd-curry",
   s_p_01: "https://www.indianhealthyrecipes.com/chicken-chettinad/",
   s_p_02: "https://www.indianhealthyrecipes.com/kerala-meen-fish-curry/",
   s_p_03: "https://www.indianhealthyrecipes.com/egg-kurma-recipe/",
@@ -77,6 +82,7 @@ const RECIPE_URLS = {
   s_v_04: "https://hebbarskitchen.com/avial-recipe-aviyal/",
   s_v_05: "https://www.indianhealthyrecipes.com/coconut-rice-recipe/",
   s_v_06: "https://www.indianhealthyrecipes.com/tomato-rasam-recipe/",
+  s_v_07: "https://www.vegrecipesofindia.com/beetroot-poriyal/",
   o_p_01: "https://hebbarskitchen.com/rajma-recipe-punjabi-rajma-masala/",
   o_p_02: "https://hebbarskitchen.com/chana-masala-recipe-chickpea-masala/",
   o_p_03: "https://hebbarskitchen.com/punjabi-dal-makhani-recipe/",
@@ -86,6 +92,10 @@ const RECIPE_URLS = {
   o_v_02: "https://hebbarskitchen.com/aloo-gobi-masala-recipe-aloo-gobi-curry/",
   o_v_03: "https://hebbarskitchen.com/bhindi-masala-recipe-bhindi-ki-gravy/",
   o_v_04: "https://hebbarskitchen.com/mix-veg-recipe-mixed-vegetable-curry/",
+  o_v_05: "https://hebbarskitchen.com/jeera-rice-recipe-jeera-pulao/",
+  o_v_06: "https://hebbarskitchen.com/masala-papad-recipe-homemade-masala/",
+  o_v_07: "https://hebbarskitchen.com/boondi-raita-recipe-boondi-ka-raita/",
+  o_v_08: "https://www.vegrecipesofindia.com/kachumber-salad-kuchumber-salad/",
 };
 
 const RECIPE_SOURCE_NAMES = {
@@ -141,9 +151,9 @@ const CHICKEN_CATEGORY_WEIGHTS = [
 const PORTION_SCALE = { light: 0.8, regular: 1, hearty: 1.25 };
 const OWNER_EXAMPLE_DATE = "2026-08-19";
 const OWNER_EXAMPLE_CHOICES = [
-  ["b_p_15", "b_v_13", "b_v_21"],
-  ["b_p_16", "b_v_17", "b_v_19"],
-  ["b_p_17", "b_v_18", "b_v_20"],
+  ["b_p_15", "b_v_17", "b_v_21"],
+  ["b_p_16", "b_v_02", "b_v_19"],
+  ["b_p_17", "b_v_09", "b_v_07"],
 ];
 
 const PROTEIN_NUTRITION = {
@@ -269,6 +279,23 @@ function preferPantry(dishes, prefs) {
     .map((item) => item.dish);
 }
 
+export function sideRole(dish) {
+  if (dish.mealRole) return dish.mealRole;
+  if (dish.proteinFamily) return "protein";
+  const label = dish.name.toLowerCase();
+  if (/rice|bhaat|pulao|pulihora|noodle/.test(label)) return "starch";
+  if (/dal|pappu|sambar|rasam/.test(label)) return "dal";
+  if (/bhaja|fry|vepudu|roast|crispy/.test(label)) return "fry";
+  if (/pachadi|chutney|bharta|bhorta|papad|raita|salad/.test(label)) return "accompaniment";
+  return "vegetable";
+}
+
+function rotate(values, start) {
+  if (!values.length) return [];
+  const index = ((start % values.length) + values.length) % values.length;
+  return values.slice(index).concat(values.slice(0, index));
+}
+
 function recipeFor(dish) {
   return RECIPE_URLS[dish.id] || SOURCES[dish.sourceSite]?.url || "#";
 }
@@ -278,7 +305,7 @@ function estimateNutrition(dish, kind, portion) {
     ? { ...(PROTEIN_NUTRITION[dish.proteinFamily] || PROTEIN_NUTRITION.lentil) }
     : { ...VEGETABLE_NUTRITION };
   const lower = dish.name.toLowerCase();
-  if (kind === "vegetable" && /dal|paneer/.test(lower)) {
+  if (kind !== "protein" && /dal|pappu|sambar|paneer/.test(lower)) {
     base = { energy: 235, protein: 10, carbs: 31, fat: 8, fibre: 8, sodium: 340, sugar: 5, cost: 38 };
   }
   if (/fried|bhaja|butter|malai|rezala/.test(lower)) {
@@ -305,6 +332,7 @@ function enrichDish(dish, kind, family, category, prefs) {
   return {
     ...dish,
     kind,
+    mealRole: kind === "protein" ? "protein" : sideRole(dish),
     sourceName: RECIPE_SOURCE_NAMES[dish.id] || SOURCES[dish.sourceSite]?.name || "Trusted source",
     recipeUrl: recipeFor(dish),
     imagePath: `assets/dishes/${dish.id}.jpg`,
@@ -380,22 +408,30 @@ export function buildMenu(catalog, dateStr, inputPreferences = {}, swapOffsets =
     ),
   );
   const vegetableOrder = preferPantry(shuffle(rng, vegetables), prefs);
+  const vegetableCandidates = vegetableOrder.filter((dish) => sideRole(dish) === "vegetable");
+  const accompanimentCandidates = vegetableOrder.filter((dish) => !["vegetable", "protein"].includes(sideRole(dish)));
+  const firstSideCandidates = vegetableCandidates.length ? vegetableCandidates : vegetableOrder.filter((dish) => sideRole(dish) !== "starch");
+  const secondSideCandidates = accompanimentCandidates.length ? accompanimentCandidates : vegetableOrder;
 
   const choices = Array.from({ length: 3 }, (_, choiceIndex) => {
     const offsets = Array.isArray(swapOffsets[choiceIndex]) ? swapOffsets[choiceIndex] : [0, 0, 0];
     const ownerExample = dateStr === OWNER_EXAMPLE_DATE && category === "bengali" && prefs.diet === "omnivore" ? OWNER_EXAMPLE_CHOICES[choiceIndex] : null;
     const proteinStart = ownerExample ? Math.max(0, proteinCandidates.findIndex((dish) => dish.id === ownerExample[0])) : choiceIndex;
     const protein = proteinCandidates[(proteinStart + Math.abs(Number(offsets[0]) || 0)) % proteinCandidates.length];
-    const defaultFirstSideIndex = ownerExample ? Math.max(0, vegetableOrder.findIndex((dish) => dish.id === ownerExample[1])) : choiceIndex * 2;
-    const firstSideIndex = (defaultFirstSideIndex + Math.abs(Number(offsets[1]) || 0)) % vegetableOrder.length;
-    const firstSide = vegetableOrder[firstSideIndex];
-    const remainingSides = vegetableOrder.filter((dish) => dish.id !== firstSide.id);
-    const defaultSecondSideIndex = ownerExample ? Math.max(0, remainingSides.findIndex((dish) => dish.id === ownerExample[2])) : choiceIndex * 2 + 1;
-    const secondSide = remainingSides[(defaultSecondSideIndex + Math.abs(Number(offsets[2]) || 0)) % remainingSides.length];
+    const firstPool = ownerExample ? vegetableOrder : firstSideCandidates;
+    const defaultFirstSideIndex = ownerExample ? Math.max(0, firstPool.findIndex((dish) => dish.id === ownerExample[1])) : choiceIndex;
+    const firstSide = rotate(firstPool, defaultFirstSideIndex + Math.abs(Number(offsets[1]) || 0))[0];
+    let secondPool = (ownerExample ? vegetableOrder : secondSideCandidates).filter((dish) => dish.id !== firstSide.id);
+    if (!secondPool.length) secondPool = vegetableOrder.filter((dish) => dish.id !== firstSide.id);
+    const defaultSecondSideIndex = ownerExample ? Math.max(0, secondPool.findIndex((dish) => dish.id === ownerExample[2])) : choiceIndex;
+    let secondSide = rotate(secondPool, defaultSecondSideIndex + Math.abs(Number(offsets[2]) || 0))[0];
+    if (sideRole(firstSide) === "starch" && sideRole(secondSide) === "starch") {
+      secondSide = rotate(vegetableOrder.filter((dish) => dish.id !== firstSide.id && sideRole(dish) !== "starch"), choiceIndex)[0] || secondSide;
+    }
     const dishes = [
       enrichDish(protein, "protein", family, category, prefs),
       enrichDish(firstSide, "vegetable", family, category, prefs),
-      enrichDish(secondSide, "vegetable", family, category, prefs),
+      enrichDish(secondSide, "accompaniment", family, category, prefs),
     ];
     const totals = dishes.reduce((result, dish) => {
       for (const key of ["energy", "protein", "carbs", "fat", "fibre", "sodium", "sugar"]) result[key] += dish.nutrition[key];
@@ -408,7 +444,7 @@ export function buildMenu(catalog, dateStr, inputPreferences = {}, swapOffsets =
       totals,
       servings: prefs.householdSize,
       estimatedCost: dishes.reduce((sum, dish) => sum + dish.estimatedCostPerServing, 0) * prefs.householdSize,
-      cookingMinutes: Math.max(...dishes.map((dish) => dish.cookingMinutes)),
+      cookingMinutes: Math.min(60, Math.round(dishes[0].cookingMinutes * 0.8 + dishes[1].cookingMinutes * 0.35 + dishes[2].cookingMinutes * 0.25)),
       needsAdvancePrep: dishes.some((dish) => dish.advancePrep),
       preferences: prefs,
     };
@@ -423,6 +459,23 @@ export function buildMenu(catalog, dateStr, inputPreferences = {}, swapOffsets =
     choices,
     preferences: prefs,
   };
+}
+
+export function nextSwapOffsets(catalog, dateStr, inputPreferences, swapOffsets, choiceIndex, dishIndex) {
+  const current = swapOffsets.map((row) => row.slice());
+  const before = buildMenu(catalog, dateStr, inputPreferences, current);
+  const currentId = before.choices[choiceIndex]?.dishes[dishIndex]?.id;
+  const reservedIds = new Set(before.choices.filter((_, index) => index !== choiceIndex).map((choice) => choice.dishes[dishIndex]?.id));
+  for (let attempt = 1; attempt <= 40; attempt += 1) {
+    const candidateOffsets = current.map((row) => row.slice());
+    candidateOffsets[choiceIndex][dishIndex] += attempt;
+    const candidateMenu = buildMenu(catalog, dateStr, inputPreferences, candidateOffsets);
+    const candidateId = candidateMenu.choices[choiceIndex]?.dishes[dishIndex]?.id;
+    const otherChoicesUnchanged = candidateMenu.choices.every((choice, index) => index === choiceIndex
+      || choice.dishes.every((dish, indexInChoice) => dish.id === before.choices[index].dishes[indexInChoice].id));
+    if (candidateId && candidateId !== currentId && !reservedIds.has(candidateId) && otherChoicesUnchanged) return candidateOffsets;
+  }
+  return current;
 }
 
 const GROUP_RULES = {

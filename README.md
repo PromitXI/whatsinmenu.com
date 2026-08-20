@@ -1,13 +1,14 @@
 # WhatsInMenu
 
-WhatsInMenu removes the nightly “what should we cook?” discussion. Every day it assembles three complete dinner choices, each with three coordinated dishes, around a household’s cuisine preferences, budget, diet, dislikes, pantry, and weekly protein rhythm.
+WhatsInMenu removes the nightly “what should we cook?” discussion. Every day it assembles three practical dinner choices around a household’s cuisine preferences, budget, diet, dislikes, pantry, and weekly protein rhythm. Each choice contains one protein, one vegetable, and one fry, dal, or rice/noodle accompaniment, with at most one starch-heavy dish.
 
 It decides **what** to cook. Trusted publishers such as Bong Eats, Sanjeev Kapoor, and Hebbar’s Kitchen explain **how** to cook it.
 
 ## Current experience
 
 - A real daily-menu preview near the top of the homepage
-- Three deterministic meal choices every day, with three dishes in each choice
+- Three deterministic meal choices every day, each designed for one cook to finish within one hour
+- One protein + one vegetable + one accompaniment, with no rice-and-noodles or double-rice combinations
 - One Gemini-generated photograph for every individual dish
 - Select a choice, then swap individual dishes without rebuilding the other choices
 - Household, portion, budget, cuisine, diet, allergy, and dislike preferences
@@ -58,6 +59,32 @@ npm run images -- --date 2026-08-20
 ```
 
 Generated photos are saved under `web/assets/dishes/`. Until a photo exists, the website intentionally uses a branded color field rather than an image from another generator.
+
+## Reusable image library
+
+`data/image_repository.json` is the image database. It inventories every catalogue image and contains discovery records for 100 Bengali and 100 Punjabi dishes from `data/image_search_seeds.csv`.
+
+Refresh the local inventory without making network requests:
+
+```bash
+python3 scripts/build_image_repository.py
+```
+
+Search Wikimedia Commons for freely licensed candidates:
+
+```bash
+python3 scripts/build_image_repository.py --discover
+python3 scripts/build_image_repository.py --discover --cuisine bengali
+python3 scripts/build_image_repository.py --discover-catalog
+```
+
+Discovery never publishes or downloads a candidate automatically. First verify that the photo really depicts the named dish and change its `reviewStatus` to `approved`. Then run:
+
+```bash
+python3 scripts/build_image_repository.py --download-approved
+```
+
+Creator, source page, licence, and licence URL are retained for attribution. Ordinary recipe-site photographs must not be copied into the app unless the owner grants permission; a visible recipe page is not an image licence.
 
 ## WhatsApp delivery
 

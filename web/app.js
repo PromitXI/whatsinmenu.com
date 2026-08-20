@@ -1,4 +1,4 @@
-import { DEFAULT_PREFERENCES, buildMenu, buildShoppingList, formatDate, menuShareText, normalizePreferences, todayInKolkata } from "./menu-engine.js?v=8";
+import { DEFAULT_PREFERENCES, buildMenu, buildShoppingList, formatDate, menuShareText, nextSwapOffsets, normalizePreferences, todayInKolkata } from "./menu-engine.js?v=9";
 
 const STORAGE = { preferences: "whatsinmenu.preferences.v3", swaps: "whatsinmenu.swaps.v3", selected: "whatsinmenu.selected.v3", feedback: "whatsinmenu.feedback.v3", history: "whatsinmenu.history.v3" };
 const state = { date: todayInKolkata(), catalog: null, menu: null, preferences: loadJson(STORAGE.preferences, DEFAULT_PREFERENCES), swaps: loadJson(STORAGE.swaps, {}), selected: loadJson(STORAGE.selected, {}) };
@@ -54,7 +54,8 @@ function choiceCard(choice, choiceIndex) {
 
 function dishRow(dish, choiceIndex, dishIndex) {
   const initials = dish.name.split(/\s+/).slice(0, 2).map((word) => word[0]).join("");
-  return `<section class="choice-dish"><div class="dish-image" aria-hidden="true"><span>${escapeHtml(initials)}</span><img data-image src="${escapeHtml(dish.imagePath)}" alt=""></div><div class="choice-dish-content"><div><small>${dishIndex === 0 ? "Main" : `Dish ${dishIndex + 1}`}</small><h3>${escapeHtml(dish.name)}</h3><p>${dish.nutrition.energy} kcal · ${dish.nutrition.protein} g protein</p></div><div class="choice-dish-actions"><a href="${escapeHtml(dish.recipeUrl)}" target="_blank" rel="noopener">Recipe by ${escapeHtml(dish.sourceName)}</a><button type="button" data-swap data-choice="${choiceIndex}" data-dish="${dishIndex}" aria-label="Swap ${escapeHtml(dish.name)}"><span aria-hidden="true">↻</span> Swap</button></div></div></section>`;
+  const labels = { protein: "Protein", vegetable: "Vegetable", starch: "Rice / noodles", dal: "Dal / rasam", fry: "Fry", accompaniment: "Accompaniment" };
+  return `<section class="choice-dish"><div class="dish-image" aria-hidden="true"><span>${escapeHtml(initials)}</span><img data-image src="${escapeHtml(dish.imagePath)}" alt=""></div><div class="choice-dish-content"><div><small>${labels[dish.mealRole] || `Dish ${dishIndex + 1}`}</small><h3>${escapeHtml(dish.name)}</h3><p>${dish.nutrition.energy} kcal · ${dish.nutrition.protein} g protein</p></div><div class="choice-dish-actions"><a href="${escapeHtml(dish.recipeUrl)}" target="_blank" rel="noopener">Recipe by ${escapeHtml(dish.sourceName)}</a><button type="button" data-swap data-choice="${choiceIndex}" data-dish="${dishIndex}" aria-label="Swap ${escapeHtml(dish.name)}"><span aria-hidden="true">↻</span> Swap</button></div></div></section>`;
 }
 
 function renderMealSummary() {
@@ -65,7 +66,18 @@ function renderMealSummary() {
 }
 
 function chooseMeal(index) { state.selected[state.date] = index; saveJson(STORAGE.selected, state.selected); renderMenu(); rememberMenu(); }
-function swapDish(choiceIndex, dishIndex) { const offsets = currentOffsets().map((row) => row.slice()); offsets[choiceIndex][dishIndex] += 1; state.swaps[state.date] = offsets; saveJson(STORAGE.swaps, state.swaps); rebuildMenu(); document.querySelector(`[data-select="${choiceIndex}"]`)?.scrollIntoView({ behavior: "smooth", block: "center" }); }
+function swapDish(choiceIndex, dishIndex) {
+  const before = currentOffsets();
+  const offsets = nextSwapOffsets(state.catalog, state.date, state.preferences, before, choiceIndex, dishIndex);
+  if (JSON.stringify(offsets) === JSON.stringify(before)) {
+    elements.selectionNote.textContent = "No other compatible dish is available in this meal slot yet.";
+    return;
+  }
+  state.swaps[state.date] = offsets;
+  saveJson(STORAGE.swaps, state.swaps);
+  rebuildMenu();
+  document.querySelector(`[data-select="${choiceIndex}"]`)?.scrollIntoView({ behavior: "smooth", block: "center" });
+}
 
 function rememberMenu() {
   const history = loadJson(STORAGE.history, []); const choice = selectedChoice();

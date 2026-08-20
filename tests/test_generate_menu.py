@@ -14,13 +14,22 @@ class DailyMenuTests(unittest.TestCase):
         menu = generate_for_date("2026-08-19")
         self.assertEqual(len(menu["choices"]), 3)
         for choice in menu["choices"]:
-            self.assertEqual([dish["role"] for dish in choice["dishes"]], ["protein", "side", "side"])
+            self.assertEqual([dish["role"] for dish in choice["dishes"]], ["protein", "vegetable", "accompaniment"])
             self.assertEqual(len({dish["id"] for dish in choice["dishes"]}), 3)
+            self.assertLessEqual(sum(dish["mealRole"] == "starch" for dish in choice["dishes"]), 1)
+            self.assertLessEqual(choice["cookingMinutes"], 60)
 
     def test_same_date_is_deterministic(self):
         first = generate_for_date("2026-09-12")
         second = generate_for_date("2026-09-12")
         self.assertEqual(first, second)
+
+    def test_owner_example_follows_practical_meal_grammar(self):
+        payload = generate_for_date("2026-08-19")
+        for choice in payload["choices"]:
+            self.assertEqual(choice["dishes"][0]["mealRole"], "protein")
+            self.assertEqual(choice["dishes"][1]["mealRole"], "vegetable")
+            self.assertNotIn(choice["dishes"][2]["mealRole"], ("protein", "vegetable"))
 
     def test_planned_protein_is_the_selected_protein(self):
         start = date(2026, 8, 18)

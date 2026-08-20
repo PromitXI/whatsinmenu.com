@@ -80,7 +80,11 @@
       { "id": "c_v_02", "name": "Hakka Noodles", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["noodles", "mixed vegetables", "soy sauce", "vinegar"] },
       { "id": "c_v_03", "name": "Veg Manchurian", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "hebbarskitchen", "complexity": "standard", "ingredients": ["cabbage", "carrot", "cornflour", "soy sauce", "garlic"] },
       { "id": "c_v_04", "name": "Chilli Garlic Fried Rice", "advancePrep": false, "spiceLevel": "spicy", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["rice", "mixed vegetables", "garlic", "dried red chili", "soy sauce"] },
-      { "id": "c_v_05", "name": "Schezwan Fried Rice", "advancePrep": false, "spiceLevel": "spicy", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["rice", "schezwan sauce", "mixed vegetables", "spring onion"] }
+      { "id": "c_v_05", "name": "Schezwan Fried Rice", "advancePrep": false, "spiceLevel": "spicy", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["rice", "schezwan sauce", "mixed vegetables", "spring onion"] },
+      { "id": "c_v_06", "name": "Chinese-style Stir-Fried Vegetables", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["broccoli", "carrot", "capsicum", "beans", "garlic", "soy sauce"] },
+      { "id": "c_v_07", "name": "Chilli Mushroom", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["mushroom", "capsicum", "onion", "garlic", "soy sauce"] },
+      { "id": "c_v_08", "name": "Chinese Mix Veg Crispy", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["broccoli", "cauliflower", "baby corn", "mushroom", "capsicum", "cornflour"] },
+      { "id": "c_v_09", "name": "Chilli Baby Corn", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["baby corn", "capsicum", "onion", "garlic", "soy sauce"] }
     ]
   },
   "andhra": {
@@ -97,7 +101,8 @@
       { "id": "a_v_03", "name": "Dondakaya Vepudu", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "subbuskitchen", "complexity": "simple", "ingredients": ["ivy gourd", "onion", "peanuts", "curry leaves", "chili powder"] },
       { "id": "a_v_04", "name": "Pulihora", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["rice", "tamarind", "peanuts", "curry leaves", "mustard seeds"] },
       { "id": "a_v_05", "name": "Gongura Pachadi", "advancePrep": false, "spiceLevel": "spicy", "sourceSite": "dassanas", "complexity": "simple", "ingredients": ["gongura leaves", "red chili", "garlic", "cumin", "mustard seeds"] },
-      { "id": "a_v_06", "name": "Cabbage Koora", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "swasthis", "complexity": "simple", "ingredients": ["cabbage", "chana dal", "coconut", "curry leaves", "mustard seeds"] }
+      { "id": "a_v_06", "name": "Cabbage Koora", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "swasthis", "complexity": "simple", "ingredients": ["cabbage", "chana dal", "coconut", "curry leaves", "mustard seeds"] },
+      { "id": "a_v_07", "name": "Beerakaya Tomato Koora", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "archanas", "complexity": "simple", "ingredients": ["ridge gourd", "tomato", "onion", "green chili", "curry leaves"] }
     ]
   },
   "southIndian": {
@@ -114,7 +119,8 @@
       { "id": "s_v_03", "name": "Cabbage Thoran", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["cabbage", "coconut", "green chili", "curry leaves", "mustard seeds"] },
       { "id": "s_v_04", "name": "Avial", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "hebbarskitchen", "complexity": "standard", "ingredients": ["mixed vegetables", "coconut", "yogurt", "curry leaves", "cumin"] },
       { "id": "s_v_05", "name": "Coconut Rice", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "swasthis", "complexity": "simple", "ingredients": ["rice", "coconut", "cashews", "curry leaves", "mustard seeds"] },
-      { "id": "s_v_06", "name": "Tomato Rasam", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["tomato", "tamarind", "black pepper", "cumin", "curry leaves"] }
+      { "id": "s_v_06", "name": "Tomato Rasam", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["tomato", "tamarind", "black pepper", "cumin", "curry leaves"] },
+      { "id": "s_v_07", "name": "Beetroot Poriyal", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "dassanas", "complexity": "simple", "ingredients": ["beetroot", "coconut", "green chili", "curry leaves", "mustard seeds"] }
     ]
   },
   "otherIndian": {
@@ -129,7 +135,11 @@
       { "id": "o_v_01", "name": "Palak Paneer", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["spinach", "paneer", "onion", "garlic", "cream"] },
       { "id": "o_v_02", "name": "Aloo Gobi", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["potato", "cauliflower", "turmeric", "cumin"] },
       { "id": "o_v_03", "name": "Bhindi Masala (Okra)", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["okra", "onion", "tomato", "cumin-coriander powder"] },
-      { "id": "o_v_04", "name": "Mixed Veg Curry", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["mixed vegetables", "onion", "tomato", "garam masala"] }
+      { "id": "o_v_04", "name": "Mixed Veg Curry", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["mixed vegetables", "onion", "tomato", "garam masala"] },
+      { "id": "o_v_05", "name": "Jeera Rice", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["rice", "cumin", "ghee", "bay leaf"] },
+      { "id": "o_v_06", "name": "Masala Papad", "advancePrep": false, "spiceLevel": "medium", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["papad", "onion", "tomato", "coriander", "chili"] },
+      { "id": "o_v_07", "name": "Boondi Raita", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "hebbarskitchen", "complexity": "simple", "ingredients": ["yogurt", "boondi", "cumin", "coriander"] },
+      { "id": "o_v_08", "name": "Kachumber Salad", "advancePrep": false, "spiceLevel": "mild", "sourceSite": "dassanas", "complexity": "simple", "ingredients": ["cucumber", "tomato", "onion", "lemon", "coriander"] }
     ]
   }
 }

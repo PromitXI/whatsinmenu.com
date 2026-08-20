@@ -49,9 +49,9 @@ COLD_START_DAYS = 10
 SIDES_PER_MEAL = 2
 OWNER_EXAMPLE_DATE = "2026-08-19"
 OWNER_EXAMPLE_CHOICES = [
-    ["b_p_15", "b_v_13", "b_v_21"],
-    ["b_p_16", "b_v_17", "b_v_19"],
-    ["b_p_17", "b_v_18", "b_v_20"],
+    ["b_p_15", "b_v_17", "b_v_21"],
+    ["b_p_16", "b_v_02", "b_v_19"],
+    ["b_p_17", "b_v_09", "b_v_07"],
 ]
 # "Once a year" dishes (festival specials, and later Promit's own list of
 # rare/expensive dishes) never show up before this many days from launch.
@@ -114,6 +114,10 @@ RECIPE_URLS = {
     "c_v_03": "https://hebbarskitchen.com/manchurian-gravy-recipe-veg-manchurian/",
     "c_v_04": "https://hebbarskitchen.com/chilli-garlic-fried-rice-recipe/",
     "c_v_05": "https://hebbarskitchen.com/schezwan-fried-rice-recipe-schezwan-rice/",
+    "c_v_06": "https://hebbarskitchen.com/rice-bowl-recipe-indian-paneer-garlic/",
+    "c_v_07": "https://hebbarskitchen.com/chilli-mushroom-recipe-mushroom-chilli/",
+    "c_v_08": "https://hebbarskitchen.com/crispy-veg-recipe-veg-crispy-chinese/",
+    "c_v_09": "https://hebbarskitchen.com/baby-corn-chilli-recipe-chilli-baby-corn/",
     "a_p_01": "https://www.indianhealthyrecipes.com/gongura-chicken-curry-chicken-with-red-sorrel-leaves/",
     "a_p_02": "https://www.yummytummyaarthi.com/andhra-spicy-fish-curry-recipe-andhra/",
     "a_p_03": "https://www.sanjeevkapoor.com/Recipe/Kodi-Guddu-Pulusu-Sirf-30-minute-FoodFood.html",
@@ -125,6 +129,7 @@ RECIPE_URLS = {
     "a_v_04": "https://hebbarskitchen.com/pulihora-recipe-chintapandu-pulihora/",
     "a_v_05": "https://www.vegrecipesofindia.com/gongura-pachadi/",
     "a_v_06": "https://www.indianhealthyrecipes.com/cabbage-curry-recipe/",
+    "a_v_07": "https://www.archanaskitchen.com/recipe/beerakaya-tomato-koora-recipe-andhra-style-ridge-gourd-curry",
     "s_p_01": "https://www.indianhealthyrecipes.com/chicken-chettinad/",
     "s_p_02": "https://www.indianhealthyrecipes.com/kerala-meen-fish-curry/",
     "s_p_03": "https://www.indianhealthyrecipes.com/egg-kurma-recipe/",
@@ -136,6 +141,7 @@ RECIPE_URLS = {
     "s_v_04": "https://hebbarskitchen.com/avial-recipe-aviyal/",
     "s_v_05": "https://www.indianhealthyrecipes.com/coconut-rice-recipe/",
     "s_v_06": "https://www.indianhealthyrecipes.com/tomato-rasam-recipe/",
+    "s_v_07": "https://www.vegrecipesofindia.com/beetroot-poriyal/",
     "o_p_01": "https://hebbarskitchen.com/rajma-recipe-punjabi-rajma-masala/",
     "o_p_02": "https://hebbarskitchen.com/chana-masala-recipe-chickpea-masala/",
     "o_p_03": "https://hebbarskitchen.com/punjabi-dal-makhani-recipe/",
@@ -145,6 +151,10 @@ RECIPE_URLS = {
     "o_v_02": "https://hebbarskitchen.com/aloo-gobi-masala-recipe-aloo-gobi-curry/",
     "o_v_03": "https://hebbarskitchen.com/bhindi-masala-recipe-bhindi-ki-gravy/",
     "o_v_04": "https://hebbarskitchen.com/mix-veg-recipe-mixed-vegetable-curry/",
+    "o_v_05": "https://hebbarskitchen.com/jeera-rice-recipe-jeera-pulao/",
+    "o_v_06": "https://hebbarskitchen.com/masala-papad-recipe-homemade-masala/",
+    "o_v_07": "https://hebbarskitchen.com/boondi-raita-recipe-boondi-ka-raita/",
+    "o_v_08": "https://www.vegrecipesofindia.com/kachumber-salad-kuchumber-salad/",
 }
 RECIPE_SOURCE_NAMES = {
     "b_p_15": "Mitar Cooking",
@@ -250,13 +260,32 @@ def _category_for_chicken(rng) -> str:
     return CHICKEN_CATEGORY_WEIGHTS[-1][0]
 
 
+def _side_role(dish):
+    if dish.get("mealRole"):
+        return dish["mealRole"]
+    if dish.get("proteinFamily"):
+        return "protein"
+    label = dish["name"].lower()
+    if any(term in label for term in ("rice", "bhaat", "pulao", "pulihora", "noodle")):
+        return "starch"
+    if any(term in label for term in ("dal", "pappu", "sambar", "rasam")):
+        return "dal"
+    if any(term in label for term in ("bhaja", "fry", "vepudu", "roast", "crispy")):
+        return "fry"
+    if any(term in label for term in ("pachadi", "chutney", "bharta", "bhorta", "papad", "raita", "salad")):
+        return "accompaniment"
+    return "vegetable"
+
+
 def _dish_with_source(dish, role):
     enriched = dict(dish)
     source = SOURCES.get(dish.get("sourceSite"), {})
     enriched.update({
         "role": role,
+        "mealRole": "protein" if role == "protein" else _side_role(dish),
         "sourceName": RECIPE_SOURCE_NAMES.get(dish["id"], source.get("name", "Trusted source")),
         "recipeUrl": RECIPE_URLS.get(dish["id"], source.get("url", "")),
+        "cookingMinutes": (45 if dish.get("complexity") == "standard" else 30) + (15 if dish.get("advancePrep") else 0),
     })
     return enriched
 
@@ -287,6 +316,10 @@ def generate_for_date(date_str: str) -> dict:
     protein_order = fisher_yates(rng, family_pool or protein_pool)
     protein_order += fisher_yates(mulberry32(hash_seed(f"{date_str}-alternatives")), [d for d in protein_pool if d not in protein_order])
     side_order = fisher_yates(rng, veg_pool)
+    vegetable_order = [dish for dish in side_order if _side_role(dish) == "vegetable"]
+    accompaniment_order = [dish for dish in side_order if _side_role(dish) not in ("vegetable", "protein")]
+    first_side_order = vegetable_order or [dish for dish in side_order if _side_role(dish) != "starch"] or side_order
+    second_side_order = accompaniment_order or side_order
 
     choices = []
     for choice_index in range(3):
@@ -297,10 +330,17 @@ def generate_for_date(date_str: str) -> dict:
             second_side = next(dish for dish in veg_pool if dish["id"] == owner_example[2])
         else:
             protein = protein_order[choice_index % len(protein_order)]
-            first_side = side_order[(choice_index * 2) % len(side_order)]
-            remaining = [dish for dish in side_order if dish["id"] != first_side["id"]]
-            second_side = remaining[(choice_index * 2 + 1) % len(remaining)]
-        dishes = [_dish_with_source(protein, "protein"), _dish_with_source(first_side, "side"), _dish_with_source(second_side, "side")]
+            first_side = first_side_order[choice_index % len(first_side_order)]
+            remaining = [dish for dish in second_side_order if dish["id"] != first_side["id"]]
+            if not remaining:
+                remaining = [dish for dish in side_order if dish["id"] != first_side["id"]]
+            second_side = remaining[choice_index % len(remaining)]
+            if _side_role(first_side) == "starch" and _side_role(second_side) == "starch":
+                non_starch = [dish for dish in side_order if dish["id"] != first_side["id"] and _side_role(dish) != "starch"]
+                if non_starch:
+                    second_side = non_starch[choice_index % len(non_starch)]
+        dishes = [_dish_with_source(protein, "protein"), _dish_with_source(first_side, "vegetable"), _dish_with_source(second_side, "accompaniment")]
+        one_cook_minutes = min(60, round(dishes[0]["cookingMinutes"] * 0.8 + dishes[1]["cookingMinutes"] * 0.35 + dishes[2]["cookingMinutes"] * 0.25))
         choices.append({
             "id": f"{date_str}-choice-{choice_index + 1}",
             "label": f"Choice {choice_index + 1}",
@@ -308,6 +348,7 @@ def generate_for_date(date_str: str) -> dict:
             "ingredients": sorted(set(item for dish in dishes for item in dish.get("ingredients", []))),
             "prepNotes": [dish.get("prepNote") for dish in dishes if dish.get("advancePrep") and dish.get("prepNote")],
             "anyNeedsAdvancePrep": any(dish.get("advancePrep") for dish in dishes),
+            "cookingMinutes": one_cook_minutes,
         })
 
     return {
