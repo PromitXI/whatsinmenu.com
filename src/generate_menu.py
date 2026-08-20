@@ -42,6 +42,23 @@ DISHES = json.loads((REPO_ROOT / "data" / "dishes.json").read_text())
 EXCLUSIONS = json.loads((REPO_ROOT / "config" / "exclusions.json").read_text())
 IST = ZoneInfo("Asia/Kolkata")
 
+
+def _load_published_images():
+    manifest_path = REPO_ROOT / "web" / "image-library.json"
+    if not manifest_path.exists():
+        return {}
+    manifest = json.loads(manifest_path.read_text())
+    return {
+        dish_id: record
+        for dish_id, record in manifest.items()
+        if record.get("imagePath")
+        and (REPO_ROOT / "web" / record["imagePath"]).is_file()
+        and (REPO_ROOT / "web" / record["imagePath"]).stat().st_size > 0
+    }
+
+
+PUBLISHED_IMAGES = _load_published_images()
+
 # Change this if the real go-live date differs — it anchors both the
 # 10-day "no Chinese yet" cold start AND the weekly protein-budget cycle.
 LAUNCH_DATE = date(2026, 8, 18)
@@ -203,7 +220,7 @@ def _is_excluded(dish, excluded_terms):
 
 def _mother_agent_filter(dishes, excluded_terms, allow_complex=False):
     """Mother agent: permanently drop Hilsa/Ilish plus excluded/complex dishes."""
-    out = [d for d in dishes if not _is_excluded(d, excluded_terms)]
+    out = [d for d in dishes if d.get("id") in PUBLISHED_IMAGES and not _is_excluded(d, excluded_terms)]
     if not allow_complex:
         out = [d for d in out if d.get("complexity") != "complex"]
     return out
@@ -252,8 +269,16 @@ def get_festival_special(date_str: str):
     for fest in FESTIVALS:
         if fest["date"] == date_str:
             special = FESTIVAL_SPECIALS.get(fest["specialId"])
-            if special:
-                return {"festivalName": fest["name"], "dish": special}
+            if special and fest["specialId"] in PUBLISHED_IMAGES:
+                image = PUBLISHED_IMAGES[fest["specialId"]]
+                return {
+                    "festivalName": fest["name"],
+                    "dish": {
+                        **special,
+                        "imagePath": image["imagePath"],
+                        "imageCredit": image if image.get("sourcePage") else None,
+                    },
+                }
     return None
 
 
@@ -287,11 +312,14 @@ def _side_role(dish):
 def _dish_with_source(dish, role):
     enriched = dict(dish)
     source = SOURCES.get(dish.get("sourceSite"), {})
+    image = PUBLISHED_IMAGES[dish["id"]]
     enriched.update({
         "role": role,
         "mealRole": "protein" if role == "protein" else _side_role(dish),
         "sourceName": RECIPE_SOURCE_NAMES.get(dish["id"], source.get("name", "Trusted source")),
         "recipeUrl": RECIPE_URLS.get(dish["id"], source.get("url", "")),
+        "imagePath": image["imagePath"],
+        "imageCredit": image if image.get("sourcePage") else None,
         "cookingMinutes": (45 if dish.get("complexity") == "standard" else 30) + (15 if dish.get("advancePrep") else 0),
     })
     return enriched
@@ -324,6 +352,9 @@ def generate_for_date(date_str: str) -> dict:
     ]
     veg_pool = _mother_agent_filter(DISHES[category]["vegetable"], excluded)
 
+    if not protein_pool or len(veg_pool) < 2:
+        raise ValueError("No complete three-dish menu with available images can be built for this category yet.")
+
     family_pool = [d for d in protein_pool if d.get("proteinFamily") == family]
     protein_order = fisher_yates(rng, family_pool or protein_pool)
     protein_order += fisher_yates(mulberry32(hash_seed(f"{date_str}-alternatives")), [d for d in protein_pool if d not in protein_order])
@@ -335,7 +366,12 @@ def generate_for_date(date_str: str) -> dict:
 
     choices = []
     for choice_index in range(3):
-        owner_example = OWNER_EXAMPLE_CHOICES[choice_index] if date_str == OWNER_EXAMPLE_DATE and category == "bengali" else None
+        requested_owner_example = OWNER_EXAMPLE_CHOICES[choice_index] if date_str == OWNER_EXAMPLE_DATE and category == "bengali" else None
+        owner_example = requested_owner_example if requested_owner_example and (
+            any(dish["id"] == requested_owner_example[0] for dish in protein_pool)
+            and any(dish["id"] == requested_owner_example[1] for dish in veg_pool)
+            and any(dish["id"] == requested_owner_example[2] for dish in veg_pool)
+        ) else None
         if owner_example:
             protein = next(dish for dish in protein_pool if dish["id"] == owner_example[0])
             first_side = next(dish for dish in veg_pool if dish["id"] == owner_example[1])

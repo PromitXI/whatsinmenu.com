@@ -9,7 +9,7 @@ It decides **what** to cook. Trusted publishers such as Bong Eats, Sanjeev Kapoo
 - A real daily-menu preview near the top of the homepage
 - Three deterministic meal choices every day, each designed for one cook to finish within one hour
 - One protein + one vegetable + one accompaniment, with no rice-and-noodles or double-rice combinations
-- One Gemini-generated photograph for every individual dish
+- One verified photograph for every suggested dish, either Gemini-generated or manually approved and licensed
 - Select a choice, then swap individual dishes without rebuilding the other choices
 - Household, portion, budget, cuisine, diet, allergy, and dislike preferences
 - Estimated cooking time, household cost, servings, kcal, and core macros
@@ -58,7 +58,7 @@ Generate the individual images for every dish across a day’s three choices:
 npm run images -- --date 2026-08-20
 ```
 
-Generated photos are saved under `web/assets/dishes/`. Until a photo exists, the website intentionally uses a branded color field rather than an image from another generator.
+Generate a missing catalogue dish directly with `npm run images -- --id DISH_ID`. Generated photos are saved under `web/assets/dishes/`, and the public image manifest is refreshed automatically. A dish is ineligible for menus and swaps until its image file exists in that manifest.
 
 ## Reusable image library
 
@@ -84,7 +84,7 @@ Discovery never publishes or downloads a candidate automatically. First verify t
 python3 scripts/build_image_repository.py --approve DISH_ID --download-approved
 ```
 
-Approved catalogue images are added to `web/image-library.json`, displayed automatically when a generated image is missing, and carry a visible creator/licence link on the card. Creator, source page, licence, and licence URL are retained for attribution. Ordinary recipe-site photographs must not be copied into the app unless the owner grants permission; a visible recipe page is not an image licence.
+`web/image-library.json` is the public allowlist for every usable photograph: Gemini-generated files and manually approved licensed images. Approved internet images carry a visible creator/licence link on the card. Creator, source page, licence, and licence URL are retained for attribution. Ordinary recipe-site photographs must not be copied into the app unless the owner grants permission; a visible recipe page is not an image licence.
 
 ## WhatsApp delivery
 
@@ -117,5 +117,6 @@ npm test
 - The product is a dinner helper, not a calorie tracker, social network, or generic recipe library.
 - Every active catalogue dish has a dish-specific publisher URL; source changes should be verified before release.
 - Bengali suggestions are backed by dish-specific recipes from at least ten distinct publishers; the automated test prevents that source diversity from dropping below ten.
+- A dish without a non-empty published image file is excluded from the website, swaps, WhatsApp payload, and Instagram menu data.
 
 The product and design brief is in `WhatsInMenu_Product_and_Design_Recommendations.docx`.

@@ -1,4 +1,4 @@
-import { DEFAULT_PREFERENCES, buildMenu, formatDate, normalizePreferences, todayInKolkata } from "./menu-engine.js?v=11";
+import { DEFAULT_PREFERENCES, buildMenu, filterCatalogByAvailableImages, formatDate, normalizePreferences, todayInKolkata } from "./menu-engine.js?v=12";
 
 function escapeHtml(value) {
   return String(value).replace(/[&<>'"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character]);
@@ -6,11 +6,14 @@ function escapeHtml(value) {
 
 const preview = document.getElementById("livePreview");
 try {
-  const response = await fetch("../data/dishes.json?v=7", { cache: "no-store" });
-  if (!response.ok) throw new Error("Menu unavailable");
-  const catalog = await response.json();
+  const [catalogResponse, imageResponse] = await Promise.all([
+    fetch("../data/dishes.json?v=9", { cache: "no-store" }),
+    fetch("image-library.json?v=2", { cache: "no-store" }),
+  ]);
+  if (!catalogResponse.ok || !imageResponse.ok) throw new Error("Menu unavailable");
+  const catalog = filterCatalogByAvailableImages(await catalogResponse.json(), await imageResponse.json());
   let stored = DEFAULT_PREFERENCES;
-  try { stored = JSON.parse(localStorage.getItem("whatsinmenu.preferences.v2")) || stored; } catch { /* default */ }
+  try { stored = JSON.parse(localStorage.getItem("whatsinmenu.preferences.v3")) || stored; } catch { /* default */ }
   const menu = buildMenu(catalog, todayInKolkata(), normalizePreferences(stored));
   preview.innerHTML = `
     <div class="preview-top"><p class="eyebrow">Live preview · ${escapeHtml(formatDate(menu.date))}</p><h2>Three choices tonight</h2></div>

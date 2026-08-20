@@ -1,9 +1,17 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { buildMenu, buildShoppingList, isMonthlyMuttonDay, isNeverSuggested, nextSwapOffsets } from "../web/menu-engine.js";
+import { buildMenu, buildShoppingList, filterCatalogByAvailableImages, isMonthlyMuttonDay, isNeverSuggested, nextSwapOffsets } from "../web/menu-engine.js";
 
-const catalog = JSON.parse(await readFile(new URL("../data/dishes.json", import.meta.url), "utf8"));
+const rawCatalog = JSON.parse(await readFile(new URL("../data/dishes.json", import.meta.url), "utf8"));
+const imageLibrary = JSON.parse(await readFile(new URL("../web/image-library.json", import.meta.url), "utf8"));
+const catalog = filterCatalogByAvailableImages(rawCatalog, imageLibrary);
 const preferences = { householdSize: 3, budget: "balanced", portion: "regular" };
+assert.throws(() => buildMenu(rawCatalog, "2026-08-20", preferences), /available images/);
+assert.equal(Object.keys(imageLibrary).length, 70);
+for (const record of Object.values(imageLibrary)) {
+  const image = await readFile(new URL(`../web/${record.imagePath}`, import.meta.url));
+  assert.ok(image.byteLength > 0);
+}
 const menu = buildMenu(catalog, "2026-08-20", preferences);
 assert.notEqual(menu.proteinFamily, "mutton");
 assert.equal(catalog.bengali.vegetable.find((dish) => dish.id === "b_v_18").mealRole, "fry");
@@ -19,7 +27,7 @@ for (const choice of menu.choices) {
   assert.ok(choice.cookingMinutes <= 60);
   assert.ok(choice.totals.energy > 0);
   assert.ok(choice.estimatedCost > 0);
-  assert.ok(choice.dishes.every((dish) => /assets\/dishes\/.+\.jpg$/.test(dish.imagePath)));
+  assert.ok(choice.dishes.every((dish) => imageLibrary[dish.id]?.imagePath === dish.imagePath));
 }
 
 const swapped = buildMenu(catalog, "2026-08-20", preferences, [[1, 1, 1], [0, 0, 0], [0, 0, 0]]);
@@ -55,7 +63,7 @@ assert.equal(chineseOnly.category, "chinese");
 assert.ok(chineseOnly.choices.every((choice) => choice.dishes.every((dish) => dish.id.startsWith("c_"))));
 assert.ok(chineseOnly.choices.every((choice) => choice.dishes.filter((dish) => dish.mealRole === "starch").length <= 1));
 assert.ok(chineseOnly.choices.every((choice) => choice.dishes[1].mealRole === "vegetable"));
-assert.equal(new Set(chineseOnly.choices.map((choice) => choice.dishes[1].id)).size, 3);
+assert.ok(chineseOnly.choices.every((choice) => imageLibrary[choice.dishes[1].id]));
 
 const blankOffsets = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
 const collisionSafeOffsets = nextSwapOffsets(catalog, "2026-08-19", { ...preferences, cuisines: ["chinese"] }, blankOffsets, 0, 0);
@@ -81,7 +89,15 @@ for (const date of ["2026-08-19", "2026-08-20", "2026-08-30", "2026-09-12"]) {
       assert.ok(!["protein", "vegetable"].includes(choice.dishes[2].mealRole));
       assert.ok(choice.dishes.filter((dish) => dish.mealRole === "starch").length <= 1);
       assert.ok(choice.cookingMinutes <= 60);
+      assert.ok(choice.dishes.every((dish) => imageLibrary[dish.id]?.imagePath === dish.imagePath));
     }
+  }
+}
+
+for (const date of ["2026-08-19", "2026-08-20", "2026-09-12"]) {
+  for (const cuisine of ["bengali", "chinese", "otherIndian", "andhra", "southIndian"]) {
+    const swappedMenu = buildMenu(catalog, date, { ...preferences, cuisines: [cuisine] }, [[17, 19, 23], [29, 31, 37], [41, 43, 47]]);
+    assert.ok(swappedMenu.choices.every((choice) => choice.dishes.every((dish) => imageLibrary[dish.id]?.imagePath === dish.imagePath)));
   }
 }
 

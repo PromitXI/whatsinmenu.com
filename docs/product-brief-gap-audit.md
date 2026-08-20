@@ -22,7 +22,7 @@ Reviewed against `WhatsInMenu_Product_and_Design_Recommendations.docx` on 20 Aug
 - **Feedback learning:** skip feedback removes dishes, while favourite history is recorded but does not yet strongly re-rank future menus.
 - **Nutrition:** clearly labelled estimates, but not calculated from exact recipe quantities or serving weights.
 - **WhatsApp:** sharing and a server-side send script exist, but browser preferences are not connected to a hosted scheduler.
-- **Images:** all live files are catalogued, a reusable-image discovery database exists, and approved licensed internet images automatically replace missing placeholders with visible attribution. Unmatched dishes still need reviewed photos.
+- **Images:** all live files are catalogued in a strict public allowlist. Only dishes with a non-empty generated or approved licensed image can be suggested; licensed internet images retain visible attribution. Unmatched dishes remain unavailable until a photo is approved or generated.
 - **Recipe sources:** every catalogue dish links to a publisher, but source quantities are not ingested into the nutrition calculation.
 
 ## Still to build

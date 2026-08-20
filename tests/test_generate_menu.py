@@ -7,7 +7,7 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
-from generate_menu import DISHES, RECIPE_URLS, _mother_agent_filter, build_daily_payload, generate_for_date, is_monthly_mutton_day, weekly_protein_plan
+from generate_menu import DISHES, PUBLISHED_IMAGES, RECIPE_URLS, _mother_agent_filter, build_daily_payload, generate_for_date, is_monthly_mutton_day, weekly_protein_plan
 
 
 class DailyMenuTests(unittest.TestCase):
@@ -23,6 +23,9 @@ class DailyMenuTests(unittest.TestCase):
             self.assertEqual(len({dish["id"] for dish in choice["dishes"]}), 3)
             self.assertLessEqual(sum(dish["mealRole"] == "starch" for dish in choice["dishes"]), 1)
             self.assertLessEqual(choice["cookingMinutes"], 60)
+            for dish in choice["dishes"]:
+                self.assertIn(dish["id"], PUBLISHED_IMAGES)
+                self.assertEqual(dish["imagePath"], PUBLISHED_IMAGES[dish["id"]]["imagePath"])
 
     def test_same_date_is_deterministic(self):
         first = generate_for_date("2026-09-12")
@@ -72,8 +75,23 @@ class DailyMenuTests(unittest.TestCase):
 
     def test_hilsa_is_permanently_excluded(self):
         hilsa = {"id": "blocked", "name": "Shorshe Ilish", "ingredients": ["hilsa"], "complexity": "simple"}
-        safe = {"id": "safe", "name": "Rui Machher Jhol", "ingredients": ["rui"], "complexity": "simple"}
+        safe = next(dish for dish in DISHES["bengali"]["protein"] if dish["id"] == "b_p_01")
         self.assertEqual(_mother_agent_filter([hilsa, safe], []), [safe])
+
+    def test_published_image_manifest_points_to_real_files(self):
+        self.assertEqual(len(PUBLISHED_IMAGES), 70)
+        for record in PUBLISHED_IMAGES.values():
+            image_path = ROOT / "web" / record["imagePath"]
+            self.assertTrue(image_path.is_file(), image_path)
+            self.assertGreater(image_path.stat().st_size, 0, image_path)
+
+    def test_every_generated_suggestion_has_a_published_image(self):
+        start = date(2026, 1, 1)
+        for offset in range(365):
+            menu = generate_for_date((start + timedelta(days=offset)).isoformat())
+            for choice in menu["choices"]:
+                for dish in choice["dishes"]:
+                    self.assertIn(dish["id"], PUBLISHED_IMAGES)
 
     def test_every_active_dish_has_a_specific_recipe(self):
         active_ids = {

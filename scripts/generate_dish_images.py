@@ -11,6 +11,7 @@ import argparse
 import base64
 import json
 import os
+import subprocess
 import sys
 import urllib.error
 import urllib.request
@@ -139,6 +140,7 @@ def main():
     style = load_style()
     for dish in selected_dishes(args):
         generate(dish, style, api_key, args.force)
+    subprocess.run([sys.executable, str(REPO_ROOT / "scripts" / "build_image_repository.py")], cwd=REPO_ROOT, check=True)
 
 
 if __name__ == "__main__":

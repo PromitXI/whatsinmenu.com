@@ -1,6 +1,292 @@
 {
+  "a_p_01": {
+    "imagePath": "assets/dishes/a_p_01.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "a_p_02": {
+    "imagePath": "assets/dishes/a_p_02.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "a_p_03": {
+    "imagePath": "assets/dishes/a_p_03.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "a_p_04": {
+    "imagePath": "assets/dishes/a_p_04.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "a_p_05": {
+    "imagePath": "assets/dishes/a_p_05.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "a_v_01": {
+    "imagePath": "assets/dishes/a_v_01.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "a_v_02": {
+    "imagePath": "assets/dishes/a_v_02.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "a_v_03": {
+    "imagePath": "assets/dishes/a_v_03.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "a_v_04": {
+    "imagePath": "assets/dishes/a_v_04.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "a_v_05": {
+    "imagePath": "assets/dishes/a_v_05.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "a_v_06": {
+    "imagePath": "assets/dishes/a_v_06.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_p_01": {
+    "imagePath": "assets/dishes/b_p_01.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_p_03": {
+    "imagePath": "assets/dishes/b_p_03.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_p_04": {
+    "imagePath": "assets/dishes/b_p_04.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_p_05": {
+    "imagePath": "assets/dishes/b_p_05.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_p_06": {
+    "imagePath": "assets/dishes/b_p_06.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_p_07": {
+    "imagePath": "assets/dishes/b_p_07.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_p_08": {
+    "imagePath": "assets/dishes/b_p_08.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_p_09": {
+    "imagePath": "assets/dishes/b_p_09.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_p_11": {
+    "imagePath": "assets/dishes/b_p_11.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_p_12": {
+    "imagePath": "assets/dishes/b_p_12.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_p_14": {
+    "imagePath": "assets/dishes/b_p_14.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_p_15": {
+    "imagePath": "assets/dishes/b_p_15.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_p_16": {
+    "imagePath": "assets/dishes/b_p_16.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_p_17": {
+    "imagePath": "assets/dishes/b_p_17.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_v_01": {
+    "imagePath": "assets/dishes/b_v_01.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_v_02": {
+    "imagePath": "assets/dishes/b_v_02.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_v_03": {
+    "imagePath": "assets/dishes/b_v_03.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_v_04": {
+    "imagePath": "assets/dishes/b_v_04.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_v_05": {
+    "imagePath": "assets/dishes/b_v_05.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_v_06": {
+    "imagePath": "assets/dishes/b_v_06.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_v_13": {
+    "imagePath": "assets/dishes/b_v_13.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_v_17": {
+    "imagePath": "assets/dishes/b_v_17.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_v_18": {
+    "imagePath": "assets/dishes/b_v_18.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_v_19": {
+    "imagePath": "assets/dishes/b_v_19.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_v_20": {
+    "imagePath": "assets/dishes/b_v_20.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "b_v_21": {
+    "imagePath": "assets/dishes/b_v_21.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "c_p_01": {
+    "imagePath": "assets/dishes/c_p_01.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "c_p_02": {
+    "imagePath": "assets/dishes/c_p_02.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "c_p_03": {
+    "imagePath": "assets/dishes/c_p_03.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "c_p_04": {
+    "imagePath": "assets/dishes/c_p_04.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "c_p_06": {
+    "imagePath": "assets/dishes/c_p_06.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "c_v_01": {
+    "imagePath": "assets/dishes/c_v_01.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "c_v_02": {
+    "imagePath": "assets/dishes/c_v_02.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "c_v_04": {
+    "imagePath": "assets/dishes/c_v_04.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "c_v_05": {
+    "imagePath": "assets/dishes/c_v_05.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "s_p_01": {
+    "imagePath": "assets/dishes/s_p_01.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "s_p_02": {
+    "imagePath": "assets/dishes/s_p_02.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "s_p_03": {
+    "imagePath": "assets/dishes/s_p_03.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "s_p_04": {
+    "imagePath": "assets/dishes/s_p_04.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "s_p_05": {
+    "imagePath": "assets/dishes/s_p_05.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "s_v_01": {
+    "imagePath": "assets/dishes/s_v_01.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "s_v_02": {
+    "imagePath": "assets/dishes/s_v_02.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "s_v_03": {
+    "imagePath": "assets/dishes/s_v_03.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "s_v_04": {
+    "imagePath": "assets/dishes/s_v_04.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "s_v_05": {
+    "imagePath": "assets/dishes/s_v_05.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
+  "s_v_06": {
+    "imagePath": "assets/dishes/s_v_06.jpg",
+    "sourceType": "ai_generated",
+    "model": "gemini-3.1-flash-image"
+  },
   "b_v_16": {
     "imagePath": "assets/repository/bengali/b_v_16.jpg",
+    "sourceType": "licensed_internet",
     "creator": "Sm faysal",
     "sourcePage": "https://commons.wikimedia.org/wiki/File:Home_made_Alu_vorta_(Bengali_mashed_potato).jpg",
     "license": "CC BY-SA 4.0",
@@ -8,6 +294,7 @@
   },
   "b_v_08": {
     "imagePath": "assets/repository/bengali/b_v_08.jpg",
+    "sourceType": "licensed_internet",
     "creator": "Rajeeb Dutta",
     "sourcePage": "https://commons.wikimedia.org/wiki/File:Mochar_ghonto-MB04.jpg",
     "license": "CC BY-SA 4.0",
@@ -15,6 +302,7 @@
   },
   "c_v_09": {
     "imagePath": "assets/repository/chinese/c_v_09.jpg",
+    "sourceType": "licensed_internet",
     "creator": "Evangelin5",
     "sourcePage": "https://commons.wikimedia.org/wiki/File:Chilli_Baby_Corn-Nellore-Andhra_Pradesh-DED_003.jpg",
     "license": "CC BY-SA 4.0",
@@ -22,6 +310,7 @@
   },
   "o_v_02": {
     "imagePath": "assets/repository/otherIndian/o_v_02.jpg",
+    "sourceType": "licensed_internet",
     "creator": "Miansari66",
     "sourcePage": "https://commons.wikimedia.org/wiki/File:Aaloo_Gobhi.JPG",
     "license": "CC0",
@@ -29,6 +318,7 @@
   },
   "o_v_03": {
     "imagePath": "assets/repository/otherIndian/o_v_03.jpg",
+    "sourceType": "licensed_internet",
     "creator": "thefoodplace.co.uk",
     "sourcePage": "https://commons.wikimedia.org/wiki/File:Bhinda_(Gujarati_style_okra_curry)_at_Prashad,_Bradford.jpg",
     "license": "CC BY 2.0",
@@ -36,6 +326,7 @@
   },
   "o_v_07": {
     "imagePath": "assets/repository/otherIndian/o_v_07.jpg",
+    "sourceType": "licensed_internet",
     "creator": "Ravi Dwivedi",
     "sourcePage": "https://commons.wikimedia.org/wiki/File:Boondi_Raita.jpg",
     "license": "CC BY-SA 4.0",
@@ -43,6 +334,7 @@
   },
   "o_p_04": {
     "imagePath": "assets/repository/otherIndian/o_p_04.jpg",
+    "sourceType": "licensed_internet",
     "creator": "Famartin",
     "sourcePage": "https://commons.wikimedia.org/wiki/File:2020-02-22_20_57_16_Butter_chicken_in_tomato_sauce_with_fenugreek_at_Karma_Modern_Indian_in_Washington,_D.C.jpg",
     "license": "CC BY-SA 4.0",
@@ -50,6 +342,7 @@
   },
   "o_p_03": {
     "imagePath": "assets/repository/otherIndian/o_p_03.jpg",
+    "sourceType": "licensed_internet",
     "creator": "TarnishedPath",
     "sourcePage": "https://commons.wikimedia.org/wiki/File:Dal_makhani.jpg",
     "license": "CC BY-SA 4.0",
@@ -57,6 +350,7 @@
   },
   "o_v_05": {
     "imagePath": "assets/repository/otherIndian/o_v_05.jpg",
+    "sourceType": "licensed_internet",
     "creator": "Marajozkee",
     "sourcePage": "https://commons.wikimedia.org/wiki/File:Jeera_rice.jpg",
     "license": "CC BY-SA 4.0",
@@ -64,6 +358,7 @@
   },
   "o_v_08": {
     "imagePath": "assets/repository/otherIndian/o_v_08.jpg",
+    "sourceType": "licensed_internet",
     "creator": "Miansari66",
     "sourcePage": "https://commons.wikimedia.org/wiki/File:Kachumber_Salad.JPG",
     "license": "CC0",
@@ -71,6 +366,7 @@
   },
   "o_v_04": {
     "imagePath": "assets/repository/otherIndian/o_v_04.jpg",
+    "sourceType": "licensed_internet",
     "creator": "Dolon Prova",
     "sourcePage": "https://commons.wikimedia.org/wiki/File:Mixed_vegetable_curry_1.jpg",
     "license": "CC BY-SA 4.0",
@@ -78,6 +374,7 @@
   },
   "o_v_01": {
     "imagePath": "assets/repository/otherIndian/o_v_01.jpg",
+    "sourceType": "licensed_internet",
     "creator": "DreamyFlutura11",
     "sourcePage": "https://commons.wikimedia.org/wiki/File:Palak_Paneer_(Cottage_cheese_in_spinach_gravy).jpg",
     "license": "CC BY-SA 4.0",
@@ -85,6 +382,7 @@
   },
   "o_p_05": {
     "imagePath": "assets/repository/otherIndian/o_p_05.jpg",
+    "sourceType": "licensed_internet",
     "creator": "Biswarup Ganguly",
     "sourcePage": "https://commons.wikimedia.org/wiki/File:Paneer_Butter_Masala_-_The_Indismart_Hotel_-_Salt_Lake_City_-_Kolkata_2023-08-13_3304.jpg",
     "license": "CC BY 3.0",

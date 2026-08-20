@@ -140,6 +140,21 @@ export const CATEGORY_LABELS = {
   southIndian: "South Indian",
 };
 
+export function filterCatalogByAvailableImages(catalog, imageLibrary = {}) {
+  const available = imageLibrary && typeof imageLibrary === "object" ? imageLibrary : {};
+  const filtered = { ...catalog };
+  for (const [category, collection] of Object.entries(catalog)) {
+    if (!collection || !Array.isArray(collection.protein) || !Array.isArray(collection.vegetable)) continue;
+    filtered[category] = { ...collection };
+    for (const kind of ["protein", "vegetable"]) {
+      filtered[category][kind] = collection[kind]
+        .filter((dish) => Boolean(available[dish.id]?.imagePath))
+        .map((dish) => ({ ...dish, publishedImage: available[dish.id] }));
+    }
+  }
+  return filtered;
+}
+
 const LAUNCH_DATE = "2026-08-18";
 const COLD_START_DAYS = 10;
 const FAMILY_CATEGORIES = {
@@ -271,6 +286,7 @@ function chooseChickenCategory(rng, allowed) {
 }
 
 function isAllowed(dish, prefs) {
+  if (!dish.publishedImage?.imagePath) return false;
   if (isNeverSuggested(dish)) return false;
   if (dish.complexity === "complex") return false;
   if (prefs.skippedDishIds.includes(dish.id)) return false;
@@ -351,13 +367,15 @@ function enrichDish(dish, kind, family, category, prefs) {
   const nutrition = estimateNutrition(dish, kind, prefs.portion);
   const baseMinutes = dish.complexity === "standard" ? 45 : 30;
   const cookingMinutes = baseMinutes + (dish.advancePrep ? 15 : 0);
+  const image = dish.publishedImage;
   return {
     ...dish,
     kind,
     mealRole: kind === "protein" ? "protein" : sideRole(dish),
     sourceName: RECIPE_SOURCE_NAMES[dish.id] || SOURCES[dish.sourceSite]?.name || "Trusted source",
     recipeUrl: recipeFor(dish),
-    imagePath: `assets/dishes/${dish.id}.jpg`,
+    imagePath: image.imagePath,
+    imageCredit: image.sourcePage ? image : null,
     cookingMinutes,
     servingLabel: kind === "protein" ? "1 bowl" : "1 small bowl",
     nutrition,
@@ -420,7 +438,7 @@ export function buildMenu(catalog, dateStr, inputPreferences = {}, swapOffsets =
     family = proteins[0]?.proteinFamily || family;
   }
   if (!matchingProteins.length || vegetables.length < 2) {
-    throw new Error("Your current preferences remove too many dishes. Loosen one allergy, dislike, cuisine, or diet filter.");
+    throw new Error("No complete three-dish menu with available images matches these preferences yet. Add the missing dish photos or loosen one filter.");
   }
 
   const matchingOrder = preferPantry(shuffle(rng, matchingProteins), prefs);
@@ -438,7 +456,13 @@ export function buildMenu(catalog, dateStr, inputPreferences = {}, swapOffsets =
 
   const choices = Array.from({ length: 3 }, (_, choiceIndex) => {
     const offsets = Array.isArray(swapOffsets[choiceIndex]) ? swapOffsets[choiceIndex] : [0, 0, 0];
-    const ownerExample = dateStr === OWNER_EXAMPLE_DATE && category === "bengali" && prefs.diet === "omnivore" ? OWNER_EXAMPLE_CHOICES[choiceIndex] : null;
+    const requestedOwnerExample = dateStr === OWNER_EXAMPLE_DATE && category === "bengali" && prefs.diet === "omnivore" ? OWNER_EXAMPLE_CHOICES[choiceIndex] : null;
+    const ownerExample = requestedOwnerExample
+      && proteinCandidates.some((dish) => dish.id === requestedOwnerExample[0])
+      && vegetableOrder.some((dish) => dish.id === requestedOwnerExample[1])
+      && vegetableOrder.some((dish) => dish.id === requestedOwnerExample[2])
+      ? requestedOwnerExample
+      : null;
     const proteinStart = ownerExample ? Math.max(0, proteinCandidates.findIndex((dish) => dish.id === ownerExample[0])) : choiceIndex;
     const protein = proteinCandidates[(proteinStart + Math.abs(Number(offsets[0]) || 0)) % proteinCandidates.length];
     const firstPool = ownerExample ? vegetableOrder : firstSideCandidates;

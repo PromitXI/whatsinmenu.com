@@ -80,7 +80,8 @@ def catalogue_records():
         for collection in (section.get("protein", []), section.get("vegetable", [])):
             for dish in collection:
                 relative = Path("web") / "assets" / "dishes" / f"{dish['id']}.jpg"
-                exists = (ROOT / relative).exists()
+                target = ROOT / relative
+                exists = target.is_file() and target.stat().st_size > 0
                 records.append({
                     "dishId": dish["id"],
                     "dishName": dish["name"],
@@ -219,14 +220,27 @@ def download_approved(records):
     return downloaded
 
 
-def write_public_library(records):
+def write_public_library(site_images, records):
     approved = {}
-    for record in records:
-        candidate = record.get("candidate") or {}
-        if not record.get("publishable") or not record.get("localPath") or not record.get("dishId"):
+    for record in site_images:
+        local_path = record.get("localPath")
+        target = ROOT / local_path if local_path else None
+        if record.get("status") != "available" or not target or not target.is_file() or target.stat().st_size == 0:
             continue
         approved[record["dishId"]] = {
-            "imagePath": record["localPath"].removeprefix("web/"),
+            "imagePath": local_path.removeprefix("web/"),
+            "sourceType": "ai_generated",
+            "model": record.get("model"),
+        }
+    for record in records:
+        candidate = record.get("candidate") or {}
+        local_path = record.get("localPath")
+        target = ROOT / local_path if local_path else None
+        if not record.get("publishable") or not target or not target.is_file() or target.stat().st_size == 0 or not record.get("dishId"):
+            continue
+        approved[record["dishId"]] = {
+            "imagePath": local_path.removeprefix("web/"),
+            "sourceType": "licensed_internet",
             "creator": candidate.get("creator") or "See source",
             "sourcePage": candidate.get("sourcePage"),
             "license": candidate.get("license"),
@@ -299,7 +313,7 @@ def main():
         "discoveredImages": discoveries,
     }
     DATABASE_PATH.write_text(json.dumps(database, indent=2, ensure_ascii=False) + "\n")
-    write_public_library(catalog_candidates)
+    write_public_library(site_images, catalog_candidates)
     available = sum(item["status"] == "available" for item in database["siteImages"])
     found = sum(item["status"] == "candidate_found" for item in discoveries)
     print(f"Catalogued {available}/{len(database['siteImages'])} current site images; {found}/{len(discoveries)} reusable candidates found")
